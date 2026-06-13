@@ -56,7 +56,21 @@
 
   /* ── Hero ──────────────────────────────────────────────────── */
   .pf-hero { position: relative; overflow: hidden; background: var(--surface-primary); }
-  .pf-hero__webgl { position: absolute; inset: 0; width: 100%; height: 100%; display: block; z-index: 0; }
+  /* Animated gradient bars background (pure CSS) */
+  .pf-hero__bars { position: absolute; inset: 0; z-index: 0; display: flex; overflow: hidden; }
+  .pf-bar {
+    height: 100%;
+    transform-origin: bottom;
+    background: linear-gradient(to top, var(--pf-bar-color, rgba(56,120,255,0.55)), transparent);
+    animation: pf-pulse 3.4s ease-in-out infinite alternate;
+    box-sizing: border-box;
+    will-change: transform;
+  }
+  @keyframes pf-pulse {
+    0%   { transform: scaleY(var(--s)); }
+    100% { transform: scaleY(calc(var(--s) * 0.62)); }
+  }
+  @media (prefers-reduced-motion: reduce) { .pf-bar { animation: none; } }
   /* Resend-style: subtle grey radial glow — transparent base lets WebGL through */
   .pf-hero__texture {
     position: absolute; inset: 0; z-index: 1;
@@ -346,155 +360,6 @@
 <div id="root"></div>
 
 <!-- ════════════════════════════════════════════════════════════
-     HERO — GPU Fluid Smoke (Navier-Stokes, Three.js)
-     Mouse stirs monochrome ink that swirls + dissipates
-     ════════════════════════════════════════════════════════════ -->
-<script>
-(function () {
-  window._heroCanvasInit = function (canvas, hero) {
-    var THREE = window.THREE;
-    if (!THREE) return function(){};
-
-    var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: false });
-    renderer.setPixelRatio(1);
-
-    /* Render below native res — the soft noise tolerates it and it keeps
-       this single full-screen pass cheap on the main GPU. */
-    var RENDER_SCALE = 0.7;
-
-    var camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-    var scene  = new THREE.Scene();
-    var geo = new THREE.PlaneGeometry(2, 2);
-
-    var uniforms = {
-      u_time:  { value: 0 },
-      u_res:   { value: new THREE.Vector2(1, 1) },
-      u_mouse: { value: new THREE.Vector2(0.5, 0.5) }
-    };
-
-    var VERT = 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position.xy,0.,1.); }';
-
-    var FRAG = [
-      'precision highp float;',
-      'varying vec2 vUv;',
-      'uniform float u_time;',
-      'uniform vec2  u_res;',
-      'uniform vec2  u_mouse;',
-      '',
-      'float hash(vec2 p){',
-      '  p = fract(p * vec2(123.34, 345.45));',
-      '  p += dot(p, p + 34.345);',
-      '  return fract(p.x * p.y);',
-      '}',
-      'float noise(vec2 p){',
-      '  vec2 i = floor(p); vec2 f = fract(p);',
-      '  vec2 u = f * f * (3.0 - 2.0 * f);',
-      '  return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), u.x),',
-      '             mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x), u.y);',
-      '}',
-      '',
-      'void main(){',
-      '  vec2 uv = vUv;',
-      '  float aspect = u_res.x / max(u_res.y, 1.0);',
-      '  float t = u_time * 0.10;',
-      '  float x = uv.x * aspect;',
-      '',
-      '  /* solid straight vertical light beams (varying width + brightness) */',
-      '  float b1 = noise(vec2(x * 15.0, uv.y * 0.6 + t * 0.50));',
-      '  float b2 = noise(vec2(x * 30.0, uv.y * 0.9 - t * 0.40));',
-      '  float b3 = noise(vec2(x *  7.0, uv.y * 0.4 + t * 0.30));',
-      '  float beams = b1 * 0.55 + b2 * 0.30 + b3 * 0.55;',
-      '  beams = pow(clamp(beams, 0.0, 1.0), 2.0);',
-      '',
-      '  /* strong, soft royal-blue glow pool — concentrated centre-right, drifting */',
-      '  vec2 c1 = vec2(0.64 * aspect + 0.05 * sin(t * 0.6), 0.48 + 0.05 * cos(t * 0.5));',
-      '  float pool  = exp(-pow(distance(vec2(x, uv.y), c1), 2.0) * 1.35);',
-      '  vec2 c2 = vec2(0.42 * aspect + 0.04 * cos(t * 0.4), 0.66);',
-      '  float pool2 = exp(-pow(distance(vec2(x, uv.y), c2), 2.0) * 3.0) * 0.55;',
-      '  float glow = clamp(pool + pool2, 0.0, 1.10);',
-      '',
-      '  /* beams lit by the glow pool + faint ambient beams everywhere */',
-      '  float lit = beams * (0.16 + 1.05 * glow);',
-      '',
-      '  /* palette: black -> deep blue -> royal blue -> bright cyan-white */',
-      '  vec3 deep = vec3(0.02, 0.07, 0.26);',
-      '  vec3 mid  = vec3(0.08, 0.30, 0.96);',
-      '  vec3 hi   = vec3(0.45, 0.72, 1.00);',
-      '',
-      '  vec3 col = vec3(0.0);',
-      '  col += glow * deep * 0.90;                  /* ambient blue glow */',
-      '  col += lit * mid;                           /* lit beams */',
-      '  col += pow(min(lit, 1.0), 2.2) * hi * 0.70; /* bright blue cores */',
-      '',
-      '  /* subtle blue mouse glow */',
-      '  vec2 mp = vec2(u_mouse.x * aspect, u_mouse.y);',
-      '  float md = exp(-pow(distance(vec2(x, uv.y), mp), 2.0) * 3.0);',
-      '  col += md * vec3(0.12, 0.26, 0.55) * 0.5;',
-      '',
-      '  /* keep the far LEFT a touch dimmer so the hero text stays legible */',
-      '  col *= mix(0.55, 1.0, smoothstep(0.0, 0.42, uv.x));',
-      '',
-      '  /* soft vignette + top fade for nav */',
-      '  col *= smoothstep(1.35, 0.18, length((uv - 0.5) * vec2(0.8, 1.08)));',
-      '  col *= mix(0.80, 1.0, smoothstep(1.0, 0.70, uv.y));',
-      '',
-      '  /* fine dither to kill banding */',
-      '  float d = fract(sin(dot(uv * u_res, vec2(12.9898, 78.233))) * 43758.5453);',
-      '  col += (d - 0.5) * 0.010;',
-      '',
-      '  gl_FragColor = vec4(col, 1.0);',
-      '}'
-    ].join('\n');
-
-    var mesh = new THREE.Mesh(geo, new THREE.ShaderMaterial({
-      vertexShader: VERT, fragmentShader: FRAG, uniforms: uniforms,
-      depthWrite: false, depthTest: false
-    }));
-    scene.add(mesh);
-
-    /* ── Mouse (smoothed toward target) ── */
-    var tmx = 0.5, tmy = 0.5;
-    function onMove(e) {
-      var r = hero.getBoundingClientRect();
-      tmx =       (e.clientX - r.left) / r.width;
-      tmy = 1.0 - (e.clientY - r.top)  / r.height;
-    }
-    window.addEventListener('mousemove', onMove, { passive: true });
-
-    function resize() {
-      var w = hero.clientWidth  || window.innerWidth;
-      var h = hero.clientHeight || Math.round(w * 0.6);
-      renderer.setSize(Math.round(w * RENDER_SCALE), Math.round(h * RENDER_SCALE), false);
-      uniforms.u_res.value.set(w * RENDER_SCALE, h * RENDER_SCALE);
-    }
-    resize();
-    var ro = new ResizeObserver(resize);
-    ro.observe(hero);
-
-    var clock = new THREE.Clock(), raf;
-    function tick() {
-      raf = requestAnimationFrame(tick);
-      uniforms.u_time.value = clock.getElapsedTime();
-      var m = uniforms.u_mouse.value;
-      m.x += (tmx - m.x) * 0.045;
-      m.y += (tmy - m.y) * 0.045;
-      renderer.render(scene, camera);
-    }
-    tick();
-
-    return function cleanup() {
-      cancelAnimationFrame(raf);
-      ro.disconnect();
-      window.removeEventListener('mousemove', onMove);
-      geo.dispose();
-      mesh.material.dispose();
-      renderer.dispose();
-    };
-  };
-}());
-</script>
-
-<!-- ════════════════════════════════════════════════════════════
      HERO — Three.js WebGL Fragment Shader Background
      Effects: Film Grain · Vignette · Mouse Light Trail
      Base: #0A0A0A — design-system surface-primary (no added color)
@@ -628,41 +493,36 @@
     }, "Resume"))));
   }
   function Hero() {
-    const canvasRef = React.useRef(null);
-    React.useEffect(function () {
-      var canvas = canvasRef.current;
-      if (!canvas) return;
-      var hero = canvas.parentElement;
-      /* Skip the heavy WebGL fluid sim on mobile — saves ~600KB + GPU/CPU.
-         The gradient/texture layers render the hero fine without it. */
-      if (window.innerWidth <= 768) return;
-      var cleanup = null, cancelled = false;
-      function start() {
-        if (cancelled || !window._heroCanvasInit) return;
-        cleanup = window._heroCanvasInit(canvas, hero);
-      }
-      if (window.THREE) {
-        start();
-      } else {
-        /* Lazy-load Three.js after mount so it never blocks first paint. */
-        var s = document.createElement('script');
-        s.src = 'https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js';
-        s.async = true;
-        s.onload = start;
-        document.head.appendChild(s);
-      }
-      return function () {
-        cancelled = true;
-        if (cleanup) cleanup();
-      };
-    }, []);
+    /* Animated gradient bars — pure CSS, no WebGL. Edges tall, centre short,
+       each bar gently pulses on a staggered delay. */
+    var NUM_BARS = 17;
+    function barHeight(i, total) {
+      var pos = i / (total - 1);
+      var dist = Math.abs(pos - 0.5);
+      return 0.30 + 0.70 * Math.pow(dist * 2.0, 1.2); /* 0.30 .. 1.00 */
+    }
+    var bars = [];
+    for (var i = 0; i < NUM_BARS; i++) {
+      var sc = barHeight(i, NUM_BARS);
+      bars.push(/*#__PURE__*/React.createElement("span", {
+        key: i,
+        className: "pf-bar",
+        style: {
+          flex: '1 0 ' + (100 / NUM_BARS) + '%',
+          maxWidth: (100 / NUM_BARS) + '%',
+          transform: 'scaleY(' + sc + ')',
+          animationDelay: (i * 0.13) + 's',
+          '--s': sc
+        }
+      }));
+    }
     return /*#__PURE__*/React.createElement("header", {
       id: "top",
       className: "pf-hero"
-    }, /*#__PURE__*/React.createElement("canvas", {
-      ref: canvasRef,
-      className: "pf-hero__webgl"
-    }), /*#__PURE__*/React.createElement("div", {
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "pf-hero__bars",
+      "aria-hidden": "true"
+    }, bars), /*#__PURE__*/React.createElement("div", {
       className: "pf-hero__texture"
     }), /*#__PURE__*/React.createElement("div", {
       className: "pf-hero__vignette"
