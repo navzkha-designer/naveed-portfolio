@@ -17,7 +17,6 @@
 
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script src="_ds/naveed-khan-portfolio-design-system-ee97a5ef-1be9-4c65-b506-ec6f688ba54c/_ds_bundle.js"></script>
@@ -293,359 +292,580 @@
 <body class="ds-base cs-page">
 <div id="root"></div>
 
-<script type="text/babel">
+<script>
 (function () {
-  const { NavBar, Button, Eyebrow, Footer, MarqueeStripe, ProjectCard, Logo } = window.NaveedKhanPortfolioDesignSystem_ee97a5;
+  const {
+    NavBar,
+    Button,
+    Eyebrow,
+    Footer,
+    MarqueeStripe,
+    ProjectCard,
+    Logo
+  } = window.NaveedKhanPortfolioDesignSystem_ee97a5;
 
   /* ── Hero image marquee ── */
-  var HERO_IMGS = [
-    'assets/convesio-1.png',
-    'assets/convesio-2.png',
-    'assets/convesio-3.png',
-    'assets/convesio-4.png',
-  ];
-
+  var HERO_IMGS = ['assets/convesio-1.png', 'assets/convesio-2.png', 'assets/convesio-3.png', 'assets/convesio-4.png'];
   function HeroMarquee() {
     var all = HERO_IMGS.concat(HERO_IMGS);
-    return (
-      <div className="cs-marquee">
-        <div className="cs-marquee__track">
-          {all.map(function (src, i) {
-            return <img key={i} className="cs-marquee__img" src={src}
-              alt={'ConvesioPay screen ' + (i % HERO_IMGS.length + 1)} loading="lazy" />;
-          })}
-        </div>
-      </div>
-    );
+    return /*#__PURE__*/React.createElement("div", {
+      className: "cs-marquee"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-marquee__track"
+    }, all.map(function (src, i) {
+      return /*#__PURE__*/React.createElement("img", {
+        key: i,
+        className: "cs-marquee__img",
+        src: src,
+        alt: 'ConvesioPay screen ' + (i % HERO_IMGS.length + 1),
+        loading: "lazy"
+      });
+    })));
   }
 
   /* ── Convesio Redesign marquee for More Work section ── */
-  var CONVESIO_IMGS = [
-    'assets/convesio-r1.webp',
-    'assets/convesio-r2.webp',
-    'assets/convesio-r3.webp',
-    'assets/convesio-r4.webp',
-  ];
+  var CONVESIO_IMGS = ['assets/convesio-r1.webp', 'assets/convesio-r2.webp', 'assets/convesio-r3.webp', 'assets/convesio-r4.webp'];
   function ConvesioShots() {
     var all = CONVESIO_IMGS.concat(CONVESIO_IMGS);
-    return (
-      <div className="cs-marquee" style={{ borderRadius: 12, padding: '20px 0' }}>
-        <div className="cs-marquee__track">
-          {all.map(function (src, i) {
-            return <img key={i} className="cs-marquee__img" src={src}
-              alt={'Convesio screen ' + (i % CONVESIO_IMGS.length + 1)} loading="lazy" />;
-          })}
-        </div>
-      </div>
-    );
+    return /*#__PURE__*/React.createElement("div", {
+      className: "cs-marquee",
+      style: {
+        borderRadius: 12,
+        padding: '20px 0'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-marquee__track"
+    }, all.map(function (src, i) {
+      return /*#__PURE__*/React.createElement("img", {
+        key: i,
+        className: "cs-marquee__img",
+        src: src,
+        alt: 'Convesio screen ' + (i % CONVESIO_IMGS.length + 1),
+        loading: "lazy"
+      });
+    })));
   }
 
   /* ── Placeholder image well ── */
-  function Ph({ height = 260, label = '' }) {
-    return (
-      <div className="cs-img-well cs-img-well--ph" style={{ minHeight: height }}>
-        <div className="cs-ph-inner">
-          <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" />
-            <path d="m21 15-5-5L5 21" />
-          </svg>
-          {label && <span>{label}</span>}
-        </div>
-      </div>
-    );
+  function Ph({
+    height = 260,
+    label = ''
+  }) {
+    return /*#__PURE__*/React.createElement("div", {
+      className: "cs-img-well cs-img-well--ph",
+      style: {
+        minHeight: height
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-ph-inner"
+    }, /*#__PURE__*/React.createElement("svg", {
+      viewBox: "0 0 24 24",
+      fill: "none",
+      strokeWidth: "1.5",
+      strokeLinecap: "round",
+      strokeLinejoin: "round"
+    }, /*#__PURE__*/React.createElement("rect", {
+      x: "3",
+      y: "3",
+      width: "18",
+      height: "18",
+      rx: "2"
+    }), /*#__PURE__*/React.createElement("circle", {
+      cx: "8.5",
+      cy: "8.5",
+      r: "1.5"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "m21 15-5-5L5 21"
+    })), label && /*#__PURE__*/React.createElement("span", null, label)));
   }
-
   function CaseStudy() {
-    return (
-      <React.Fragment>
-        {/* ── Sticky Nav ── */}
-        <div className="cs-nav-wrap" id="cs-nav">
-          <div className="cs-col" style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
-            <a href="index.html" className="cs-nav-logo-link" aria-label="Back to homepage"></a>
-            <NavBar
-              links={[
-                { label: 'Work',    href: 'index.html#work'    },
-                { label: 'About',   href: 'index.html#about'   },
-                { label: 'Contact', href: 'index.html#contact' },
-              ]}
-              cta={{ label: 'Resume', href: 'Naveed-Khan-Resume.pdf', target: '_blank' }}
-              style={{ flex: 1 }}
-            />
-            <button className="cs-mob-toggle" id="cs-ham" aria-label="Open menu">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                <line x1="3" y1="6"  x2="21" y2="6"/>
-                <line x1="3" y1="12" x2="21" y2="12"/>
-                <line x1="3" y1="18" x2="21" y2="18"/>
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        {/* ── Mobile drawer ── */}
-        <div className="cs-mob-drawer" id="cs-drawer">
-          <div className="cs-mob-drawer__top">
-            <a href="index.html" style={{ display:'flex', alignItems:'center' }}>
-              <Logo height={17} />
-            </a>
-            <button id="cs-close" style={{ background:'none', border:'none', cursor:'pointer', color:'var(--text-primary)', padding:8 }} aria-label="Close menu">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                <line x1="18" y1="6" x2="6" y2="18"/>
-                <line x1="6" y1="6" x2="18" y2="18"/>
-              </svg>
-            </button>
-          </div>
-          <nav className="cs-mob-drawer__links">
-            {[
-              { label: 'Work',    href: 'index.html#work'    },
-              { label: 'About',   href: 'index.html#about'   },
-              { label: 'Contact', href: 'index.html#contact' },
-            ].map(function(l) { return (
-              <a key={l.label} className="cs-mob-drawer__link" href={l.href}>{l.label}</a>
-            ); })}
-          </nav>
-          <div className="cs-mob-drawer__cta">
-            <Button as="a" href="Naveed-Khan-Resume.pdf" target="_blank" rel="noopener" variant="primary" size="lg">Resume</Button>
-          </div>
-        </div>
-
-        {/* ── Hero ── */}
-        <section className="cs-section cs-hero" style={{ borderTop: 'none' }}>
-          <div className="cs-col">
-            <p style={{ fontFamily: 'var(--font-body)', fontSize: '13px', fontWeight: 500, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--text-secondary)', margin: '0 0 var(--space-24)' }}>ConvesioPay · Payments Platform</p>
-            <h1 className="cs-hero__title" data-reveal>
-              The product didn't exist yet.<br />
-              <em>I had to build it from zero.</em>
-            </h1>
-            <div className="cs-meta" style={{ borderRadius: '4px', padding: '0px', margin: '0px 0px 80px', borderWidth: '1px' }}>
-              {[
-                { label: 'Role',     value: 'Lead Product Designer'    },
-                { label: 'Timeline', value: 'Jan 2023 – Sep 2023'      },
-                { label: 'Scope',    value: 'Product Design · 0 → 1'   },
-                { label: 'Outcome',  value: '$1M+ Processed (Year 1)'  },
-              ].map((m) =>
-                <div key={m.label} className="cs-meta__cell">
-                  <div className="cs-meta__label">{m.label}</div>
-                  <div className="cs-meta__value">{m.value}</div>
-                </div>
-              )}
-            </div>
-            <HeroMarquee />
-          </div>
-        </section>
-
-        {/* ── 01 The Story ── */}
-        <section className="cs-section">
-          <div className="cs-col">
-            <div className="cs-eyebrow-row"><Eyebrow>The story</Eyebrow></div>
-            <h2 className="cs-h2" data-reveal>A payments product built<br />entirely from a blank page.</h2>
-            <p className="cs-body">ConvesioPay began as an internal initiative — Convesio wanted to offer an integrated billing and payments layer directly inside the hosting platform. No existing product to redesign. No prior design language for payments. No third-party flow to borrow from.</p>
-            <p className="cs-body">I was given the brief in early 2023: design a payments product that felt native to the Convesio platform, was trustworthy enough to handle real money, and was simple enough that a non-technical user could set it up in under ten minutes. That brief was everything I had to start with.</p>
-            <p className="cs-body">What followed was eight months of iterating from first principles — user flows, information architecture, security-first interaction design, and a visual system that balanced trust with the existing Convesio design language.</p>
-          </div>
-        </section>
-
-        {/* ── 02 The Problem ── */}
-        <section className="cs-section">
-          <div className="cs-col">
-            <div className="cs-eyebrow-row"><Eyebrow>The challenge</Eyebrow></div>
-            <h2 className="cs-h2" data-reveal>Payments design is trust design.<br />Every detail carries weight.</h2>
-            <div className="cs-two-col">
-              <p className="cs-body cs-body--wide">Designing for payments is different from designing a dashboard. Users approach payment flows with a heightened sense of scrutiny — they look for signals of security, of legitimacy, of clarity. A confusing label on a billing screen isn't just bad UX; it can make a user abandon the product entirely.</p>
-              <p className="cs-body cs-body--wide">I spent the first month studying how users interacted with payment products they already trusted — Stripe, PayPal, Paddle — and mapping where ConvesioPay needed to diverge. We weren't Stripe. Our users were web professionals and agency owners, not developers building e-commerce at scale. That shaped every decision I made about what to show, what to hide, and what language to use.</p>
-            </div>
-            <div className="cs-grid-2">
-              <Ph height={260} label="User flow — Onboarding" />
-              <Ph height={260} label="User flow — First Payment" />
-            </div>
-          </div>
-        </section>
-
-        {/* ── 03 The Approach ── */}
-        <section className="cs-section">
-          <div className="cs-col">
-            <div className="cs-eyebrow-row"><Eyebrow>The approach</Eyebrow></div>
-            <h2 className="cs-h2" data-reveal>Three principles that shaped<br />every design decision.</h2>
-            <p className="cs-body">With no prior product to build on top of, I set three design principles early and held to them throughout.</p>
-            <div className="cs-blockquote">
-              <p style={{ fontFamily: 'Geist', fontWeight: '400' }}>"Clarity over completeness. Show what users need right now, not everything the system can do."</p>
-            </div>
-            <p className="cs-body">The first principle was clarity over completeness. Payments platforms are complex systems. Showing that complexity to users doesn't help them — it creates anxiety. Every screen was designed to surface exactly what was needed for the current step, hiding everything else behind progressive disclosure.</p>
-            <p className="cs-body">The second was trust signals first. Every element that could communicate security, legitimacy, or reliability was treated as a primary design element — not an afterthought. Iconography, copy tone, status communication, and error handling were all part of this.</p>
-            <p className="cs-body">The third was native integration. ConvesioPay had to feel like a part of Convesio, not a third-party product bolted on. Shared component language, consistent navigation patterns, and a visual palette that matched the platform made the integration feel seamless.</p>
-          </div>
-        </section>
-
-        {/* ── 04 What Was Built ── */}
-        <section className="cs-section">
-          <div className="cs-col">
-            <div className="cs-eyebrow-row"><Eyebrow>The design</Eyebrow></div>
-            <h2 className="cs-h2" data-reveal>What Was Built</h2>
-            <p className="cs-body">The product covered four primary flows: account setup and verification, payment method management, invoice generation and delivery, and transaction history and reporting. Each flow was designed independently and then tested for cross-flow coherence.</p>
-            <div className="cs-table">
-              {[
-                {
-                  decision: 'Flow 01', area: 'Account Setup',
-                  subLabel: 'A guided onboarding that built confidence step by step',
-                  after: 'New users follow a three-step verification flow — business details, payment method, payout account. Each step has a single focus. Inline validation and clear progress indicators meant users knew exactly where they were at every point.'
-                },
-                {
-                  decision: 'Flow 02', area: 'Payment Methods',
-                  subLabel: 'Multiple methods, one coherent interface',
-                  after: 'Users needed to manage credit cards, bank accounts, and PayPal in a single place. A unified card-based interface gave each method the same visual weight. Adding, removing, and setting defaults was designed to feel like managing files — familiar and low-stakes.'
-                },
-                {
-                  decision: 'Flow 03', area: 'Invoice Generation',
-                  subLabel: 'Automated billing that felt manual in the right places',
-                  after: 'Agency users needed to send branded invoices without a billing team. A simple template system let them customise once and automate thereafter. The "send" moment was designed carefully — a summary confirmation screen that gave users confidence before committing.'
-                },
-                {
-                  decision: 'Flow 04', area: 'Transaction History',
-                  subLabel: 'Data density without cognitive overload',
-                  after: 'Financial data is inherently dense. The transaction log used a tiered disclosure model — a scannable list with key signals visible at a glance, expandable rows for full detail. Filter and search were first-class, not secondary tools.'
-                },
-                {
-                  decision: 'Flow 05', area: 'Error states',
-                  subLabel: 'Failures designed to be recoverable',
-                  after: 'Payment failures are high-stress moments. Every error state was written and designed to answer three questions: what happened, why it happened, and what to do next. No dead ends. No technical jargon. No vague "something went wrong" messages.'
-                },
-              ].map((row) =>
-                <div key={row.area} className="cs-table__row">
-                  <div>
-                    <div className="cs-table__label" style={{ marginBottom: 1, color: 'rgb(153, 153, 153)', fontWeight: '400', fontSize: '16px', textTransform: 'none', letterSpacing: 0 }}>{row.decision}</div>
-                    <div style={{ fontFamily: 'var(--font-body)', marginBottom: 0, fontWeight: '400', color: 'rgb(153, 153, 153)', fontSize: '16px' }}>{row.area}</div>
-                  </div>
-                  <div>
-                    <div className="cs-table__sublabel">{row.subLabel}</div>
-                    <div className="cs-table__solution" style={{ color: '#A3A3A3' }}>{row.after}</div>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        </section>
-
-        {/* ── 05 Working with Engineering ── */}
-        <section className="cs-section">
-          <div className="cs-col">
-            <div className="cs-eyebrow-row"><Eyebrow>Collaboration</Eyebrow></div>
-            <h2 className="cs-h2" data-reveal>Working with constraints<br />from day one.</h2>
-            <p className="cs-body">Building from zero meant working alongside the engineering team from the very start — not handing off finished designs, but co-designing within technical constraints that shaped the product significantly.</p>
-            <p className="cs-body">The payment infrastructure was built on Stripe's API. That gave us a lot — reliability, compliance, a proven payment flow backbone. But it also set boundaries. Some states I designed couldn't be triggered on demand; some flows required sequences that Stripe enforced. I learned to treat the API as a creative constraint rather than a limitation.</p>
-            <div className="cs-blockquote">
-              <p style={{ fontFamily: 'Geist', fontWeight: '400' }}>"The API is a constraint, not an obstacle. Design within it, then push against the edges."</p>
-            </div>
-            <div className="cs-grid-2">
-              <Ph height={260} label="Design handoff — Components" />
-              <Ph height={260} label="Prototype — Payment flow" />
-            </div>
-          </div>
-        </section>
-
-        {/* ── 06 The Output ── */}
-        <section className="cs-section">
-          <div className="cs-col">
-            <div className="cs-eyebrow-row"><Eyebrow>The output</Eyebrow></div>
-            <h2 className="cs-h2" data-reveal>From zero to a live payments product.</h2>
-            <p className="cs-body" style={{ maxWidth: 680 }}>At launch, ConvesioPay covered the full billing lifecycle for Convesio's hosting customers. It shipped with a complete component library specific to the payments layer, interaction documentation for the engineering team, and end-to-end tested flows across all primary paths.</p>
-            <div className="cs-screens-grid">
-              <img src="assets/convesio-1.png" alt="ConvesioPay — Dashboard" loading="lazy" />
-              <img src="assets/convesio-2.png" alt="ConvesioPay — Payments" loading="lazy" />
-              <img src="assets/convesio-3.png" alt="ConvesioPay — Invoices" loading="lazy" />
-              <img src="assets/convesio-4.png" alt="ConvesioPay — History" loading="lazy" />
-            </div>
-          </div>
-        </section>
-
-        {/* ── 07 Outcomes ── */}
-        <section className="cs-section">
-          <div className="cs-col">
-            <div className="cs-eyebrow-row"><Eyebrow>Outcomes</Eyebrow></div>
-            <h2 className="cs-h2" data-reveal>$1M+ processed in year one.<br />With no marketing push.</h2>
-            <p className="cs-body">The product launched to existing Convesio customers. There was no paid acquisition, no product-led growth campaign — just an announcement to the existing base. In the first twelve months, ConvesioPay processed over $1M in payments.</p>
-            <p className="cs-body">The metric I cared most about wasn't volume — it was the payment completion rate. Users who reached the payment screen completed it at over 90%. That told me the design was doing its job: reducing friction, building confidence, and getting out of the way.</p>
-            <div className="cs-metrics">
-              {[
-                { value: '$1M+',  label: 'Processed in Year 1'           },
-                { value: '90%',   label: 'Payment completion rate'        },
-                { value: '0 → 1', label: 'Product built from scratch'     },
-              ].map((m) =>
-                <div key={m.label} className="cs-metric">
-                  <div className="cs-metric__value" data-counter style={{ fontFamily: 'Geist', fontWeight: '400' }}>{m.value}</div>
-                  <div className="cs-metric__label">{m.label}</div>
-                </div>
-              )}
-            </div>
-          </div>
-        </section>
-
-        {/* ── 08 Reflection ── */}
-        <section className="cs-section">
-          <div className="cs-col">
-            <div className="cs-eyebrow-row"><Eyebrow>Reflection</Eyebrow></div>
-            <h2 className="cs-h2" data-reveal>Building from zero teaches you<br />to be precise about what matters.</h2>
-            <p className="cs-body">Working on a 0 → 1 product is a different kind of design challenge. There's no existing user behaviour to anchor to, no established patterns to iterate on, no prior version to push back against. Every decision is a genuine first — and that means every decision has to be deliberately made, not defaulted to.</p>
-            <div className="cs-pull">
-              <p style={{ fontFamily: 'Geist', fontWeight: '400' }}>A blank page forces clarity. You can't fall back on convention when there is none — you have to know why every element is there.</p>
-            </div>
-            <p className="cs-body">ConvesioPay taught me that 0 → 1 work is less about creativity and more about conviction. The ability to defend a design decision when there's no precedent to point to is a muscle I've been building since I was freelancing, and this project tested it fully.</p>
-          </div>
-        </section>
-
-        {/* ── More Work ── */}
-        <section className="cs-section">
-          <div className="cs-col">
-            <div className="cs-eyebrow-row"><Eyebrow>More work</Eyebrow></div>
-            <ProjectCard
-              eyebrow="CONVESIO"
-              title="Leading a self-initiated product redesign."
-              description="Identified key usability issues, pitched a redesign strategy, secured buy-in, and led a full platform transformation that drove 144% hosting revenue growth."
-              stats={[
-                { label: 'Role',    value: 'Lead Product Designer'      },
-                { label: 'Outcome', value: '144% Hosting Revenue Growth' },
-              ]}
-              cta={{ label: 'Read Case Study', href: 'Convesio Case Study.html' }}
-              media={<ConvesioShots />}
-            />
-          </div>
-        </section>
-
-        {/* ── Marquee ── */}
-        <MarqueeStripe items={[
-          'ConvesioPay', '$1M+ Processed', '0 → 1 Product',
-          'Payments Design', 'Lead Product Designer', 'Shipped in 8 months',
-          'ConvesioPay', '$1M+ Processed', '0 → 1 Product',
-          'Payments Design', 'Lead Product Designer', 'Shipped in 8 months',
-        ]} speed={44} />
-
-        {/* ── Final CTA ── */}
-        <section className="cs-section" style={{ textAlign: 'center', paddingBottom: 'var(--space-160)' }}>
-          <div className="cs-col--narrow">
-            <h2 className="cs-display" data-reveal>Work Together</h2>
-            <p className="cs-body" style={{ margin: '0 auto var(--space-40)', textAlign: 'center', maxWidth: 640 }}>
-              I'm looking for the next product I'll help shape, scale, and improve.<br />
-              If that sounds like what you're building, let's talk.
-            </p>
-            <Button as="a" href="mailto:navzkha@gmail.com" variant="primary" size="lg">Contact</Button>
-          </div>
-        </section>
-
-        <Footer
-          copyright="© All rights reserved. Naveed Khan"
-          socials={[
-            { icon: 'linkedin', href: 'https://www.linkedin.com/in/naveed-khan-designer/', label: 'LinkedIn' },
-            { icon: 'mail',     href: 'mailto:navzkha@gmail.com',                          label: 'Email'    },
-          ]}
-        />
-      </React.Fragment>
-    );
+    return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+      className: "cs-nav-wrap",
+      id: "cs-nav"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-col",
+      style: {
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center'
+      }
+    }, /*#__PURE__*/React.createElement("a", {
+      href: "index.html",
+      className: "cs-nav-logo-link",
+      "aria-label": "Back to homepage"
+    }), /*#__PURE__*/React.createElement(NavBar, {
+      links: [{
+        label: 'Work',
+        href: 'index.html#work'
+      }, {
+        label: 'About',
+        href: 'index.html#about'
+      }, {
+        label: 'Contact',
+        href: 'index.html#contact'
+      }],
+      cta: {
+        label: 'Resume',
+        href: 'Naveed-Khan-Resume.pdf',
+        target: '_blank'
+      },
+      style: {
+        flex: 1
+      }
+    }), /*#__PURE__*/React.createElement("button", {
+      className: "cs-mob-toggle",
+      id: "cs-ham",
+      "aria-label": "Open menu"
+    }, /*#__PURE__*/React.createElement("svg", {
+      width: "22",
+      height: "22",
+      viewBox: "0 0 24 24",
+      fill: "none",
+      stroke: "currentColor",
+      strokeWidth: "2",
+      strokeLinecap: "round"
+    }, /*#__PURE__*/React.createElement("line", {
+      x1: "3",
+      y1: "6",
+      x2: "21",
+      y2: "6"
+    }), /*#__PURE__*/React.createElement("line", {
+      x1: "3",
+      y1: "12",
+      x2: "21",
+      y2: "12"
+    }), /*#__PURE__*/React.createElement("line", {
+      x1: "3",
+      y1: "18",
+      x2: "21",
+      y2: "18"
+    }))))), /*#__PURE__*/React.createElement("div", {
+      className: "cs-mob-drawer",
+      id: "cs-drawer"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-mob-drawer__top"
+    }, /*#__PURE__*/React.createElement("a", {
+      href: "index.html",
+      style: {
+        display: 'flex',
+        alignItems: 'center'
+      }
+    }, /*#__PURE__*/React.createElement(Logo, {
+      height: 17
+    })), /*#__PURE__*/React.createElement("button", {
+      id: "cs-close",
+      style: {
+        background: 'none',
+        border: 'none',
+        cursor: 'pointer',
+        color: 'var(--text-primary)',
+        padding: 8
+      },
+      "aria-label": "Close menu"
+    }, /*#__PURE__*/React.createElement("svg", {
+      width: "22",
+      height: "22",
+      viewBox: "0 0 24 24",
+      fill: "none",
+      stroke: "currentColor",
+      strokeWidth: "2",
+      strokeLinecap: "round"
+    }, /*#__PURE__*/React.createElement("line", {
+      x1: "18",
+      y1: "6",
+      x2: "6",
+      y2: "18"
+    }), /*#__PURE__*/React.createElement("line", {
+      x1: "6",
+      y1: "6",
+      x2: "18",
+      y2: "18"
+    })))), /*#__PURE__*/React.createElement("nav", {
+      className: "cs-mob-drawer__links"
+    }, [{
+      label: 'Work',
+      href: 'index.html#work'
+    }, {
+      label: 'About',
+      href: 'index.html#about'
+    }, {
+      label: 'Contact',
+      href: 'index.html#contact'
+    }].map(function (l) {
+      return /*#__PURE__*/React.createElement("a", {
+        key: l.label,
+        className: "cs-mob-drawer__link",
+        href: l.href
+      }, l.label);
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "cs-mob-drawer__cta"
+    }, /*#__PURE__*/React.createElement(Button, {
+      as: "a",
+      href: "Naveed-Khan-Resume.pdf",
+      target: "_blank",
+      rel: "noopener",
+      variant: "primary",
+      size: "lg"
+    }, "Resume"))), /*#__PURE__*/React.createElement("section", {
+      className: "cs-section cs-hero",
+      style: {
+        borderTop: 'none'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-col"
+    }, /*#__PURE__*/React.createElement("p", {
+      style: {
+        fontFamily: 'var(--font-body)',
+        fontSize: '13px',
+        fontWeight: 500,
+        letterSpacing: '2px',
+        textTransform: 'uppercase',
+        color: 'var(--text-secondary)',
+        margin: '0 0 var(--space-24)'
+      }
+    }, "ConvesioPay \xB7 Payments Platform"), /*#__PURE__*/React.createElement("h1", {
+      className: "cs-hero__title",
+      "data-reveal": true
+    }, "The product didn't exist yet.", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("em", null, "I had to build it from zero.")), /*#__PURE__*/React.createElement("div", {
+      className: "cs-meta",
+      style: {
+        borderRadius: '4px',
+        padding: '0px',
+        margin: '0px 0px 80px',
+        borderWidth: '1px'
+      }
+    }, [{
+      label: 'Role',
+      value: 'Lead Product Designer'
+    }, {
+      label: 'Timeline',
+      value: 'Jan 2023 – Sep 2023'
+    }, {
+      label: 'Scope',
+      value: 'Product Design · 0 → 1'
+    }, {
+      label: 'Outcome',
+      value: '$1M+ Processed (Year 1)'
+    }].map(m => /*#__PURE__*/React.createElement("div", {
+      key: m.label,
+      className: "cs-meta__cell"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-meta__label"
+    }, m.label), /*#__PURE__*/React.createElement("div", {
+      className: "cs-meta__value"
+    }, m.value)))), /*#__PURE__*/React.createElement(HeroMarquee, null))), /*#__PURE__*/React.createElement("section", {
+      className: "cs-section"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-col"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-eyebrow-row"
+    }, /*#__PURE__*/React.createElement(Eyebrow, null, "The story")), /*#__PURE__*/React.createElement("h2", {
+      className: "cs-h2",
+      "data-reveal": true
+    }, "A payments product built", /*#__PURE__*/React.createElement("br", null), "entirely from a blank page."), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body"
+    }, "ConvesioPay began as an internal initiative \u2014 Convesio wanted to offer an integrated billing and payments layer directly inside the hosting platform. No existing product to redesign. No prior design language for payments. No third-party flow to borrow from."), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body"
+    }, "I was given the brief in early 2023: design a payments product that felt native to the Convesio platform, was trustworthy enough to handle real money, and was simple enough that a non-technical user could set it up in under ten minutes. That brief was everything I had to start with."), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body"
+    }, "What followed was eight months of iterating from first principles \u2014 user flows, information architecture, security-first interaction design, and a visual system that balanced trust with the existing Convesio design language."))), /*#__PURE__*/React.createElement("section", {
+      className: "cs-section"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-col"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-eyebrow-row"
+    }, /*#__PURE__*/React.createElement(Eyebrow, null, "The challenge")), /*#__PURE__*/React.createElement("h2", {
+      className: "cs-h2",
+      "data-reveal": true
+    }, "Payments design is trust design.", /*#__PURE__*/React.createElement("br", null), "Every detail carries weight."), /*#__PURE__*/React.createElement("div", {
+      className: "cs-two-col"
+    }, /*#__PURE__*/React.createElement("p", {
+      className: "cs-body cs-body--wide"
+    }, "Designing for payments is different from designing a dashboard. Users approach payment flows with a heightened sense of scrutiny \u2014 they look for signals of security, of legitimacy, of clarity. A confusing label on a billing screen isn't just bad UX; it can make a user abandon the product entirely."), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body cs-body--wide"
+    }, "I spent the first month studying how users interacted with payment products they already trusted \u2014 Stripe, PayPal, Paddle \u2014 and mapping where ConvesioPay needed to diverge. We weren't Stripe. Our users were web professionals and agency owners, not developers building e-commerce at scale. That shaped every decision I made about what to show, what to hide, and what language to use.")), /*#__PURE__*/React.createElement("div", {
+      className: "cs-grid-2"
+    }, /*#__PURE__*/React.createElement(Ph, {
+      height: 260,
+      label: "User flow \u2014 Onboarding"
+    }), /*#__PURE__*/React.createElement(Ph, {
+      height: 260,
+      label: "User flow \u2014 First Payment"
+    })))), /*#__PURE__*/React.createElement("section", {
+      className: "cs-section"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-col"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-eyebrow-row"
+    }, /*#__PURE__*/React.createElement(Eyebrow, null, "The approach")), /*#__PURE__*/React.createElement("h2", {
+      className: "cs-h2",
+      "data-reveal": true
+    }, "Three principles that shaped", /*#__PURE__*/React.createElement("br", null), "every design decision."), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body"
+    }, "With no prior product to build on top of, I set three design principles early and held to them throughout."), /*#__PURE__*/React.createElement("div", {
+      className: "cs-blockquote"
+    }, /*#__PURE__*/React.createElement("p", {
+      style: {
+        fontFamily: 'Geist',
+        fontWeight: '400'
+      }
+    }, "\"Clarity over completeness. Show what users need right now, not everything the system can do.\"")), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body"
+    }, "The first principle was clarity over completeness. Payments platforms are complex systems. Showing that complexity to users doesn't help them \u2014 it creates anxiety. Every screen was designed to surface exactly what was needed for the current step, hiding everything else behind progressive disclosure."), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body"
+    }, "The second was trust signals first. Every element that could communicate security, legitimacy, or reliability was treated as a primary design element \u2014 not an afterthought. Iconography, copy tone, status communication, and error handling were all part of this."), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body"
+    }, "The third was native integration. ConvesioPay had to feel like a part of Convesio, not a third-party product bolted on. Shared component language, consistent navigation patterns, and a visual palette that matched the platform made the integration feel seamless."))), /*#__PURE__*/React.createElement("section", {
+      className: "cs-section"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-col"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-eyebrow-row"
+    }, /*#__PURE__*/React.createElement(Eyebrow, null, "The design")), /*#__PURE__*/React.createElement("h2", {
+      className: "cs-h2",
+      "data-reveal": true
+    }, "What Was Built"), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body"
+    }, "The product covered four primary flows: account setup and verification, payment method management, invoice generation and delivery, and transaction history and reporting. Each flow was designed independently and then tested for cross-flow coherence."), /*#__PURE__*/React.createElement("div", {
+      className: "cs-table"
+    }, [{
+      decision: 'Flow 01',
+      area: 'Account Setup',
+      subLabel: 'A guided onboarding that built confidence step by step',
+      after: 'New users follow a three-step verification flow — business details, payment method, payout account. Each step has a single focus. Inline validation and clear progress indicators meant users knew exactly where they were at every point.'
+    }, {
+      decision: 'Flow 02',
+      area: 'Payment Methods',
+      subLabel: 'Multiple methods, one coherent interface',
+      after: 'Users needed to manage credit cards, bank accounts, and PayPal in a single place. A unified card-based interface gave each method the same visual weight. Adding, removing, and setting defaults was designed to feel like managing files — familiar and low-stakes.'
+    }, {
+      decision: 'Flow 03',
+      area: 'Invoice Generation',
+      subLabel: 'Automated billing that felt manual in the right places',
+      after: 'Agency users needed to send branded invoices without a billing team. A simple template system let them customise once and automate thereafter. The "send" moment was designed carefully — a summary confirmation screen that gave users confidence before committing.'
+    }, {
+      decision: 'Flow 04',
+      area: 'Transaction History',
+      subLabel: 'Data density without cognitive overload',
+      after: 'Financial data is inherently dense. The transaction log used a tiered disclosure model — a scannable list with key signals visible at a glance, expandable rows for full detail. Filter and search were first-class, not secondary tools.'
+    }, {
+      decision: 'Flow 05',
+      area: 'Error states',
+      subLabel: 'Failures designed to be recoverable',
+      after: 'Payment failures are high-stress moments. Every error state was written and designed to answer three questions: what happened, why it happened, and what to do next. No dead ends. No technical jargon. No vague "something went wrong" messages.'
+    }].map(row => /*#__PURE__*/React.createElement("div", {
+      key: row.area,
+      className: "cs-table__row"
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      className: "cs-table__label",
+      style: {
+        marginBottom: 1,
+        color: 'rgb(153, 153, 153)',
+        fontWeight: '400',
+        fontSize: '16px',
+        textTransform: 'none',
+        letterSpacing: 0
+      }
+    }, row.decision), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontFamily: 'var(--font-body)',
+        marginBottom: 0,
+        fontWeight: '400',
+        color: 'rgb(153, 153, 153)',
+        fontSize: '16px'
+      }
+    }, row.area)), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      className: "cs-table__sublabel"
+    }, row.subLabel), /*#__PURE__*/React.createElement("div", {
+      className: "cs-table__solution",
+      style: {
+        color: '#A3A3A3'
+      }
+    }, row.after))))))), /*#__PURE__*/React.createElement("section", {
+      className: "cs-section"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-col"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-eyebrow-row"
+    }, /*#__PURE__*/React.createElement(Eyebrow, null, "Collaboration")), /*#__PURE__*/React.createElement("h2", {
+      className: "cs-h2",
+      "data-reveal": true
+    }, "Working with constraints", /*#__PURE__*/React.createElement("br", null), "from day one."), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body"
+    }, "Building from zero meant working alongside the engineering team from the very start \u2014 not handing off finished designs, but co-designing within technical constraints that shaped the product significantly."), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body"
+    }, "The payment infrastructure was built on Stripe's API. That gave us a lot \u2014 reliability, compliance, a proven payment flow backbone. But it also set boundaries. Some states I designed couldn't be triggered on demand; some flows required sequences that Stripe enforced. I learned to treat the API as a creative constraint rather than a limitation."), /*#__PURE__*/React.createElement("div", {
+      className: "cs-blockquote"
+    }, /*#__PURE__*/React.createElement("p", {
+      style: {
+        fontFamily: 'Geist',
+        fontWeight: '400'
+      }
+    }, "\"The API is a constraint, not an obstacle. Design within it, then push against the edges.\"")), /*#__PURE__*/React.createElement("div", {
+      className: "cs-grid-2"
+    }, /*#__PURE__*/React.createElement(Ph, {
+      height: 260,
+      label: "Design handoff \u2014 Components"
+    }), /*#__PURE__*/React.createElement(Ph, {
+      height: 260,
+      label: "Prototype \u2014 Payment flow"
+    })))), /*#__PURE__*/React.createElement("section", {
+      className: "cs-section"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-col"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-eyebrow-row"
+    }, /*#__PURE__*/React.createElement(Eyebrow, null, "The output")), /*#__PURE__*/React.createElement("h2", {
+      className: "cs-h2",
+      "data-reveal": true
+    }, "From zero to a live payments product."), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body",
+      style: {
+        maxWidth: 680
+      }
+    }, "At launch, ConvesioPay covered the full billing lifecycle for Convesio's hosting customers. It shipped with a complete component library specific to the payments layer, interaction documentation for the engineering team, and end-to-end tested flows across all primary paths."), /*#__PURE__*/React.createElement("div", {
+      className: "cs-screens-grid"
+    }, /*#__PURE__*/React.createElement("img", {
+      src: "assets/convesio-1.png",
+      alt: "ConvesioPay \u2014 Dashboard",
+      loading: "lazy"
+    }), /*#__PURE__*/React.createElement("img", {
+      src: "assets/convesio-2.png",
+      alt: "ConvesioPay \u2014 Payments",
+      loading: "lazy"
+    }), /*#__PURE__*/React.createElement("img", {
+      src: "assets/convesio-3.png",
+      alt: "ConvesioPay \u2014 Invoices",
+      loading: "lazy"
+    }), /*#__PURE__*/React.createElement("img", {
+      src: "assets/convesio-4.png",
+      alt: "ConvesioPay \u2014 History",
+      loading: "lazy"
+    })))), /*#__PURE__*/React.createElement("section", {
+      className: "cs-section"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-col"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-eyebrow-row"
+    }, /*#__PURE__*/React.createElement(Eyebrow, null, "Outcomes")), /*#__PURE__*/React.createElement("h2", {
+      className: "cs-h2",
+      "data-reveal": true
+    }, "$1M+ processed in year one.", /*#__PURE__*/React.createElement("br", null), "With no marketing push."), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body"
+    }, "The product launched to existing Convesio customers. There was no paid acquisition, no product-led growth campaign \u2014 just an announcement to the existing base. In the first twelve months, ConvesioPay processed over $1M in payments."), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body"
+    }, "The metric I cared most about wasn't volume \u2014 it was the payment completion rate. Users who reached the payment screen completed it at over 90%. That told me the design was doing its job: reducing friction, building confidence, and getting out of the way."), /*#__PURE__*/React.createElement("div", {
+      className: "cs-metrics"
+    }, [{
+      value: '$1M+',
+      label: 'Processed in Year 1'
+    }, {
+      value: '90%',
+      label: 'Payment completion rate'
+    }, {
+      value: '0 → 1',
+      label: 'Product built from scratch'
+    }].map(m => /*#__PURE__*/React.createElement("div", {
+      key: m.label,
+      className: "cs-metric"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-metric__value",
+      "data-counter": true,
+      style: {
+        fontFamily: 'Geist',
+        fontWeight: '400'
+      }
+    }, m.value), /*#__PURE__*/React.createElement("div", {
+      className: "cs-metric__label"
+    }, m.label)))))), /*#__PURE__*/React.createElement("section", {
+      className: "cs-section"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-col"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-eyebrow-row"
+    }, /*#__PURE__*/React.createElement(Eyebrow, null, "Reflection")), /*#__PURE__*/React.createElement("h2", {
+      className: "cs-h2",
+      "data-reveal": true
+    }, "Building from zero teaches you", /*#__PURE__*/React.createElement("br", null), "to be precise about what matters."), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body"
+    }, "Working on a 0 \u2192 1 product is a different kind of design challenge. There's no existing user behaviour to anchor to, no established patterns to iterate on, no prior version to push back against. Every decision is a genuine first \u2014 and that means every decision has to be deliberately made, not defaulted to."), /*#__PURE__*/React.createElement("div", {
+      className: "cs-pull"
+    }, /*#__PURE__*/React.createElement("p", {
+      style: {
+        fontFamily: 'Geist',
+        fontWeight: '400'
+      }
+    }, "A blank page forces clarity. You can't fall back on convention when there is none \u2014 you have to know why every element is there.")), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body"
+    }, "ConvesioPay taught me that 0 \u2192 1 work is less about creativity and more about conviction. The ability to defend a design decision when there's no precedent to point to is a muscle I've been building since I was freelancing, and this project tested it fully."))), /*#__PURE__*/React.createElement("section", {
+      className: "cs-section"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-col"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-eyebrow-row"
+    }, /*#__PURE__*/React.createElement(Eyebrow, null, "More work")), /*#__PURE__*/React.createElement(ProjectCard, {
+      eyebrow: "CONVESIO",
+      title: "Leading a self-initiated product redesign.",
+      description: "Identified key usability issues, pitched a redesign strategy, secured buy-in, and led a full platform transformation that drove 144% hosting revenue growth.",
+      stats: [{
+        label: 'Role',
+        value: 'Lead Product Designer'
+      }, {
+        label: 'Outcome',
+        value: '144% Hosting Revenue Growth'
+      }],
+      cta: {
+        label: 'Read Case Study',
+        href: 'Convesio Case Study.html'
+      },
+      media: /*#__PURE__*/React.createElement(ConvesioShots, null)
+    }))), /*#__PURE__*/React.createElement(MarqueeStripe, {
+      items: ['ConvesioPay', '$1M+ Processed', '0 → 1 Product', 'Payments Design', 'Lead Product Designer', 'Shipped in 8 months', 'ConvesioPay', '$1M+ Processed', '0 → 1 Product', 'Payments Design', 'Lead Product Designer', 'Shipped in 8 months'],
+      speed: 44
+    }), /*#__PURE__*/React.createElement("section", {
+      className: "cs-section",
+      style: {
+        textAlign: 'center',
+        paddingBottom: 'var(--space-160)'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-col--narrow"
+    }, /*#__PURE__*/React.createElement("h2", {
+      className: "cs-display",
+      "data-reveal": true
+    }, "Work Together"), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body",
+      style: {
+        margin: '0 auto var(--space-40)',
+        textAlign: 'center',
+        maxWidth: 640
+      }
+    }, "I'm looking for the next product I'll help shape, scale, and improve.", /*#__PURE__*/React.createElement("br", null), "If that sounds like what you're building, let's talk."), /*#__PURE__*/React.createElement(Button, {
+      as: "a",
+      href: "mailto:navzkha@gmail.com",
+      variant: "primary",
+      size: "lg"
+    }, "Contact"))), /*#__PURE__*/React.createElement(Footer, {
+      copyright: "\xA9 All rights reserved. Naveed Khan",
+      socials: [{
+        icon: 'linkedin',
+        href: 'https://www.linkedin.com/in/naveed-khan-designer/',
+        label: 'LinkedIn'
+      }, {
+        icon: 'mail',
+        href: 'mailto:navzkha@gmail.com',
+        label: 'Email'
+      }]
+    }));
   }
-
   function mount() {
     if (!window.NaveedKhanPortfolioDesignSystem_ee97a5) return setTimeout(mount, 40);
-    ReactDOM.createRoot(document.getElementById('root')).render(<CaseStudy />);
+    ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(CaseStudy, null));
   }
   mount();
-}());
+})();
+
+
 </script>
 
 <!-- GSAP scroll animations -->

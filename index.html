@@ -22,7 +22,6 @@
 <!-- React + Babel -->
 <script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
 
 <!-- GSAP 3 + ScrollTrigger -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
@@ -582,63 +581,136 @@
      Effects: Film Grain · Vignette · Mouse Light Trail
      Base: #0A0A0A — design-system surface-primary (no added color)
      ════════════════════════════════════════════════════════════ -->
-<script type="text/babel">
+<script>
 (function () {
-  const { NavBar, Button, Logo } = window.NaveedKhanPortfolioDesignSystem_ee97a5;
-
+  const {
+    NavBar,
+    Button,
+    Logo
+  } = window.NaveedKhanPortfolioDesignSystem_ee97a5;
   function PfNav() {
-    return (
-      <React.Fragment>
-        <div className="pf-nav-wrap" id="pf-nav">
-          <div className="pf-col" style={{ position: 'relative' }}>
-            <NavBar links={[
-              { label: 'Work',    href: '#work'    },
-              { label: 'About',   href: '#about'   },
-              { label: 'Contact', href: '#contact' },
-            ]} cta={{ label: 'Resume', href: 'Naveed-Khan-Resume.pdf', target: '_blank' }} />
-            <button className="pf-mob-toggle" id="pf-ham" aria-label="Open menu">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                <line x1="3" y1="6"  x2="21" y2="6"/>
-                <line x1="3" y1="12" x2="21" y2="12"/>
-                <line x1="3" y1="18" x2="21" y2="18"/>
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile drawer — outside nav-wrap so backdrop-filter can't break position:fixed */}
-        <div className="pf-mob-drawer" id="pf-drawer">
-          <div className="pf-mob-drawer__top">
-            <a href="#" style={{ display:'flex', alignItems:'center' }}>
-              <Logo height={17} />
-            </a>
-            <button id="pf-close" style={{ background:'none', border:'none', cursor:'pointer', color:'var(--text-primary)', padding:8 }} aria-label="Close menu">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                <line x1="18" y1="6" x2="6" y2="18"/>
-                <line x1="6" y1="6" x2="18" y2="18"/>
-              </svg>
-            </button>
-          </div>
-          <nav className="pf-mob-drawer__links">
-            {[
-              { label: 'Work',    href: '#work'    },
-              { label: 'About',   href: '#about'   },
-              { label: 'Contact', href: '#contact' },
-            ].map(function(l) { return (
-              <a key={l.label} className="pf-mob-drawer__link" href={l.href}>{l.label}</a>
-            ); })}
-          </nav>
-          <div className="pf-mob-drawer__cta">
-            <Button as="a" href="Naveed-Khan-Resume.pdf" target="_blank" rel="noopener" variant="primary" size="lg">Resume</Button>
-          </div>
-        </div>
-      </React.Fragment>
-    );
+    return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+      className: "pf-nav-wrap",
+      id: "pf-nav"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "pf-col",
+      style: {
+        position: 'relative'
+      }
+    }, /*#__PURE__*/React.createElement(NavBar, {
+      links: [{
+        label: 'Work',
+        href: '#work'
+      }, {
+        label: 'About',
+        href: '#about'
+      }, {
+        label: 'Contact',
+        href: '#contact'
+      }],
+      cta: {
+        label: 'Resume',
+        href: 'Naveed-Khan-Resume.pdf',
+        target: '_blank'
+      }
+    }), /*#__PURE__*/React.createElement("button", {
+      className: "pf-mob-toggle",
+      id: "pf-ham",
+      "aria-label": "Open menu"
+    }, /*#__PURE__*/React.createElement("svg", {
+      width: "22",
+      height: "22",
+      viewBox: "0 0 24 24",
+      fill: "none",
+      stroke: "currentColor",
+      strokeWidth: "2",
+      strokeLinecap: "round"
+    }, /*#__PURE__*/React.createElement("line", {
+      x1: "3",
+      y1: "6",
+      x2: "21",
+      y2: "6"
+    }), /*#__PURE__*/React.createElement("line", {
+      x1: "3",
+      y1: "12",
+      x2: "21",
+      y2: "12"
+    }), /*#__PURE__*/React.createElement("line", {
+      x1: "3",
+      y1: "18",
+      x2: "21",
+      y2: "18"
+    }))))), /*#__PURE__*/React.createElement("div", {
+      className: "pf-mob-drawer",
+      id: "pf-drawer"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "pf-mob-drawer__top"
+    }, /*#__PURE__*/React.createElement("a", {
+      href: "#",
+      style: {
+        display: 'flex',
+        alignItems: 'center'
+      }
+    }, /*#__PURE__*/React.createElement(Logo, {
+      height: 17
+    })), /*#__PURE__*/React.createElement("button", {
+      id: "pf-close",
+      style: {
+        background: 'none',
+        border: 'none',
+        cursor: 'pointer',
+        color: 'var(--text-primary)',
+        padding: 8
+      },
+      "aria-label": "Close menu"
+    }, /*#__PURE__*/React.createElement("svg", {
+      width: "22",
+      height: "22",
+      viewBox: "0 0 24 24",
+      fill: "none",
+      stroke: "currentColor",
+      strokeWidth: "2",
+      strokeLinecap: "round"
+    }, /*#__PURE__*/React.createElement("line", {
+      x1: "18",
+      y1: "6",
+      x2: "6",
+      y2: "18"
+    }), /*#__PURE__*/React.createElement("line", {
+      x1: "6",
+      y1: "6",
+      x2: "18",
+      y2: "18"
+    })))), /*#__PURE__*/React.createElement("nav", {
+      className: "pf-mob-drawer__links"
+    }, [{
+      label: 'Work',
+      href: '#work'
+    }, {
+      label: 'About',
+      href: '#about'
+    }, {
+      label: 'Contact',
+      href: '#contact'
+    }].map(function (l) {
+      return /*#__PURE__*/React.createElement("a", {
+        key: l.label,
+        className: "pf-mob-drawer__link",
+        href: l.href
+      }, l.label);
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "pf-mob-drawer__cta"
+    }, /*#__PURE__*/React.createElement(Button, {
+      as: "a",
+      href: "Naveed-Khan-Resume.pdf",
+      target: "_blank",
+      rel: "noopener",
+      variant: "primary",
+      size: "lg"
+    }, "Resume"))));
   }
-
   function Hero() {
     const canvasRef = React.useRef(null);
-
     React.useEffect(function () {
       var canvas = canvasRef.current;
       if (!canvas) return;
@@ -647,336 +719,402 @@
       var cleanup = window._heroCanvasInit(canvas, hero);
       return cleanup;
     }, []);
-
-    return (
-      <header id="top" className="pf-hero">
-        <canvas ref={canvasRef} className="pf-hero__webgl" />
-        <div className="pf-hero__texture" />
-        <div className="pf-hero__vignette" />
-        <div className="pf-col pf-hero__inner">
-          <div className="pf-hero__content">
-            <p className="pf-eyebrow pf-eyebrow--lg"
-               style={{ fontFamily: 'Geist', fontSize: '16px' }}>
-              Senior Product Designer
-            </p>
-            <h1 className="pf-hero__title">Naveed<br/>Khan</h1>
-            <p className="pf-hero__lead">
-              Over 12+ years, I've designed SaaS, fintech, cloud hosting, and AI products —
-              leading 0→1 builds, redesigns, and growth initiatives from strategy to shipped UX.
-            </p>
-            <div className="pf-hero__cta">
-              <Button as="a" href="#work" variant="primary" size="lg">View Selected Work</Button>
-            </div>
-          </div>
-        </div>
-      </header>
-    );
+    return /*#__PURE__*/React.createElement("header", {
+      id: "top",
+      className: "pf-hero"
+    }, /*#__PURE__*/React.createElement("canvas", {
+      ref: canvasRef,
+      className: "pf-hero__webgl"
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "pf-hero__texture"
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "pf-hero__vignette"
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "pf-col pf-hero__inner"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "pf-hero__content"
+    }, /*#__PURE__*/React.createElement("p", {
+      className: "pf-eyebrow pf-eyebrow--lg",
+      style: {
+        fontFamily: 'Geist',
+        fontSize: '16px'
+      }
+    }, "Senior Product Designer"), /*#__PURE__*/React.createElement("h1", {
+      className: "pf-hero__title"
+    }, "Naveed", /*#__PURE__*/React.createElement("br", null), "Khan"), /*#__PURE__*/React.createElement("p", {
+      className: "pf-hero__lead"
+    }, "Over 12+ years, I've designed SaaS, fintech, cloud hosting, and AI products \u2014 leading 0\u21921 builds, redesigns, and growth initiatives from strategy to shipped UX."), /*#__PURE__*/React.createElement("div", {
+      className: "pf-hero__cta"
+    }, /*#__PURE__*/React.createElement(Button, {
+      as: "a",
+      href: "#work",
+      variant: "primary",
+      size: "lg"
+    }, "View Selected Work")))));
   }
-
   window.PfNav = PfNav;
   window.Hero = Hero;
-}());
+})();
+
+
 </script>
 
 <!-- ════════════ WORK ════════════ -->
-<script type="text/babel">
+<script>
 (function () {
-  const { ProjectCard, Eyebrow } = window.NaveedKhanPortfolioDesignSystem_ee97a5;
+  const {
+    ProjectCard,
+    Eyebrow
+  } = window.NaveedKhanPortfolioDesignSystem_ee97a5;
 
   /* ── Infinite marquee for Convesio case study images ─────── */
-  var IMGS = [
-    'assets/convesio-1.png',
-    'assets/convesio-2.png',
-    'assets/convesio-3.png',
-    'assets/convesio-4.png',
-  ];
-
-  var CONVESIO_IMGS = [
-    'assets/convesio-r1.webp',
-    'assets/convesio-r2.webp',
-    'assets/convesio-r3.webp',
-    'assets/convesio-r4.webp',
-  ];
+  var IMGS = ['assets/convesio-1.png', 'assets/convesio-2.png', 'assets/convesio-3.png', 'assets/convesio-4.png'];
+  var CONVESIO_IMGS = ['assets/convesio-r1.webp', 'assets/convesio-r2.webp', 'assets/convesio-r3.webp', 'assets/convesio-r4.webp'];
   function ConvesioRedesignMarquee() {
     var all = CONVESIO_IMGS.concat(CONVESIO_IMGS);
-    return (
-      <div className="cs-marquee" style={{ padding: '20px 0' }}>
-        <div className="cs-marquee__track">
-          {all.map(function (src, i) {
-            return <img key={i} className="cs-marquee__img" src={src}
-              alt={'Convesio screen ' + ((i % CONVESIO_IMGS.length) + 1)} loading="lazy" />;
-          })}
-        </div>
-      </div>
-    );
+    return /*#__PURE__*/React.createElement("div", {
+      className: "cs-marquee",
+      style: {
+        padding: '20px 0'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-marquee__track"
+    }, all.map(function (src, i) {
+      return /*#__PURE__*/React.createElement("img", {
+        key: i,
+        className: "cs-marquee__img",
+        src: src,
+        alt: 'Convesio screen ' + (i % CONVESIO_IMGS.length + 1),
+        loading: "lazy"
+      });
+    })));
   }
-
   function ConvesioMarquee() {
     /* Duplicate the set so the CSS translateX(-50%) loop is seamless */
     var all = IMGS.concat(IMGS);
-    return (
-      <div className="cs-marquee">
-        <div className="cs-marquee__track">
-          {all.map(function (src, i) {
-            return (
-              <img
-                key={i}
-                className="cs-marquee__img"
-                src={src}
-                alt={'Convesio screen ' + ((i % IMGS.length) + 1)}
-                loading="lazy"
-              />
-            );
-          })}
-        </div>
-      </div>
-    );
+    return /*#__PURE__*/React.createElement("div", {
+      className: "cs-marquee"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-marquee__track"
+    }, all.map(function (src, i) {
+      return /*#__PURE__*/React.createElement("img", {
+        key: i,
+        className: "cs-marquee__img",
+        src: src,
+        alt: 'Convesio screen ' + (i % IMGS.length + 1),
+        loading: "lazy"
+      });
+    })));
   }
 
   /* ── Placeholder shots for other cards ──────────────────── */
-  function Shot({ tone, label }) {
+  function Shot({
+    tone,
+    label
+  }) {
     var isBlue = tone === 'blue';
-    return (
-      <div className="pf-shot">
-        <div className="pf-shot__bar"><span></span><span></span><span></span></div>
-        <div className={"pf-shot__body " + (isBlue ? 'is-blue' : 'is-light')}>
-          {isBlue && label
-            ? <div className="pf-shot__brand">{label}</div>
-            : <React.Fragment>
-                <div className="pf-shot__side"></div>
-                <div className="pf-shot__main">
-                  <div className="pf-shot__line" style={{ width:'60%' }}></div>
-                  <div className="pf-shot__line" style={{ width:'85%' }}></div>
-                  <div className="pf-shot__cards"><span></span><span></span><span></span></div>
-                </div>
-              </React.Fragment>
-          }
-        </div>
-      </div>
-    );
+    return /*#__PURE__*/React.createElement("div", {
+      className: "pf-shot"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "pf-shot__bar"
+    }, /*#__PURE__*/React.createElement("span", null), /*#__PURE__*/React.createElement("span", null), /*#__PURE__*/React.createElement("span", null)), /*#__PURE__*/React.createElement("div", {
+      className: "pf-shot__body " + (isBlue ? 'is-blue' : 'is-light')
+    }, isBlue && label ? /*#__PURE__*/React.createElement("div", {
+      className: "pf-shot__brand"
+    }, label) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+      className: "pf-shot__side"
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "pf-shot__main"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "pf-shot__line",
+      style: {
+        width: '60%'
+      }
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "pf-shot__line",
+      style: {
+        width: '85%'
+      }
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "pf-shot__cards"
+    }, /*#__PURE__*/React.createElement("span", null), /*#__PURE__*/React.createElement("span", null), /*#__PURE__*/React.createElement("span", null))))));
   }
-
-  var CW_IMGS = [
-    'assets/cloudways-1.png',
-    'assets/cloudways-2.png',
-    'assets/cloudways-3.png',
-    'assets/cloudways-4.png',
-  ];
+  var CW_IMGS = ['assets/cloudways-1.png', 'assets/cloudways-2.png', 'assets/cloudways-3.png', 'assets/cloudways-4.png'];
   function CloudwaysMarquee() {
     var all = CW_IMGS.concat(CW_IMGS);
-    return (
-      <div className="pf-cs-marquee">
-        <div className="pf-cs-marquee__track">
-          {all.map(function (src, i) {
-            return <img key={i} className="pf-cs-marquee__img" src={src}
-              alt={'Cloudways ' + ((i % CW_IMGS.length) + 1)} loading="lazy" />;
-          })}
-        </div>
-      </div>
-    );
+    return /*#__PURE__*/React.createElement("div", {
+      className: "pf-cs-marquee"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "pf-cs-marquee__track"
+    }, all.map(function (src, i) {
+      return /*#__PURE__*/React.createElement("img", {
+        key: i,
+        className: "pf-cs-marquee__img",
+        src: src,
+        alt: 'Cloudways ' + (i % CW_IMGS.length + 1),
+        loading: "lazy"
+      });
+    })));
   }
-
   function WorkSection() {
-    return (
-      <section id="work" className="pf-section">
-        <div className="pf-col">
-          <div className="pf-section__head">
-            <Eyebrow size="lg">Selected Work</Eyebrow>
-            <h2 className="pf-h1" style={{ fontWeight: 800 }}>Work</h2>
-          </div>
-          <div className="pf-work__stack">
-            <ProjectCard
-              eyebrow="CONVESIOPAY"
-              description="Led end-to-end product design from concept to launch for a payments platform processing $1M+ in year one."
-              stats={[
-                { label: 'Role',    value: 'Lead Product Designer'  },
-                { label: 'Outcome', value: '$1M+ processed (Year 1)'},
-              ]}
-              cta={{ label: 'Read Case Study', href: 'ConvesioPay Case Study.html' }}
-              media={<ConvesioMarquee />}
-            />
-            <ProjectCard
-              eyebrow="CLOUDWAYS"
-              title="Designing at scale across product, web, and brand."
-              description="Spent 7 years designing and scaling a high-growth cloud hosting platform across product, marketing, and brand."
-              stats={[
-                { label: 'Role',    value: 'Lead Designer'                      },
-                { label: 'Outcome', value: 'Part of a $350M Acquisition Story' },
-              ]}
-              cta={{ label: 'Read Case Study', href: 'Cloudways Case Study.html' }}
-              media={<CloudwaysMarquee />}
-            />
-            <ProjectCard
-              eyebrow="CONVESIO"
-              title="Leading a self-initiated product redesign."
-              description="Identified key usability issues, pitched a redesign strategy, secured buy-in, and led a full platform transformation."
-              stats={[
-                { label: 'Role',    value: 'Lead Product Designer'    },
-                { label: 'Outcome', value: '144% Hosting Revenue Growth'},
-              ]}
-              cta={{ label: 'Read Case Study', href: 'Convesio Case Study.html', variant: 'primary' }}
-              media={<ConvesioRedesignMarquee />}
-            />
-          </div>
-        </div>
-      </section>
-    );
+    return /*#__PURE__*/React.createElement("section", {
+      id: "work",
+      className: "pf-section"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "pf-col"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "pf-section__head"
+    }, /*#__PURE__*/React.createElement(Eyebrow, {
+      size: "lg"
+    }, "Selected Work"), /*#__PURE__*/React.createElement("h2", {
+      className: "pf-h1",
+      style: {
+        fontWeight: 800
+      }
+    }, "Work")), /*#__PURE__*/React.createElement("div", {
+      className: "pf-work__stack"
+    }, /*#__PURE__*/React.createElement(ProjectCard, {
+      eyebrow: "CONVESIOPAY",
+      description: "Led end-to-end product design from concept to launch for a payments platform processing $1M+ in year one.",
+      stats: [{
+        label: 'Role',
+        value: 'Lead Product Designer'
+      }, {
+        label: 'Outcome',
+        value: '$1M+ processed (Year 1)'
+      }],
+      cta: {
+        label: 'Read Case Study',
+        href: 'ConvesioPay Case Study.html'
+      },
+      media: /*#__PURE__*/React.createElement(ConvesioMarquee, null)
+    }), /*#__PURE__*/React.createElement(ProjectCard, {
+      eyebrow: "CLOUDWAYS",
+      title: "Designing at scale across product, web, and brand.",
+      description: "Spent 7 years designing and scaling a high-growth cloud hosting platform across product, marketing, and brand.",
+      stats: [{
+        label: 'Role',
+        value: 'Lead Designer'
+      }, {
+        label: 'Outcome',
+        value: 'Part of a $350M Acquisition Story'
+      }],
+      cta: {
+        label: 'Read Case Study',
+        href: 'Cloudways Case Study.html'
+      },
+      media: /*#__PURE__*/React.createElement(CloudwaysMarquee, null)
+    }), /*#__PURE__*/React.createElement(ProjectCard, {
+      eyebrow: "CONVESIO",
+      title: "Leading a self-initiated product redesign.",
+      description: "Identified key usability issues, pitched a redesign strategy, secured buy-in, and led a full platform transformation.",
+      stats: [{
+        label: 'Role',
+        value: 'Lead Product Designer'
+      }, {
+        label: 'Outcome',
+        value: '144% Hosting Revenue Growth'
+      }],
+      cta: {
+        label: 'Read Case Study',
+        href: 'Convesio Case Study.html',
+        variant: 'primary'
+      },
+      media: /*#__PURE__*/React.createElement(ConvesioRedesignMarquee, null)
+    }))));
   }
-
   window.WorkSection = WorkSection;
-}());
+})();
+
+
 </script>
 
 <!-- ════════════ ABOUT ════════════ -->
-<script type="text/babel">
+<script>
 (function () {
-  const { Eyebrow, Button, ExperienceRow } = window.NaveedKhanPortfolioDesignSystem_ee97a5;
-
-  var EXP = [
-    { company: 'CONVESIO',         role: 'Senior Product Designer',         period: '2022 - 2026' },
-    { company: 'BRAINSTORM FORCE', role: 'Senior Product Designer',         period: '2021 - 2022' },
-    { company: 'CLOUDWAYS',        role: 'Senior UI/UX / Product Designer', period: '2014 - 2021' },
-    { company: 'KNYSYS',           role: 'UI Designer',                     period: '2014'        },
-    { company: 'FREELANCE',        role: 'Graphic / UI Designer',           period: '2012 - 2013' },
-  ];
-
+  const {
+    Eyebrow,
+    Button,
+    ExperienceRow
+  } = window.NaveedKhanPortfolioDesignSystem_ee97a5;
+  var EXP = [{
+    company: 'CONVESIO',
+    role: 'Senior Product Designer',
+    period: '2022 - 2026'
+  }, {
+    company: 'BRAINSTORM FORCE',
+    role: 'Senior Product Designer',
+    period: '2021 - 2022'
+  }, {
+    company: 'CLOUDWAYS',
+    role: 'Senior UI/UX / Product Designer',
+    period: '2014 - 2021'
+  }, {
+    company: 'KNYSYS',
+    role: 'UI Designer',
+    period: '2014'
+  }, {
+    company: 'FREELANCE',
+    role: 'Graphic / UI Designer',
+    period: '2012 - 2013'
+  }];
   function AboutSection() {
-    return (
-      <section id="about" className="pf-section">
-        <div className="pf-col">
-          <div className="pf-section__head">
-            <Eyebrow>My Story</Eyebrow>
-            <h2 className="pf-h1" style={{ fontWeight: 800 }}>About</h2>
-          </div>
-          <div className="pf-about__grid">
-            <div className="pf-about__story">
-              <h3 className="pf-serif">A self-taught designer shaped by real products.</h3>
-              <div className="pf-about__prose">
-                <p>I learned design by building.</p>
-                <p>What started with freelance projects evolved into more than a decade of designing SaaS, fintech, cloud infrastructure, and AI products.</p>
-                <p>Throughout my career, I've often been trusted as the sole designer — working closely with founders, engineers, marketers, and stakeholders to take products from early concepts to shipped experiences.</p>
-                <p>I care about clarity, ownership, and creating products that continue delivering value long after launch.</p>
-              </div>
-              <Button as="a" href="Naveed-Khan-Resume.pdf" target="_blank" rel="noopener" variant="secondary" size="sm" icon="arrow-up-right">View Resume</Button>
-            </div>
-            <div className="pf-about__exp">
-              <Eyebrow>Experience</Eyebrow>
-              <div className="pf-about__timeline">
-                {EXP.map(function (e, i) {
-                  return <ExperienceRow key={e.company} company={e.company} role={e.role} period={e.period} divider={i < EXP.length - 1} />;
-                })}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    );
+    return /*#__PURE__*/React.createElement("section", {
+      id: "about",
+      className: "pf-section"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "pf-col"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "pf-section__head"
+    }, /*#__PURE__*/React.createElement(Eyebrow, null, "My Story"), /*#__PURE__*/React.createElement("h2", {
+      className: "pf-h1",
+      style: {
+        fontWeight: 800
+      }
+    }, "About")), /*#__PURE__*/React.createElement("div", {
+      className: "pf-about__grid"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "pf-about__story"
+    }, /*#__PURE__*/React.createElement("h3", {
+      className: "pf-serif"
+    }, "A self-taught designer shaped by real products."), /*#__PURE__*/React.createElement("div", {
+      className: "pf-about__prose"
+    }, /*#__PURE__*/React.createElement("p", null, "I learned design by building."), /*#__PURE__*/React.createElement("p", null, "What started with freelance projects evolved into more than a decade of designing SaaS, fintech, cloud infrastructure, and AI products."), /*#__PURE__*/React.createElement("p", null, "Throughout my career, I've often been trusted as the sole designer \u2014 working closely with founders, engineers, marketers, and stakeholders to take products from early concepts to shipped experiences."), /*#__PURE__*/React.createElement("p", null, "I care about clarity, ownership, and creating products that continue delivering value long after launch.")), /*#__PURE__*/React.createElement(Button, {
+      as: "a",
+      href: "Naveed-Khan-Resume.pdf",
+      target: "_blank",
+      rel: "noopener",
+      variant: "secondary",
+      size: "sm",
+      icon: "arrow-up-right"
+    }, "View Resume")), /*#__PURE__*/React.createElement("div", {
+      className: "pf-about__exp"
+    }, /*#__PURE__*/React.createElement(Eyebrow, null, "Experience"), /*#__PURE__*/React.createElement("div", {
+      className: "pf-about__timeline"
+    }, EXP.map(function (e, i) {
+      return /*#__PURE__*/React.createElement(ExperienceRow, {
+        key: e.company,
+        company: e.company,
+        role: e.role,
+        period: e.period,
+        divider: i < EXP.length - 1
+      });
+    }))))));
   }
-
   window.AboutSection = AboutSection;
-}());
+})();
+
+
 </script>
 
 <!-- ════════════ METRICS ════════════ -->
-<script type="text/babel">
+<script>
 (function () {
-  const { Stat } = window.NaveedKhanPortfolioDesignSystem_ee97a5;
-
-  var METRICS = [
-    { value: '12+',   label: 'Years Experience'       },
-    { value: '$350M', label: 'Acquisition (Cloudways)'},
-    { value: '$1M',   label: 'Processed (Year 1)'     },
-    { value: '0 → 1', label: 'Products Built'         },
-  ];
-
+  const {
+    Stat
+  } = window.NaveedKhanPortfolioDesignSystem_ee97a5;
+  var METRICS = [{
+    value: '12+',
+    label: 'Years Experience'
+  }, {
+    value: '$350M',
+    label: 'Acquisition (Cloudways)'
+  }, {
+    value: '$1M',
+    label: 'Processed (Year 1)'
+  }, {
+    value: '0 → 1',
+    label: 'Products Built'
+  }];
   function MetricsSection() {
-    return (
-      <section className="pf-metrics">
-        <div className="pf-col pf-metrics__row">
-          {METRICS.map(function (m) {
-            return <Stat key={m.label} size="lg" value={m.value} label={m.label} />;
-          })}
-        </div>
-      </section>
-    );
+    return /*#__PURE__*/React.createElement("section", {
+      className: "pf-metrics"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "pf-col pf-metrics__row"
+    }, METRICS.map(function (m) {
+      return /*#__PURE__*/React.createElement(Stat, {
+        key: m.label,
+        size: "lg",
+        value: m.value,
+        label: m.label
+      });
+    })));
   }
-
   window.MetricsSection = MetricsSection;
-}());
+})();
+
+
 </script>
 
 <!-- ════════════ FINAL CTA ════════════ -->
-<script type="text/babel">
+<script>
 (function () {
-  const { Button } = window.NaveedKhanPortfolioDesignSystem_ee97a5;
-
+  const {
+    Button
+  } = window.NaveedKhanPortfolioDesignSystem_ee97a5;
   function FinalCTA() {
-    return (
-      <section id="contact" className="pf-section pf-cta">
-        <div className="pf-cta__inner">
-          <h2 className="pf-cta__title" style={{ fontWeight: 800 }}>Work Together</h2>
-          <p className="pf-cta__lead">
-            I'm looking for the next product I'll help shape, scale, and improve.<br/>
-            If that sounds like what you're building, let's talk.
-          </p>
-          <Button as="a" href="mailto:navzkha@gmail.com" variant="primary" size="lg">Contact</Button>
-        </div>
-      </section>
-    );
+    return /*#__PURE__*/React.createElement("section", {
+      id: "contact",
+      className: "pf-section pf-cta"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "pf-cta__inner"
+    }, /*#__PURE__*/React.createElement("h2", {
+      className: "pf-cta__title",
+      style: {
+        fontWeight: 800
+      }
+    }, "Work Together"), /*#__PURE__*/React.createElement("p", {
+      className: "pf-cta__lead"
+    }, "I'm looking for the next product I'll help shape, scale, and improve.", /*#__PURE__*/React.createElement("br", null), "If that sounds like what you're building, let's talk."), /*#__PURE__*/React.createElement(Button, {
+      as: "a",
+      href: "mailto:navzkha@gmail.com",
+      variant: "primary",
+      size: "lg"
+    }, "Contact")));
   }
-
   window.FinalCTA = FinalCTA;
-}());
+})();
+
+
 </script>
 
 <!-- ════════════ APP MOUNT ════════════ -->
-<script type="text/babel">
+<script>
 (function () {
-  const { MarqueeStripe, Footer } = window.NaveedKhanPortfolioDesignSystem_ee97a5;
-
+  const {
+    MarqueeStripe,
+    Footer
+  } = window.NaveedKhanPortfolioDesignSystem_ee97a5;
   function App() {
-    return (
-      <React.Fragment>
-        <PfNav />
-        <Hero />
-        <MarqueeStripe items={[
-          'Cloudways · $350M Acquisition', '12 Years Self-Taught',
-          '50k Users · SaaS', '$1M+ Processed · Fintech',
-          '0 → 1 Products', 'Strategy to Shipped UX',
-          'Cloudways · $350M Acquisition', '12 Years Self-Taught',
-          '50k Users · SaaS', '$1M+ Processed · Fintech',
-        ]} speed={22} />
-        <WorkSection />
-        <AboutSection />
-        <MetricsSection />
-        <MarqueeStripe items={[
-          'Senior Product Designer', 'SaaS · Fintech · Cloud · AI',
-          'Concept to Launch', 'Redesign · Growth · 0→1',
-          'Senior Product Designer', 'SaaS · Fintech · Cloud · AI',
-          'Concept to Launch', 'Redesign · Growth · 0→1',
-          'Senior Product Designer', 'SaaS · Fintech · Cloud · AI',
-        ]} speed={22} />
-        <FinalCTA />
-        <Footer
-          copyright="© All rights reserved. Naveed Khan"
-          socials={[
-            { icon: 'linkedin', href: 'https://www.linkedin.com/in/naveed-khan-designer/', label: 'LinkedIn' },
-            { icon: 'mail',     href: 'mailto:navzkha@gmail.com',                          label: 'Email'    },
-          ]}
-        />
-      </React.Fragment>
-    );
+    return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PfNav, null), /*#__PURE__*/React.createElement(Hero, null), /*#__PURE__*/React.createElement(MarqueeStripe, {
+      items: ['Cloudways · $350M Acquisition', '12 Years Self-Taught', '50k Users · SaaS', '$1M+ Processed · Fintech', '0 → 1 Products', 'Strategy to Shipped UX', 'Cloudways · $350M Acquisition', '12 Years Self-Taught', '50k Users · SaaS', '$1M+ Processed · Fintech'],
+      speed: 22
+    }), /*#__PURE__*/React.createElement(WorkSection, null), /*#__PURE__*/React.createElement(AboutSection, null), /*#__PURE__*/React.createElement(MetricsSection, null), /*#__PURE__*/React.createElement(MarqueeStripe, {
+      items: ['Senior Product Designer', 'SaaS · Fintech · Cloud · AI', 'Concept to Launch', 'Redesign · Growth · 0→1', 'Senior Product Designer', 'SaaS · Fintech · Cloud · AI', 'Concept to Launch', 'Redesign · Growth · 0→1', 'Senior Product Designer', 'SaaS · Fintech · Cloud · AI'],
+      speed: 22
+    }), /*#__PURE__*/React.createElement(FinalCTA, null), /*#__PURE__*/React.createElement(Footer, {
+      copyright: "\xA9 All rights reserved. Naveed Khan",
+      socials: [{
+        icon: 'linkedin',
+        href: 'https://www.linkedin.com/in/naveed-khan-designer/',
+        label: 'LinkedIn'
+      }, {
+        icon: 'mail',
+        href: 'mailto:navzkha@gmail.com',
+        label: 'Email'
+      }]
+    }));
   }
-
   function mount() {
-    if (!(window.PfNav && window.Hero && window.WorkSection && window.AboutSection
-        && window.MetricsSection && window.FinalCTA)) {
+    if (!(window.PfNav && window.Hero && window.WorkSection && window.AboutSection && window.MetricsSection && window.FinalCTA)) {
       return setTimeout(mount, 30);
     }
-    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(App, null));
   }
   mount();
-}());
+})();
+
+
 </script>
 <!-- ════════════ GSAP ANIMATIONS ════════════
      1. Magnetic pull + scale on primary buttons (GSAP)

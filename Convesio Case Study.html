@@ -17,7 +17,6 @@
 
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script src="_ds/naveed-khan-portfolio-design-system-ee97a5ef-1be9-4c65-b506-ec6f688ba54c/_ds_bundle.js"></script>
@@ -329,391 +328,630 @@
 <div id="root"></div>
 
 <!-- ═══════════════ CASE STUDY PAGE ═══════════════ -->
-<script type="text/babel">
-
-
-
-
-
-
-
+<script>
 (function () {
-  const { NavBar, Button, Eyebrow, Stat, Footer, MarqueeStripe, ProjectCard, Logo } = window.NaveedKhanPortfolioDesignSystem_ee97a5;
+  const {
+    NavBar,
+    Button,
+    Eyebrow,
+    Stat,
+    Footer,
+    MarqueeStripe,
+    ProjectCard,
+    Logo
+  } = window.NaveedKhanPortfolioDesignSystem_ee97a5;
 
   /* ── Cloudways real image marquee ── */
   function CloudwaysShots() {
-    var imgs = [
-      'assets/cloudways-1.png',
-      'assets/cloudways-2.png',
-      'assets/cloudways-3.png',
-      'assets/cloudways-4.png',
-    ];
+    var imgs = ['assets/cloudways-1.png', 'assets/cloudways-2.png', 'assets/cloudways-3.png', 'assets/cloudways-4.png'];
     var all = imgs.concat(imgs);
-    return (
-      <div className="cs-marquee">
-        <div className="cs-marquee__track">
-          {all.map(function (src, i) {
-            return <img key={i} className="cs-marquee__img" src={src}
-            alt={'Cloudways screen ' + (i % imgs.length + 1)} loading="lazy" />;
-          })}
-        </div>
-      </div>
-    );
+    return /*#__PURE__*/React.createElement("div", {
+      className: "cs-marquee"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-marquee__track"
+    }, all.map(function (src, i) {
+      return /*#__PURE__*/React.createElement("img", {
+        key: i,
+        className: "cs-marquee__img",
+        src: src,
+        alt: 'Cloudways screen ' + (i % imgs.length + 1),
+        loading: "lazy"
+      });
+    })));
   }
 
   /* ── Hero image marquee ── */
-  var HERO_IMGS = [
-  'assets/convesio-r1.webp',
-  'assets/convesio-r2.webp',
-  'assets/convesio-r3.webp',
-  'assets/convesio-r4.webp'];
-
+  var HERO_IMGS = ['assets/convesio-r1.webp', 'assets/convesio-r2.webp', 'assets/convesio-r3.webp', 'assets/convesio-r4.webp'];
   function HeroMarquee() {
     var all = HERO_IMGS.concat(HERO_IMGS);
-    return (
-      <div className="cs-marquee">
-        <div className="cs-marquee__track">
-          {all.map(function (src, i) {
-            return <img key={i} className="cs-marquee__img" src={src}
-            alt={'Convesio screen ' + (i % HERO_IMGS.length + 1)} loading="lazy" />;
-          })}
-        </div>
-      </div>);
-
+    return /*#__PURE__*/React.createElement("div", {
+      className: "cs-marquee"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-marquee__track"
+    }, all.map(function (src, i) {
+      return /*#__PURE__*/React.createElement("img", {
+        key: i,
+        className: "cs-marquee__img",
+        src: src,
+        alt: 'Convesio screen ' + (i % HERO_IMGS.length + 1),
+        loading: "lazy"
+      });
+    })));
   }
 
   /* ── Placeholder image well ── */
-  function Ph({ height = 260, label = '' }) {
-    return (
-      <div className="cs-img-well cs-img-well--ph" style={{ minHeight: height }}>
-        <div className="cs-ph-inner">
-          <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" />
-            <path d="m21 15-5-5L5 21" />
-          </svg>
-          {label && <span>{label}</span>}
-        </div>
-      </div>);
-
+  function Ph({
+    height = 260,
+    label = ''
+  }) {
+    return /*#__PURE__*/React.createElement("div", {
+      className: "cs-img-well cs-img-well--ph",
+      style: {
+        minHeight: height
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-ph-inner"
+    }, /*#__PURE__*/React.createElement("svg", {
+      viewBox: "0 0 24 24",
+      fill: "none",
+      strokeWidth: "1.5",
+      strokeLinecap: "round",
+      strokeLinejoin: "round"
+    }, /*#__PURE__*/React.createElement("rect", {
+      x: "3",
+      y: "3",
+      width: "18",
+      height: "18",
+      rx: "2"
+    }), /*#__PURE__*/React.createElement("circle", {
+      cx: "8.5",
+      cy: "8.5",
+      r: "1.5"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "m21 15-5-5L5 21"
+    })), label && /*#__PURE__*/React.createElement("span", null, label)));
   }
 
   /* ── Real image well ── */
-  function Img({ src, alt = '', height }) {
-    return (
-      <div className="cs-img-well" style={height ? { minHeight: height } : {}}>
-        <img src={src} alt={alt} loading="lazy" />
-      </div>);
-
+  function Img({
+    src,
+    alt = '',
+    height
+  }) {
+    return /*#__PURE__*/React.createElement("div", {
+      className: "cs-img-well",
+      style: height ? {
+        minHeight: height
+      } : {}
+    }, /*#__PURE__*/React.createElement("img", {
+      src: src,
+      alt: alt,
+      loading: "lazy"
+    }));
   }
 
   /* ── Case Study Page ── */
   function CaseStudy() {
-    return (
-      <React.Fragment>
-        {/* ── Sticky Nav ── */}
-        <div className="cs-nav-wrap" id="cs-nav">
-          <div className="cs-col" style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
-            <a href="index.html" className="cs-nav-logo-link" aria-label="Back to homepage"></a>
-            <NavBar
-              links={[
-              { label: 'Work', href: 'index.html#work' },
-              { label: 'About', href: 'index.html#about' },
-              { label: 'Contact', href: 'index.html#contact' }]}
-              cta={{ label: 'Resume', href: 'Naveed-Khan-Resume.pdf', target: '_blank' }}
-              style={{ flex: 1 }}
-            />
-            <button className="cs-mob-toggle" id="cs-ham" aria-label="Open menu">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                <line x1="3" y1="6"  x2="21" y2="6"/>
-                <line x1="3" y1="12" x2="21" y2="12"/>
-                <line x1="3" y1="18" x2="21" y2="18"/>
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        {/* ── Mobile drawer ── */}
-        <div className="cs-mob-drawer" id="cs-drawer">
-          <div className="cs-mob-drawer__top">
-            <a href="index.html" style={{ display:'flex', alignItems:'center' }}>
-              <Logo height={17} />
-            </a>
-            <button id="cs-close" style={{ background:'none', border:'none', cursor:'pointer', color:'var(--text-primary)', padding:8 }} aria-label="Close menu">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                <line x1="18" y1="6" x2="6" y2="18"/>
-                <line x1="6" y1="6" x2="18" y2="18"/>
-              </svg>
-            </button>
-          </div>
-          <nav className="cs-mob-drawer__links">
-            {[
-              { label: 'Work',    href: 'index.html#work'    },
-              { label: 'About',   href: 'index.html#about'   },
-              { label: 'Contact', href: 'index.html#contact' },
-            ].map(function(l) { return (
-              <a key={l.label} className="cs-mob-drawer__link" href={l.href}>{l.label}</a>
-            ); })}
-          </nav>
-          <div className="cs-mob-drawer__cta">
-            <Button as="a" href="Naveed-Khan-Resume.pdf" target="_blank" rel="noopener" variant="primary" size="lg">Resume</Button>
-          </div>
-        </div>
-
-        {/* ── Hero ── */}
-        <section className="cs-section cs-hero" style={{ borderTop: 'none' }}>
-          <div className="cs-col">
-            <p style={{ fontFamily: 'var(--font-body)', fontSize: '13px', fontWeight: 500, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--text-secondary)', margin: '0 0 var(--space-24)' }}>Convesio Hosting Platform</p>
-            <h1 className="cs-hero__title" data-reveal>
-              I joined as their only designer.<br />
-              <em>Nobody asked for a redesign.</em>
-            </h1>
-            <div className="cs-meta" style={{ borderRadius: "4px", padding: "0px", margin: "0px 0px 80px", borderWidth: "1px" }}>
-              {[
-              { label: 'Role', value: 'Lead Product Designer' },
-              { label: 'Timeline', value: 'Jul 2022 – Mar 2023' },
-              { label: 'Scope', value: 'Product Redesign' },
-              { label: 'Outcome', value: '144% Hosting Revenue Growth' }].
-              map((m) =>
-              <div key={m.label} className="cs-meta__cell">
-                  <div className="cs-meta__label">{m.label}</div>
-                  <div className="cs-meta__value">{m.value}</div>
-                </div>
-              )}
-            </div>
-            <HeroMarquee />
-          </div>
-        </section>
-
-        {/* ── 01 The Story ── */}
-        <section className="cs-section">
-          <div className="cs-col">
-            <div className="cs-eyebrow-row"><Eyebrow>The story</Eyebrow></div>
-            <h2 className="cs-h2" data-reveal>The product worked.<br />The experience didn't.</h2>
-            <p className="cs-body">Convesio is a managed WordPress hosting platform built to handle serious scale. When I joined in early 2022, the platform had real technical muscle — container-based infrastructure, autoscaling, genuine DevOps capabilities for enterprise clients.</p>
-            <p className="cs-body">But the dashboard was a different story. It had been built fast, by engineers, without a dedicated designer. Features were bolted on. The information architecture had no centre of gravity. Every new user I watched try the product struggled with the same things — not because the product was bad, but because nobody had ever stepped back and looked at the whole thing.</p>
-            <p className="cs-body">I had been hired to work on new features. I ended up redesigning the platform from the ground up — with nobody asking me to.</p>
-          </div>
-        </section>
-
-        {/* ── 02 The Platform ── */}
-        <section className="cs-section">
-          <div className="cs-col">
-            <div className="cs-eyebrow-row"><Eyebrow>The problem</Eyebrow></div>
-            <h2 className="cs-h2" data-reveal>The platform was powerful,<br />but it required too much effort to use.</h2>
-            <div className="cs-two-col">
-              <p className="cs-body cs-body--wide">I mapped every screen in the product. I looked at support tickets, onboarding drop-off data, and I watched recordings of users navigating the dashboard. The friction wasn't in any single place — it was structural. Navigation was unpredictable. Core actions were buried. The visual language was inconsistent across sections that had been built at different times by different people.</p>
-              <p className="cs-body cs-body--wide">This wasn't a case of bad design decisions — it was the natural result of a product that had grown without design direction. The good news: the underlying product logic was sound. What needed to change was the surface. I started documenting.</p>
-            </div>
-            <div className="cs-grid-3">
-              <Ph height={220} label="Before — Nav" />
-              <Ph height={220} label="Before — Dashboard" />
-              <Ph height={220} label="Before — Apps" />
-            </div>
-            <div className="cs-grid-4">
-              <Ph height={160} label="Before — Settings" />
-              <Ph height={160} label="Before — Billing" />
-              <Ph height={160} label="Before — Support" />
-              <Ph height={160} label="Before — Onboarding" />
-            </div>
-          </div>
-        </section>
-
-        {/* ── 03 Nobody asked ── */}
-        <section className="cs-section">
-          <div className="cs-col">
-            <div className="cs-eyebrow-row"><Eyebrow>The pitch</Eyebrow></div>
-            <h2 className="cs-h2" data-reveal>Nobody asked for this.</h2>
-            <p className="cs-body">I had been at Convesio for three months when I put together the first deck. I wasn't asked to. But I had started to collect enough evidence — support patterns, session recordings, onboarding data — that I felt I could make the case clearly.</p>
-            <p className="cs-body">I presented to the CEO and CTO with a simple framing: we're losing on perception before we're losing on features. The engineering team had built a product worth paying for. The design was making it harder to see that.</p>
-            <div className="cs-blockquote">
-              <p style={{ fontFamily: "Geist", fontWeight: "400" }}>"We're losing on perception before we're losing on features."</p>
-            </div>
-            <p className="cs-body">The response surprised me — I was given full scope to redesign. Not a page, not a feature. The whole platform. I had three months and no additional headcount.</p>
-          </div>
-          <div className="cs-col" style={{ marginTop: 'var(--space-48)' }}>
-            <div className="cs-grid-2">
-              <Ph height={280} label="Pitch Deck — Slide 1" />
-              <Ph height={280} label="Pitch Deck — Evidence" />
-            </div>
-          </div>
-        </section>
-
-        {/* ── 04 Company-Wide Presentation ── */}
-        <section className="cs-section">
-          <div className="cs-col">
-            <div className="cs-eyebrow-row"><Eyebrow>Alignment</Eyebrow></div>
-            <h2 className="cs-h2" data-reveal>Company-Wide Presentation</h2>
-            <p className="cs-body">Before any design work happened, I ran a cross-functional alignment session. Every team — engineering, marketing, customer success, sales — had opinions about the product. I needed to understand all of them, and I needed everyone to agree on the direction before I started shipping screens.</p>
-            <p className="cs-body">The session produced one shared understanding: the product needed to feel like something people were proud to show clients. That became the design brief.</p>
-          </div>
-        </section>
-
-        {/* ── 05 What Needed To Change ── */}
-        <section className="cs-section">
-          <div className="cs-col">
-            <div className="cs-eyebrow-row"><Eyebrow>The redesign</Eyebrow></div>
-            <h2 className="cs-h2" data-reveal>What Needed To Change</h2>
-            <p className="cs-body">Every decision traced back to one of three problems users struggled to know where they were, important information was buried, and the interface required too much effort to understand.</p>
-            <div className="cs-table">
-              {[
-              {
-                decision: 'Decision 01', area: 'Navigation',
-                subLabel: 'Sidebar over horizontal tabs',
-                after: 'The original product used horizontal red text links forcing users to remember what existed where. A persistent left sidebar with icons means users can see the structure not remember it. One structural change that reduced cognitive load across every screen.'
-              },
-              {
-                decision: 'Decision 02', area: 'Site management',
-                subLabel: 'Health at a glance, not after investigation',
-                after: 'Agencies managing 20 client sites need to spot problems in three seconds. Plan Health, Disk Usage, Bandwidth, Performance — all surfaced directly in the site list. No clicking into each site to find issues.'
-              },
-              {
-                decision: 'Decision 03', area: 'Analytics',
-                subLabel: 'Organize by what users need, not what data exists',
-                after: 'Same data, completely different experience. Three tabs — Traffic, Firewall, Caching. Metric cards with sparklines. World map instead of a text table. The challenge wasn\'t missing data, it was too much data with no hierarchy.'
-              },
-              {
-                decision: 'Decision 04', area: 'Deployments',
-                subLabel: 'Real-time experience for two audiences',
-                after: 'Progress bar, step checklist, and live log stream in one modal. Technical users see exactly what\'s happening. Non-technical users see how far along they are. Two audiences, one screen, both served.'
-              },
-              {
-                decision: 'Decision 05', area: 'Empty states',
-                subLabel: 'Invitation, not absence',
-                after: 'The original empty dashboard was a blank table. An empty screen is a new user\'s first experience of the product. It should feel like an invitation — friendly copy, single clear action, two supporting cards.'
-              }].
-              map((row) =>
-              <div key={row.area} className="cs-table__row">
-                <div>
-                  <div className="cs-table__label" style={{ marginBottom: 1, color: "rgb(153, 153, 153)", fontWeight: "400", fontSize: "16px", textTransform: "none", letterSpacing: 0 }}>{row.decision}</div>
-                  <div style={{ fontFamily: 'var(--font-body)', marginBottom: 0, fontWeight: "400", color: "rgb(153, 153, 153)", fontSize: "16px" }}>{row.area}</div>
-                </div>
-                <div>
-                  <div className="cs-table__sublabel">{row.subLabel}</div>
-                  <div className="cs-table__solution" style={{ color: '#A3A3A3' }}>{row.after}</div>
-                </div>
-              </div>
-              )}
-            </div>
-          </div>
-        </section>
-
-        {/* ── 06 Not every decision ── */}
-        <section className="cs-section">
-          <div className="cs-col">
-            <div className="cs-eyebrow-row"><Eyebrow>Collaboration</Eyebrow></div>
-            <h2 className="cs-h2" data-reveal>Not every decision was mine.</h2>
-            <p className="cs-body">I was the only designer, but this was never a solo project. Every major structural decision was validated with the engineering team before it went into a prototype. Every copy change was reviewed with marketing. Customer success flagged three patterns I would have missed entirely from user research alone.</p>
-            <p className="cs-body">The rule I kept to: I own the design decisions, but I don't own the product knowledge. The engineers knew things I didn't. The CS team knew things nobody had ever written down. My job was to synthesise that, not override it.</p>
-            <div className="cs-blockquote">
-              <p style={{ fontFamily: "Geist", fontWeight: "400" }}>"I own the design decisions, but I don't own the product knowledge."</p>
-            </div>
-          </div>
-        </section>
-
-        {/* ── 07 Beyond the Screens ── */}
-        <section className="cs-section">
-          <div className="cs-col">
-            <div className="cs-eyebrow-row"><Eyebrow>The output</Eyebrow></div>
-            <h2 className="cs-h2" data-reveal>Beyond the Screens</h2>
-            <p className="cs-body" style={{ maxWidth: 680 }}>The redesign covered more than UI. It produced a component library, a set of interaction patterns, documentation for the engineering team, and a visual language that extended into the marketing site and onboarding emails.</p>
-            <div className="cs-screens-grid">
-              <img src="assets/convesio-r1.webp" alt="Convesio Dashboard — After" loading="lazy" />
-              <img src="assets/convesio-r2.webp" alt="Convesio Sites — After" loading="lazy" />
-              <img src="assets/convesio-r3.webp" alt="Convesio Analytics — After" loading="lazy" />
-              <img src="assets/convesio-r4.webp" alt="Convesio Settings — After" loading="lazy" />
-            </div>
-          </div>
-        </section>
-
-        {/* ── 08 Outcomes ── */}
-        <section className="cs-section">
-          <div className="cs-col">
-            <div className="cs-eyebrow-row"><Eyebrow>Outcomes</Eyebrow></div>
-            <h2 className="cs-h2" data-reveal>What started as two screens<br />became a company initiative.</h2>
-            <p className="cs-body">The redesign shipped in phases across three months. There was no big-bang launch — features rolled out continuously as they were completed and reviewed. The metrics came in steadily after that.</p>
-            <p className="cs-body">The most meaningful outcome wasn't the numbers. It was that the engineering team started asking for design reviews before development started. That hadn't happened before.</p>
-            <div className="cs-metrics">
-              {[
-              { value: '144%', label: 'Hosting revenue growth during tenure' },
-              { value: '4–6mo', label: 'Development timeline' },
-              { value: '100%', label: 'Platform redesigned' }].
-              map((m) =>
-              <div key={m.label} className="cs-metric">
-                  <div className="cs-metric__value" data-counter style={{ fontFamily: "Geist", fontWeight: "400" }}>{m.value}</div>
-                  <div className="cs-metric__label">{m.label}</div>
-                </div>
-              )}
-            </div>
-          </div>
-        </section>
-
-        {/* ── 09 Before a ticket ── */}
-        <section className="cs-section">
-          <div className="cs-col">
-            <div className="cs-eyebrow-row"><Eyebrow>Reflection</Eyebrow></div>
-            <h2 className="cs-h2" data-reveal>Great design work often starts<br />before a ticket exists.</h2>
-            <p className="cs-body">The instinct to fix things I wasn't asked to fix is something I've had to learn to channel carefully. Done wrong, it's noise. Done right, it's the difference between shipping features and shipping a product.</p>
-            <div className="cs-pull">
-              <p style={{ fontFamily: "Geist", fontWeight: "400" }}>The most important design work I've done has never started with a Jira ticket.<br />It's started with a question I couldn't stop thinking about.</p>
-            </div>
-            <p className="cs-body">At Convesio, the question was simple: why does a technically excellent product feel so hard to use? The answer took three months to build. But it started with spending a week watching people use it, and refusing to look away.</p>
-          </div>
-        </section>
-
-        {/* ── 10 Cloudways Bridge ── */}
-        {/* ── 10 More Work ── */}
-        <section className="cs-section">
-          <div className="cs-col">
-            <div className="cs-eyebrow-row"><Eyebrow>More work</Eyebrow></div>
-            <ProjectCard
-              eyebrow="CLOUDWAYS"
-              title="Designing at scale across product, web, and brand."
-              description="Spent 7 years designing and scaling a high-growth cloud hosting platform that was acquired for $350M. Product, marketing, and brand — all of it."
-              stats={[
-              { label: 'Role', value: 'Lead Designer' },
-              { label: 'Outcome', value: 'Part of a $350M Acquisition Story' }]
-              }
-              cta={{ label: 'Read Case Study', href: 'Cloudways Case Study.html' }}
-              media={<CloudwaysShots />} />
-            
-          </div>
-        </section>
-
-        {/* ── Marquee ── */}
-        <MarqueeStripe items={[
-        'Convesio Redesign', '120% Revenue Growth', '0 → 1 Design System',
-        'Self-Initiated', 'Lead Product Designer', 'Shipped in 4 months']
-        } speed={44} />
-
-        {/* ── CTA ── */}
-        <section className="cs-section" style={{ textAlign: 'center', paddingBottom: 'var(--space-160)' }}>
-          <div className="cs-col--narrow">
-            <h2 className="cs-display" data-reveal>Work Together</h2>
-            <p className="cs-body" style={{ margin: '0 auto var(--space-40)', textAlign: 'center', maxWidth: 640 }}>
-              I'm looking for the next product I'll help shape, scale, and improve.<br />
-              If that sounds like what you're building, let's talk.
-            </p>
-            <Button as="a" href="mailto:navzkha@gmail.com" variant="primary" size="lg">Contact</Button>
-          </div>
-        </section>
-
-        <Footer
-          copyright="© All rights reserved. Naveed Khan"
-          socials={[
-            { icon: 'linkedin', href: 'https://www.linkedin.com/in/naveed-khan-designer/', label: 'LinkedIn' },
-            { icon: 'mail',     href: 'mailto:navzkha@gmail.com',                          label: 'Email'    },
-          ]} />
-        
-      </React.Fragment>);
-
+    return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+      className: "cs-nav-wrap",
+      id: "cs-nav"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-col",
+      style: {
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center'
+      }
+    }, /*#__PURE__*/React.createElement("a", {
+      href: "index.html",
+      className: "cs-nav-logo-link",
+      "aria-label": "Back to homepage"
+    }), /*#__PURE__*/React.createElement(NavBar, {
+      links: [{
+        label: 'Work',
+        href: 'index.html#work'
+      }, {
+        label: 'About',
+        href: 'index.html#about'
+      }, {
+        label: 'Contact',
+        href: 'index.html#contact'
+      }],
+      cta: {
+        label: 'Resume',
+        href: 'Naveed-Khan-Resume.pdf',
+        target: '_blank'
+      },
+      style: {
+        flex: 1
+      }
+    }), /*#__PURE__*/React.createElement("button", {
+      className: "cs-mob-toggle",
+      id: "cs-ham",
+      "aria-label": "Open menu"
+    }, /*#__PURE__*/React.createElement("svg", {
+      width: "22",
+      height: "22",
+      viewBox: "0 0 24 24",
+      fill: "none",
+      stroke: "currentColor",
+      strokeWidth: "2",
+      strokeLinecap: "round"
+    }, /*#__PURE__*/React.createElement("line", {
+      x1: "3",
+      y1: "6",
+      x2: "21",
+      y2: "6"
+    }), /*#__PURE__*/React.createElement("line", {
+      x1: "3",
+      y1: "12",
+      x2: "21",
+      y2: "12"
+    }), /*#__PURE__*/React.createElement("line", {
+      x1: "3",
+      y1: "18",
+      x2: "21",
+      y2: "18"
+    }))))), /*#__PURE__*/React.createElement("div", {
+      className: "cs-mob-drawer",
+      id: "cs-drawer"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-mob-drawer__top"
+    }, /*#__PURE__*/React.createElement("a", {
+      href: "index.html",
+      style: {
+        display: 'flex',
+        alignItems: 'center'
+      }
+    }, /*#__PURE__*/React.createElement(Logo, {
+      height: 17
+    })), /*#__PURE__*/React.createElement("button", {
+      id: "cs-close",
+      style: {
+        background: 'none',
+        border: 'none',
+        cursor: 'pointer',
+        color: 'var(--text-primary)',
+        padding: 8
+      },
+      "aria-label": "Close menu"
+    }, /*#__PURE__*/React.createElement("svg", {
+      width: "22",
+      height: "22",
+      viewBox: "0 0 24 24",
+      fill: "none",
+      stroke: "currentColor",
+      strokeWidth: "2",
+      strokeLinecap: "round"
+    }, /*#__PURE__*/React.createElement("line", {
+      x1: "18",
+      y1: "6",
+      x2: "6",
+      y2: "18"
+    }), /*#__PURE__*/React.createElement("line", {
+      x1: "6",
+      y1: "6",
+      x2: "18",
+      y2: "18"
+    })))), /*#__PURE__*/React.createElement("nav", {
+      className: "cs-mob-drawer__links"
+    }, [{
+      label: 'Work',
+      href: 'index.html#work'
+    }, {
+      label: 'About',
+      href: 'index.html#about'
+    }, {
+      label: 'Contact',
+      href: 'index.html#contact'
+    }].map(function (l) {
+      return /*#__PURE__*/React.createElement("a", {
+        key: l.label,
+        className: "cs-mob-drawer__link",
+        href: l.href
+      }, l.label);
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "cs-mob-drawer__cta"
+    }, /*#__PURE__*/React.createElement(Button, {
+      as: "a",
+      href: "Naveed-Khan-Resume.pdf",
+      target: "_blank",
+      rel: "noopener",
+      variant: "primary",
+      size: "lg"
+    }, "Resume"))), /*#__PURE__*/React.createElement("section", {
+      className: "cs-section cs-hero",
+      style: {
+        borderTop: 'none'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-col"
+    }, /*#__PURE__*/React.createElement("p", {
+      style: {
+        fontFamily: 'var(--font-body)',
+        fontSize: '13px',
+        fontWeight: 500,
+        letterSpacing: '2px',
+        textTransform: 'uppercase',
+        color: 'var(--text-secondary)',
+        margin: '0 0 var(--space-24)'
+      }
+    }, "Convesio Hosting Platform"), /*#__PURE__*/React.createElement("h1", {
+      className: "cs-hero__title",
+      "data-reveal": true
+    }, "I joined as their only designer.", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("em", null, "Nobody asked for a redesign.")), /*#__PURE__*/React.createElement("div", {
+      className: "cs-meta",
+      style: {
+        borderRadius: "4px",
+        padding: "0px",
+        margin: "0px 0px 80px",
+        borderWidth: "1px"
+      }
+    }, [{
+      label: 'Role',
+      value: 'Lead Product Designer'
+    }, {
+      label: 'Timeline',
+      value: 'Jul 2022 – Mar 2023'
+    }, {
+      label: 'Scope',
+      value: 'Product Redesign'
+    }, {
+      label: 'Outcome',
+      value: '144% Hosting Revenue Growth'
+    }].map(m => /*#__PURE__*/React.createElement("div", {
+      key: m.label,
+      className: "cs-meta__cell"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-meta__label"
+    }, m.label), /*#__PURE__*/React.createElement("div", {
+      className: "cs-meta__value"
+    }, m.value)))), /*#__PURE__*/React.createElement(HeroMarquee, null))), /*#__PURE__*/React.createElement("section", {
+      className: "cs-section"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-col"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-eyebrow-row"
+    }, /*#__PURE__*/React.createElement(Eyebrow, null, "The story")), /*#__PURE__*/React.createElement("h2", {
+      className: "cs-h2",
+      "data-reveal": true
+    }, "The product worked.", /*#__PURE__*/React.createElement("br", null), "The experience didn't."), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body"
+    }, "Convesio is a managed WordPress hosting platform built to handle serious scale. When I joined in early 2022, the platform had real technical muscle \u2014 container-based infrastructure, autoscaling, genuine DevOps capabilities for enterprise clients."), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body"
+    }, "But the dashboard was a different story. It had been built fast, by engineers, without a dedicated designer. Features were bolted on. The information architecture had no centre of gravity. Every new user I watched try the product struggled with the same things \u2014 not because the product was bad, but because nobody had ever stepped back and looked at the whole thing."), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body"
+    }, "I had been hired to work on new features. I ended up redesigning the platform from the ground up \u2014 with nobody asking me to."))), /*#__PURE__*/React.createElement("section", {
+      className: "cs-section"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-col"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-eyebrow-row"
+    }, /*#__PURE__*/React.createElement(Eyebrow, null, "The problem")), /*#__PURE__*/React.createElement("h2", {
+      className: "cs-h2",
+      "data-reveal": true
+    }, "The platform was powerful,", /*#__PURE__*/React.createElement("br", null), "but it required too much effort to use."), /*#__PURE__*/React.createElement("div", {
+      className: "cs-two-col"
+    }, /*#__PURE__*/React.createElement("p", {
+      className: "cs-body cs-body--wide"
+    }, "I mapped every screen in the product. I looked at support tickets, onboarding drop-off data, and I watched recordings of users navigating the dashboard. The friction wasn't in any single place \u2014 it was structural. Navigation was unpredictable. Core actions were buried. The visual language was inconsistent across sections that had been built at different times by different people."), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body cs-body--wide"
+    }, "This wasn't a case of bad design decisions \u2014 it was the natural result of a product that had grown without design direction. The good news: the underlying product logic was sound. What needed to change was the surface. I started documenting.")), /*#__PURE__*/React.createElement("div", {
+      className: "cs-grid-3"
+    }, /*#__PURE__*/React.createElement(Ph, {
+      height: 220,
+      label: "Before \u2014 Nav"
+    }), /*#__PURE__*/React.createElement(Ph, {
+      height: 220,
+      label: "Before \u2014 Dashboard"
+    }), /*#__PURE__*/React.createElement(Ph, {
+      height: 220,
+      label: "Before \u2014 Apps"
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "cs-grid-4"
+    }, /*#__PURE__*/React.createElement(Ph, {
+      height: 160,
+      label: "Before \u2014 Settings"
+    }), /*#__PURE__*/React.createElement(Ph, {
+      height: 160,
+      label: "Before \u2014 Billing"
+    }), /*#__PURE__*/React.createElement(Ph, {
+      height: 160,
+      label: "Before \u2014 Support"
+    }), /*#__PURE__*/React.createElement(Ph, {
+      height: 160,
+      label: "Before \u2014 Onboarding"
+    })))), /*#__PURE__*/React.createElement("section", {
+      className: "cs-section"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-col"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-eyebrow-row"
+    }, /*#__PURE__*/React.createElement(Eyebrow, null, "The pitch")), /*#__PURE__*/React.createElement("h2", {
+      className: "cs-h2",
+      "data-reveal": true
+    }, "Nobody asked for this."), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body"
+    }, "I had been at Convesio for three months when I put together the first deck. I wasn't asked to. But I had started to collect enough evidence \u2014 support patterns, session recordings, onboarding data \u2014 that I felt I could make the case clearly."), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body"
+    }, "I presented to the CEO and CTO with a simple framing: we're losing on perception before we're losing on features. The engineering team had built a product worth paying for. The design was making it harder to see that."), /*#__PURE__*/React.createElement("div", {
+      className: "cs-blockquote"
+    }, /*#__PURE__*/React.createElement("p", {
+      style: {
+        fontFamily: "Geist",
+        fontWeight: "400"
+      }
+    }, "\"We're losing on perception before we're losing on features.\"")), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body"
+    }, "The response surprised me \u2014 I was given full scope to redesign. Not a page, not a feature. The whole platform. I had three months and no additional headcount.")), /*#__PURE__*/React.createElement("div", {
+      className: "cs-col",
+      style: {
+        marginTop: 'var(--space-48)'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-grid-2"
+    }, /*#__PURE__*/React.createElement(Ph, {
+      height: 280,
+      label: "Pitch Deck \u2014 Slide 1"
+    }), /*#__PURE__*/React.createElement(Ph, {
+      height: 280,
+      label: "Pitch Deck \u2014 Evidence"
+    })))), /*#__PURE__*/React.createElement("section", {
+      className: "cs-section"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-col"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-eyebrow-row"
+    }, /*#__PURE__*/React.createElement(Eyebrow, null, "Alignment")), /*#__PURE__*/React.createElement("h2", {
+      className: "cs-h2",
+      "data-reveal": true
+    }, "Company-Wide Presentation"), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body"
+    }, "Before any design work happened, I ran a cross-functional alignment session. Every team \u2014 engineering, marketing, customer success, sales \u2014 had opinions about the product. I needed to understand all of them, and I needed everyone to agree on the direction before I started shipping screens."), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body"
+    }, "The session produced one shared understanding: the product needed to feel like something people were proud to show clients. That became the design brief."))), /*#__PURE__*/React.createElement("section", {
+      className: "cs-section"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-col"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-eyebrow-row"
+    }, /*#__PURE__*/React.createElement(Eyebrow, null, "The redesign")), /*#__PURE__*/React.createElement("h2", {
+      className: "cs-h2",
+      "data-reveal": true
+    }, "What Needed To Change"), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body"
+    }, "Every decision traced back to one of three problems users struggled to know where they were, important information was buried, and the interface required too much effort to understand."), /*#__PURE__*/React.createElement("div", {
+      className: "cs-table"
+    }, [{
+      decision: 'Decision 01',
+      area: 'Navigation',
+      subLabel: 'Sidebar over horizontal tabs',
+      after: 'The original product used horizontal red text links forcing users to remember what existed where. A persistent left sidebar with icons means users can see the structure not remember it. One structural change that reduced cognitive load across every screen.'
+    }, {
+      decision: 'Decision 02',
+      area: 'Site management',
+      subLabel: 'Health at a glance, not after investigation',
+      after: 'Agencies managing 20 client sites need to spot problems in three seconds. Plan Health, Disk Usage, Bandwidth, Performance — all surfaced directly in the site list. No clicking into each site to find issues.'
+    }, {
+      decision: 'Decision 03',
+      area: 'Analytics',
+      subLabel: 'Organize by what users need, not what data exists',
+      after: 'Same data, completely different experience. Three tabs — Traffic, Firewall, Caching. Metric cards with sparklines. World map instead of a text table. The challenge wasn\'t missing data, it was too much data with no hierarchy.'
+    }, {
+      decision: 'Decision 04',
+      area: 'Deployments',
+      subLabel: 'Real-time experience for two audiences',
+      after: 'Progress bar, step checklist, and live log stream in one modal. Technical users see exactly what\'s happening. Non-technical users see how far along they are. Two audiences, one screen, both served.'
+    }, {
+      decision: 'Decision 05',
+      area: 'Empty states',
+      subLabel: 'Invitation, not absence',
+      after: 'The original empty dashboard was a blank table. An empty screen is a new user\'s first experience of the product. It should feel like an invitation — friendly copy, single clear action, two supporting cards.'
+    }].map(row => /*#__PURE__*/React.createElement("div", {
+      key: row.area,
+      className: "cs-table__row"
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      className: "cs-table__label",
+      style: {
+        marginBottom: 1,
+        color: "rgb(153, 153, 153)",
+        fontWeight: "400",
+        fontSize: "16px",
+        textTransform: "none",
+        letterSpacing: 0
+      }
+    }, row.decision), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontFamily: 'var(--font-body)',
+        marginBottom: 0,
+        fontWeight: "400",
+        color: "rgb(153, 153, 153)",
+        fontSize: "16px"
+      }
+    }, row.area)), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      className: "cs-table__sublabel"
+    }, row.subLabel), /*#__PURE__*/React.createElement("div", {
+      className: "cs-table__solution",
+      style: {
+        color: '#A3A3A3'
+      }
+    }, row.after))))))), /*#__PURE__*/React.createElement("section", {
+      className: "cs-section"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-col"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-eyebrow-row"
+    }, /*#__PURE__*/React.createElement(Eyebrow, null, "Collaboration")), /*#__PURE__*/React.createElement("h2", {
+      className: "cs-h2",
+      "data-reveal": true
+    }, "Not every decision was mine."), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body"
+    }, "I was the only designer, but this was never a solo project. Every major structural decision was validated with the engineering team before it went into a prototype. Every copy change was reviewed with marketing. Customer success flagged three patterns I would have missed entirely from user research alone."), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body"
+    }, "The rule I kept to: I own the design decisions, but I don't own the product knowledge. The engineers knew things I didn't. The CS team knew things nobody had ever written down. My job was to synthesise that, not override it."), /*#__PURE__*/React.createElement("div", {
+      className: "cs-blockquote"
+    }, /*#__PURE__*/React.createElement("p", {
+      style: {
+        fontFamily: "Geist",
+        fontWeight: "400"
+      }
+    }, "\"I own the design decisions, but I don't own the product knowledge.\"")))), /*#__PURE__*/React.createElement("section", {
+      className: "cs-section"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-col"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-eyebrow-row"
+    }, /*#__PURE__*/React.createElement(Eyebrow, null, "The output")), /*#__PURE__*/React.createElement("h2", {
+      className: "cs-h2",
+      "data-reveal": true
+    }, "Beyond the Screens"), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body",
+      style: {
+        maxWidth: 680
+      }
+    }, "The redesign covered more than UI. It produced a component library, a set of interaction patterns, documentation for the engineering team, and a visual language that extended into the marketing site and onboarding emails."), /*#__PURE__*/React.createElement("div", {
+      className: "cs-screens-grid"
+    }, /*#__PURE__*/React.createElement("img", {
+      src: "assets/convesio-r1.webp",
+      alt: "Convesio Dashboard \u2014 After",
+      loading: "lazy"
+    }), /*#__PURE__*/React.createElement("img", {
+      src: "assets/convesio-r2.webp",
+      alt: "Convesio Sites \u2014 After",
+      loading: "lazy"
+    }), /*#__PURE__*/React.createElement("img", {
+      src: "assets/convesio-r3.webp",
+      alt: "Convesio Analytics \u2014 After",
+      loading: "lazy"
+    }), /*#__PURE__*/React.createElement("img", {
+      src: "assets/convesio-r4.webp",
+      alt: "Convesio Settings \u2014 After",
+      loading: "lazy"
+    })))), /*#__PURE__*/React.createElement("section", {
+      className: "cs-section"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-col"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-eyebrow-row"
+    }, /*#__PURE__*/React.createElement(Eyebrow, null, "Outcomes")), /*#__PURE__*/React.createElement("h2", {
+      className: "cs-h2",
+      "data-reveal": true
+    }, "What started as two screens", /*#__PURE__*/React.createElement("br", null), "became a company initiative."), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body"
+    }, "The redesign shipped in phases across three months. There was no big-bang launch \u2014 features rolled out continuously as they were completed and reviewed. The metrics came in steadily after that."), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body"
+    }, "The most meaningful outcome wasn't the numbers. It was that the engineering team started asking for design reviews before development started. That hadn't happened before."), /*#__PURE__*/React.createElement("div", {
+      className: "cs-metrics"
+    }, [{
+      value: '144%',
+      label: 'Hosting revenue growth during tenure'
+    }, {
+      value: '4–6mo',
+      label: 'Development timeline'
+    }, {
+      value: '100%',
+      label: 'Platform redesigned'
+    }].map(m => /*#__PURE__*/React.createElement("div", {
+      key: m.label,
+      className: "cs-metric"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-metric__value",
+      "data-counter": true,
+      style: {
+        fontFamily: "Geist",
+        fontWeight: "400"
+      }
+    }, m.value), /*#__PURE__*/React.createElement("div", {
+      className: "cs-metric__label"
+    }, m.label)))))), /*#__PURE__*/React.createElement("section", {
+      className: "cs-section"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-col"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-eyebrow-row"
+    }, /*#__PURE__*/React.createElement(Eyebrow, null, "Reflection")), /*#__PURE__*/React.createElement("h2", {
+      className: "cs-h2",
+      "data-reveal": true
+    }, "Great design work often starts", /*#__PURE__*/React.createElement("br", null), "before a ticket exists."), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body"
+    }, "The instinct to fix things I wasn't asked to fix is something I've had to learn to channel carefully. Done wrong, it's noise. Done right, it's the difference between shipping features and shipping a product."), /*#__PURE__*/React.createElement("div", {
+      className: "cs-pull"
+    }, /*#__PURE__*/React.createElement("p", {
+      style: {
+        fontFamily: "Geist",
+        fontWeight: "400"
+      }
+    }, "The most important design work I've done has never started with a Jira ticket.", /*#__PURE__*/React.createElement("br", null), "It's started with a question I couldn't stop thinking about.")), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body"
+    }, "At Convesio, the question was simple: why does a technically excellent product feel so hard to use? The answer took three months to build. But it started with spending a week watching people use it, and refusing to look away."))), /*#__PURE__*/React.createElement("section", {
+      className: "cs-section"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-col"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-eyebrow-row"
+    }, /*#__PURE__*/React.createElement(Eyebrow, null, "More work")), /*#__PURE__*/React.createElement(ProjectCard, {
+      eyebrow: "CLOUDWAYS",
+      title: "Designing at scale across product, web, and brand.",
+      description: "Spent 7 years designing and scaling a high-growth cloud hosting platform that was acquired for $350M. Product, marketing, and brand \u2014 all of it.",
+      stats: [{
+        label: 'Role',
+        value: 'Lead Designer'
+      }, {
+        label: 'Outcome',
+        value: 'Part of a $350M Acquisition Story'
+      }],
+      cta: {
+        label: 'Read Case Study',
+        href: 'Cloudways Case Study.html'
+      },
+      media: /*#__PURE__*/React.createElement(CloudwaysShots, null)
+    }))), /*#__PURE__*/React.createElement(MarqueeStripe, {
+      items: ['Convesio Redesign', '120% Revenue Growth', '0 → 1 Design System', 'Self-Initiated', 'Lead Product Designer', 'Shipped in 4 months'],
+      speed: 44
+    }), /*#__PURE__*/React.createElement("section", {
+      className: "cs-section",
+      style: {
+        textAlign: 'center',
+        paddingBottom: 'var(--space-160)'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cs-col--narrow"
+    }, /*#__PURE__*/React.createElement("h2", {
+      className: "cs-display",
+      "data-reveal": true
+    }, "Work Together"), /*#__PURE__*/React.createElement("p", {
+      className: "cs-body",
+      style: {
+        margin: '0 auto var(--space-40)',
+        textAlign: 'center',
+        maxWidth: 640
+      }
+    }, "I'm looking for the next product I'll help shape, scale, and improve.", /*#__PURE__*/React.createElement("br", null), "If that sounds like what you're building, let's talk."), /*#__PURE__*/React.createElement(Button, {
+      as: "a",
+      href: "mailto:navzkha@gmail.com",
+      variant: "primary",
+      size: "lg"
+    }, "Contact"))), /*#__PURE__*/React.createElement(Footer, {
+      copyright: "\xA9 All rights reserved. Naveed Khan",
+      socials: [{
+        icon: 'linkedin',
+        href: 'https://www.linkedin.com/in/naveed-khan-designer/',
+        label: 'LinkedIn'
+      }, {
+        icon: 'mail',
+        href: 'mailto:navzkha@gmail.com',
+        label: 'Email'
+      }]
+    }));
   }
-
   function mount() {
     if (!window.NaveedKhanPortfolioDesignSystem_ee97a5) return setTimeout(mount, 40);
-    ReactDOM.createRoot(document.getElementById('root')).render(<CaseStudy />);
+    ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(CaseStudy, null));
   }
   mount();
 })();
+
+
 </script>
 
 <!-- GSAP scroll animations -->
