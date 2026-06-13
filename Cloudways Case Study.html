@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Cloudways — Naveed Khan</title>
+
+<link rel="stylesheet" href="_ds/naveed-khan-portfolio-design-system-ee97a5ef-1be9-4c65-b506-ec6f688ba54c/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/naveed-khan-portfolio-design-system-ee97a5ef-1be9-4c65-b506-ec6f688ba54c/tokens/colors.css">
+<link rel="stylesheet" href="_ds/naveed-khan-portfolio-design-system-ee97a5ef-1be9-4c65-b506-ec6f688ba54c/tokens/typography.css">
+<link rel="stylesheet" href="_ds/naveed-khan-portfolio-design-system-ee97a5ef-1be9-4c65-b506-ec6f688ba54c/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/naveed-khan-portfolio-design-system-ee97a5ef-1be9-4c65-b506-ec6f688ba54c/tokens/radius.css">
+<link rel="stylesheet" href="_ds/naveed-khan-portfolio-design-system-ee97a5ef-1be9-4c65-b506-ec6f688ba54c/tokens/effects.css">
+<link rel="stylesheet" href="_ds/naveed-khan-portfolio-design-system-ee97a5ef-1be9-4c65-b506-ec6f688ba54c/tokens/base.css">
+<link rel="stylesheet" href="_ds/naveed-khan-portfolio-design-system-ee97a5ef-1be9-4c65-b506-ec6f688ba54c/styles.css">
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="_ds/naveed-khan-portfolio-design-system-ee97a5ef-1be9-4c65-b506-ec6f688ba54c/_ds_bundle.js"></script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--surface-primary); color: var(--text-primary); }
+
+  /* ── Layout ── */
+  .cs-page { background: var(--surface-primary); }
+  .cs-col   { width: min(1320px, calc(100% - 160px)); margin: 0 auto; }
+  .cs-col--narrow { width: min(800px, calc(100% - 160px)); margin: 0 auto; }
+
+  /* ── Section rhythm ── */
+  .cs-section { padding: var(--space-160) 0; position: relative; }
+  .cs-section::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1280px, calc(100% - 160px));
+    height: 1px;
+    background: #262626;
+  }
+  .cs-section:first-of-type::before { display: none; }
+  .cs-eyebrow-row { display: flex; align-items: center; gap: var(--space-16); margin-bottom: var(--space-32); }
+
+  /* ── Mobile nav ── */
+  .cs-mob-toggle {
+    display: none; background: none; border: none; cursor: pointer;
+    padding: 8px; margin-right: -8px; color: var(--text-primary);
+  }
+  .cs-mob-drawer {
+    display: none; position: fixed; inset: 0; z-index: 999;
+    background: #0A0A0A; flex-direction: column;
+    padding: 24px 32px 48px;
+  }
+  .cs-mob-drawer.is-open { display: flex; }
+  .cs-mob-drawer__top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 48px; }
+  .cs-mob-drawer__links { display: flex; flex-direction: column; gap: 8px; flex: 1; justify-content: center; }
+  .cs-mob-drawer__link {
+    font-family: var(--font-display); font-size: 40px; font-weight: 700;
+    letter-spacing: -1px; color: var(--text-secondary); text-decoration: none;
+    padding: 12px 0; border-bottom: 1px solid #1a1a1a;
+    transition: color 200ms ease;
+  }
+  .cs-mob-drawer__link:hover { color: var(--text-primary); }
+  .cs-mob-drawer__cta { margin-top: 40px; }
+  @media (max-width: 768px) {
+    .cs-mob-toggle { display: flex; align-items: center; justify-content: center; }
+    .cs-nav-wrap nav > div { display: none !important; }
+  }
+
+  /* ── Sticky Nav ── */
+  .cs-nav-wrap {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,10,10,0.88);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 300ms;
+  }
+  .cs-nav-wrap.is-scrolled { border-bottom-color: #262626; }
+  .cs-nav-wrap .cs-col { position: relative; }
+  .cs-nav-logo-link {
+    position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+    width: 48px; height: 36px; z-index: 2;
+  }
+
+  /* ── Hero ── */
+  .cs-hero { padding: var(--space-160) 0 var(--space-96); }
+  .cs-hero__title { font-family: var(--font-display); font-weight: 700; font-size: 72px; line-height: 72px; letter-spacing: var(--track-very-tight); color: var(--text-primary); margin: 0 0 var(--space-64); max-width: 1280px; }
+  .cs-hero__title em { color: var(--text-secondary); font-style: normal; }
+
+  /* ── Meta row ── */
+  .cs-meta { display: flex; gap: 0; margin-bottom: var(--space-80); border: 1px solid #262626; border-radius: 8px; overflow: hidden; }
+  .cs-meta__cell { flex: 1; padding: var(--space-24) var(--space-24); border-right: 1px solid #262626; }
+  .cs-meta__cell:last-child { border-right: none; }
+  .cs-meta__label { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-tertiary, #666); margin-bottom: 6px; }
+  .cs-meta__value { font-family: var(--font-body); font-size: 14px; color: var(--text-primary); font-weight: 400; }
+
+  /* ── Image marquee ── */
+  .cs-marquee { overflow: hidden; width: 100%; padding: 20px 0; background: #111; border-radius: 16px; }
+  .cs-marquee__track {
+    display: flex; gap: 20px; width: max-content;
+    animation: cs-scroll 32s linear infinite;
+  }
+  .cs-marquee__track:hover { animation-play-state: paused; }
+  .cs-marquee__img { flex: 0 0 auto; width: 490px; height: 339px; object-fit: cover; display: block; border-radius: 12px; box-shadow: 0 8px 28px -6px rgba(0,0,0,.7); }
+  @keyframes cs-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  @media (max-width: 680px) { .cs-marquee__img { width: 300px; height: 208px; } }
+
+  /* ── Typography ── */
+  .cs-display { font-family: var(--font-display); font-weight: 800; font-size: clamp(36px, 4vw, 60px); line-height: 1.05; letter-spacing: var(--track-tight); color: var(--text-primary); margin: 0 0 var(--space-32); }
+  .cs-h2 { font-family: var(--font-body); font-weight: 400; font-size: 48px; line-height: 56px; letter-spacing: var(--track-tight); color: var(--text-primary); margin: 0 0 var(--space-24); }
+  .cs-body { font-family: var(--font-body); font-size: 17px; line-height: 1.75; color: var(--text-secondary); margin: 0 0 var(--space-20); max-width: 680px; }
+  .cs-body--wide { max-width: 100%; }
+  .cs-blockquote { border-left: 2px solid var(--text-primary); padding-left: var(--space-24); margin: var(--space-40) 0; }
+  .cs-blockquote p { font-family: 'Geist', sans-serif; font-weight: 400; font-size: 22px; line-height: 1.4; color: var(--text-primary); margin: 0; letter-spacing: -0.3px; }
+
+  /* ── Image grids ── */
+  .cs-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: var(--space-48) 0; }
+  .cs-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: var(--space-48) 0; }
+  .cs-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: var(--space-48) 0; }
+
+  /* ── Screens grid ── */
+  .cs-screens-grid {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    justify-content: start;
+    gap: 24px;
+    margin: var(--space-48) 0;
+  }
+  .cs-screens-grid img {
+    display: block; width: auto; height: auto; max-width: 100%;
+    border-radius: 12px; box-shadow: 0 8px 32px -8px rgba(0,0,0,0.6);
+  }
+  @media (max-width: 900px) { .cs-screens-grid { grid-template-columns: 1fr; } }
+
+  /* ── Problem/Solution table ── */
+  .cs-table { width: 100%; max-width: 1280px; margin: var(--space-48) 0; border: 1px solid #262626; border-radius: 8px; overflow: hidden; }
+  .cs-table__row { display: grid; grid-template-columns: 280px 1fr; gap: 40px; padding: var(--space-24) var(--space-32); border-bottom: 1px solid #262626; }
+  .cs-table__label { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--text-tertiary, #555); margin-bottom: 6px; }
+  .cs-table__sublabel { font-family: var(--font-body); font-size: 20px; line-height: 28px; font-weight: 500; color: var(--text-primary); text-transform: none; letter-spacing: 0; margin-bottom: 10px; }
+  .cs-table__solution { font-family: var(--font-body); font-size: 15px; color: var(--text-primary); line-height: 1.6; }
+
+  /* ── Metrics row ── */
+  .cs-metrics { display: flex; gap: 0; padding: var(--space-64) 0; border-top: var(--border-hairline); border-bottom: var(--border-hairline); margin: var(--space-48) 0; }
+  .cs-metric { flex: 1; text-align: center; border-right: var(--border-hairline); padding: 0 var(--space-32); }
+  .cs-metric:last-child { border-right: none; }
+  .cs-metric:first-child { padding-left: 0; }
+  .cs-metric__value { font-family: var(--font-display); font-weight: 800; font-size: 56px; line-height: 1; letter-spacing: -2px; color: var(--text-primary); margin-bottom: 10px; }
+  .cs-metric__label { font-family: var(--font-body); font-size: 13px; color: var(--text-secondary); line-height: 1.4; }
+
+  /* ── Placeholder image well ── */
+  .cs-img-well { background: #111; border-radius: 12px; overflow: hidden; position: relative; }
+  .cs-img-well img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cs-img-well--ph { background: #111; border: 1px solid #262626; min-height: 280px; display: flex; align-items: center; justify-content: center; }
+  .cs-ph-inner { display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0.25; }
+  .cs-ph-inner svg { width: 28px; height: 28px; stroke: #fff; }
+  .cs-ph-inner span { font-size: 11px; font-family: var(--font-body); color: #fff; letter-spacing: 1px; text-transform: uppercase; }
+
+  /* ── Pull quote ── */
+  .cs-pull { background: #111; border-radius: 12px; padding: var(--space-40); margin: var(--space-48) 0; max-width: 860px; }
+  .cs-pull p { font-family: 'Geist', sans-serif; font-weight: 400; font-size: 20px; line-height: 1.5; color: var(--text-primary); margin: 0; }
+
+  /* ── Two-col text ── */
+  .cs-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-64); align-items: start; }
+
+  /* ── ProjectCard overrides ── */
+  .cs-col article p:first-child { font-size: 16px !important; }
+  .cs-col article :is(h1,h2,h3,h4,h5,h6) { font-family: 'Geist', sans-serif !important; font-weight: 400 !important; }
+  @media (max-width: 680px) {
+    .cs-col article header { flex-direction: column !important; align-items: flex-start !important; gap: 20px; }
+  }
+
+  /* ── Word reveal ── */
+  .word-wrap  { display: inline-block; overflow: hidden; vertical-align: bottom; line-height: inherit; }
+  .word-inner { display: inline-block; }
+
+  /* ── Primary button ── */
+  .ds-btn--primary {
+    position: relative !important; overflow: hidden !important;
+    isolation: isolate !important;
+    transition: color 0.38s ease, box-shadow 0.22s ease !important;
+    will-change: transform;
+  }
+  .ds-btn--primary::before {
+    content: ''; position: absolute; inset: 0; background: #111;
+    transform: scaleX(0); transform-origin: var(--btn-origin, 0% 50%);
+    transition: transform 0.42s cubic-bezier(0.77, 0, 0.175, 1);
+    z-index: 0; pointer-events: none;
+  }
+  .ds-btn--primary:hover::before { transform: scaleX(1); }
+  .ds-btn--primary:hover { color: #fff !important; }
+  .ds-btn--primary > *, .ds-btn--primary span, .ds-btn--primary svg { position: relative; z-index: 1; }
+  .ds-btn--primary:active { transform: scale(0.97) !important; }
+
+  /* ── Secondary button ── */
+  .ds-btn--secondary {
+    position: relative !important; overflow: hidden !important;
+    transition: color 0.25s ease !important;
+  }
+  .ds-btn--secondary::before {
+    content: ''; position: absolute; inset: 0;
+    background: rgba(255,255,255,0.055);
+    transform: scaleY(0); transform-origin: bottom;
+    transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none; z-index: 0;
+  }
+  .ds-btn--secondary:hover::before { transform: scaleY(1); }
+  .ds-btn--secondary svg {
+    transition: transform 0.26s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+    position: relative; z-index: 1;
+  }
+  .ds-btn--secondary:hover svg { transform: translate(11px, -11px) !important; opacity: 0 !important; }
+  .ds-btn--secondary::after {
+    content: ''; position: absolute;
+    right: 16px; top: 50%; width: 15px; height: 15px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17 17 7'/%3E%3Cpath d='M7 7h10v10'/%3E%3C/svg%3E");
+    background-size: contain; background-repeat: no-repeat; background-position: center;
+    transform: translateY(calc(-50% + 11px)) translateX(-11px); opacity: 0;
+    transition: transform 0.26s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease 0.06s;
+    pointer-events: none; z-index: 2; display: block !important;
+  }
+  .ds-btn--secondary:hover::after { transform: translateY(-50%) translateX(0); opacity: 1; }
+  .ds-btn--secondary > *, .ds-btn--secondary span { position: relative; z-index: 1; }
+  .ds-btn--secondary:active { transform: scale(0.96) !important; }
+
+  /* ── Responsive ── */
+  @media (max-width: 1280px) {
+    .cs-hero__title { font-size: 60px; line-height: 64px; white-space: normal; }
+  }
+  @media (max-width: 1024px) {
+    .cs-col, .cs-col--narrow { width: calc(100% - 80px); }
+    .cs-two-col { grid-template-columns: 1fr; gap: var(--space-40); }
+    .cs-grid-4 { grid-template-columns: repeat(2, 1fr); }
+    .cs-hero__title { font-size: 52px; line-height: 56px; }
+    .cs-h2 { font-size: 36px; line-height: 44px; }
+    .cs-table__row { grid-template-columns: 200px 1fr; gap: 24px; }
+    .cs-marquee__img { width: 380px; height: 263px; }
+  }
+  @media (max-width: 680px) {
+    .cs-col, .cs-col--narrow { width: calc(100% - 40px); }
+    .cs-section { padding: var(--space-96) 0; }
+    .cs-hero { padding: var(--space-96) 0 var(--space-64); }
+    .cs-hero__title { font-size: 36px; line-height: 40px; }
+    .cs-h2 { font-size: 26px; line-height: 34px; }
+    .cs-display { font-size: 36px !important; line-height: 1.1 !important; }
+    .cs-body { font-size: 15px; }
+    .cs-grid-3 { grid-template-columns: 1fr; }
+    .cs-grid-2 { grid-template-columns: 1fr; }
+    .cs-meta { flex-wrap: wrap; }
+    .cs-meta__cell { flex: 0 0 50%; border-right: none; border-bottom: 1px solid #262626; }
+    .cs-meta__cell:nth-child(odd) { border-right: 1px solid #262626; }
+    .cs-meta__cell:nth-last-child(-n+2) { border-bottom: none; }
+    .cs-metrics { flex-direction: column; }
+    .cs-metric { border-right: none; border-bottom: 1px solid #262626; padding: var(--space-24) var(--space-32); }
+    .cs-metric:last-child { border-bottom: none; }
+    .cs-metric__value { font-size: 40px; }
+    .cs-table { max-width: 100%; }
+    .cs-table__row { grid-template-columns: 1fr; gap: 12px; }
+    .cs-blockquote { padding-left: var(--space-16); }
+    .cs-blockquote p { font-size: 18px; }
+    .cs-pull { padding: var(--space-24); }
+    .cs-pull p { font-size: 16px !important; }
+    .cs-marquee__img { width: 260px; height: 180px; }
+    nav { padding: var(--space-16) 0 !important; }
+    footer { flex-direction: column !important; align-items: center !important; text-align: center !important; padding: var(--space-32) var(--space-24) !important; gap: var(--space-16) !important; }
+  }
+  @media (max-width: 768px) {
+    .cs-mob-toggle { display: flex; align-items: center; justify-content: center; }
+    .cs-nav-wrap nav > div > ul,
+    .cs-nav-wrap nav > div > a:last-child { display: none !important; }
+  }
+</style>
+</head>
+<body class="ds-base cs-page">
+<div id="root"></div>
+
+<script type="text/babel">
+(function () {
+  const { NavBar, Button, Eyebrow, Footer, MarqueeStripe, ProjectCard, Logo } = window.NaveedKhanPortfolioDesignSystem_ee97a5;
+
+  /* ── Hero image marquee ── */
+  var HERO_IMGS = [
+    'assets/cloudways-1.png',
+    'assets/cloudways-2.png',
+    'assets/cloudways-3.png',
+    'assets/cloudways-4.png',
+  ];
+
+  function HeroMarquee() {
+    var all = HERO_IMGS.concat(HERO_IMGS);
+    return (
+      <div className="cs-marquee">
+        <div className="cs-marquee__track">
+          {all.map(function (src, i) {
+            return <img key={i} className="cs-marquee__img" src={src}
+              alt={'Cloudways screen ' + (i % HERO_IMGS.length + 1)} loading="lazy" />;
+          })}
+        </div>
+      </div>
+    );
+  }
+
+  /* ── Convesio redesign shots for More Work ── */
+  var CONVESIO_IMGS = [
+    'assets/convesio-r1.webp',
+    'assets/convesio-r2.webp',
+    'assets/convesio-r3.webp',
+    'assets/convesio-r4.webp',
+  ];
+  function ConvesioShots() {
+    var all = CONVESIO_IMGS.concat(CONVESIO_IMGS);
+    return (
+      <div className="cs-marquee" style={{ borderRadius: 12, padding: '20px 0' }}>
+        <div className="cs-marquee__track">
+          {all.map(function (src, i) {
+            return <img key={i} className="cs-marquee__img" src={src}
+              alt={'Convesio screen ' + (i % CONVESIO_IMGS.length + 1)} loading="lazy" />;
+          })}
+        </div>
+      </div>
+    );
+  }
+
+  /* ── Placeholder image well ── */
+  function Ph({ height = 260, label = '' }) {
+    return (
+      <div className="cs-img-well cs-img-well--ph" style={{ minHeight: height }}>
+        <div className="cs-ph-inner">
+          <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" />
+            <path d="m21 15-5-5L5 21" />
+          </svg>
+          {label && <span>{label}</span>}
+        </div>
+      </div>
+    );
+  }
+
+  function CaseStudy() {
+    return (
+      <React.Fragment>
+        {/* ── Sticky Nav ── */}
+        <div className="cs-nav-wrap" id="cs-nav">
+          <div className="cs-col" style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+            <a href="index.html" className="cs-nav-logo-link" aria-label="Back to homepage"></a>
+            <NavBar
+              links={[
+                { label: 'Work',    href: 'index.html#work'    },
+                { label: 'About',   href: 'index.html#about'   },
+                { label: 'Contact', href: 'index.html#contact' },
+              ]}
+              cta={{ label: 'Resume', href: 'Naveed-Khan-Resume.pdf', target: '_blank' }}
+              style={{ flex: 1 }}
+            />
+            <button className="cs-mob-toggle" id="cs-ham" aria-label="Open menu">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <line x1="3" y1="6"  x2="21" y2="6"/>
+                <line x1="3" y1="12" x2="21" y2="12"/>
+                <line x1="3" y1="18" x2="21" y2="18"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {/* ── Mobile drawer ── */}
+        <div className="cs-mob-drawer" id="cs-drawer">
+          <div className="cs-mob-drawer__top">
+            <a href="index.html" style={{ display:'flex', alignItems:'center' }}>
+              <Logo height={17} />
+            </a>
+            <button id="cs-close" style={{ background:'none', border:'none', cursor:'pointer', color:'var(--text-primary)', padding:8 }} aria-label="Close menu">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+          </div>
+          <nav className="cs-mob-drawer__links">
+            {[
+              { label: 'Work',    href: 'index.html#work'    },
+              { label: 'About',   href: 'index.html#about'   },
+              { label: 'Contact', href: 'index.html#contact' },
+            ].map(function(l) { return (
+              <a key={l.label} className="cs-mob-drawer__link" href={l.href}>{l.label}</a>
+            ); })}
+          </nav>
+          <div className="cs-mob-drawer__cta">
+            <Button as="a" href="Naveed-Khan-Resume.pdf" target="_blank" rel="noopener" variant="primary" size="lg">Resume</Button>
+          </div>
+        </div>
+
+        {/* ── Hero ── */}
+        <section className="cs-section cs-hero" style={{ borderTop: 'none' }}>
+          <div className="cs-col">
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: '13px', fontWeight: 500, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--text-secondary)', margin: '0 0 var(--space-24)' }}>Cloudways · Cloud Hosting Platform</p>
+            <h1 className="cs-hero__title" data-reveal>
+              Seven years at one company.<br />
+              <em>I designed most of what you see.</em>
+            </h1>
+            <div className="cs-meta" style={{ borderRadius: '4px', padding: '0px', margin: '0px 0px 80px', borderWidth: '1px' }}>
+              {[
+                { label: 'Role',     value: 'Lead UI/UX & Product Designer' },
+                { label: 'Timeline', value: '2014 – 2021'                   },
+                { label: 'Scope',    value: 'Product · Marketing · Brand'   },
+                { label: 'Outcome',  value: '$350M Acquisition'             },
+              ].map((m) =>
+                <div key={m.label} className="cs-meta__cell">
+                  <div className="cs-meta__label">{m.label}</div>
+                  <div className="cs-meta__value">{m.value}</div>
+                </div>
+              )}
+            </div>
+            <HeroMarquee />
+          </div>
+        </section>
+
+        {/* ── 01 The Context ── */}
+        <section className="cs-section">
+          <div className="cs-col">
+            <div className="cs-eyebrow-row"><Eyebrow>The context</Eyebrow></div>
+            <h2 className="cs-h2" data-reveal>I joined when Cloudways<br />was still figuring itself out.</h2>
+            <p className="cs-body">Cloudways is a managed cloud hosting platform that sits between raw cloud infrastructure — AWS, Google Cloud, DigitalOcean — and the developers and agencies who need to deploy WordPress and PHP applications reliably and fast. When I joined in 2014, the product was a year old and growing quickly. The design wasn't keeping up.</p>
+            <p className="cs-body">I was the first designer brought in specifically for product. The team was engineering-led and moving fast. My job, as it became clear in the first few weeks, wasn't just to make things look better — it was to establish a design practice where one hadn't existed, and to hold the visual and interaction standard across everything Cloudways put in front of its customers.</p>
+            <p className="cs-body">I stayed for seven years. By the time I left, Cloudways had been acquired by DigitalOcean for $350M. The product had grown from a scrappy MVP to a platform used by 50,000 customers worldwide.</p>
+          </div>
+        </section>
+
+        {/* ── 02 The Scale ── */}
+        <section className="cs-section">
+          <div className="cs-col">
+            <div className="cs-eyebrow-row"><Eyebrow>The scope</Eyebrow></div>
+            <h2 className="cs-h2" data-reveal>Product, marketing, and brand.<br />All of it needed design.</h2>
+            <div className="cs-two-col">
+              <p className="cs-body cs-body--wide">Cloudways wasn't one product — it was a platform, a marketing site, a brand, a set of onboarding flows, a documentation system, and a suite of customer-facing tools, all requiring consistent design direction simultaneously. At various points I owned all of them, and always some of them.</p>
+              <p className="cs-body cs-body--wide">That breadth was both the challenge and the education. Designing for the product meant working with engineers on interaction systems. Designing for marketing meant working with copywriters and PPC teams on conversion. Designing for brand meant setting the visual standard that everything else referenced. The three weren't separate — they were one continuous design system.</p>
+            </div>
+            <div className="cs-grid-4">
+              <Ph height={180} label="Product — Dashboard" />
+              <Ph height={180} label="Marketing — Landing page" />
+              <Ph height={180} label="Brand — Style guide" />
+              <Ph height={180} label="Onboarding — Flow" />
+            </div>
+          </div>
+        </section>
+
+        {/* ── 03 What I Built ── */}
+        <section className="cs-section">
+          <div className="cs-col">
+            <div className="cs-eyebrow-row"><Eyebrow>The work</Eyebrow></div>
+            <h2 className="cs-h2" data-reveal>Seven years of design decisions,<br />each one building on the last.</h2>
+            <p className="cs-body">The work at Cloudways wasn't a single project — it was a long sequence of decisions made over years, each one informed by what came before. These are the five areas where the design had the most impact.</p>
+            <div className="cs-table">
+              {[
+                {
+                  decision: 'Area 01', area: 'Platform redesign',
+                  subLabel: 'From a technical tool to a product people enjoyed using',
+                  after: 'The original Cloudways dashboard was functional but intimidating — it assumed a level of cloud infrastructure knowledge that most of the user base didn\'t have. A full redesign in 2017 restructured the information architecture, simplified server management flows, and introduced a visual language that balanced technical capability with accessibility.'
+                },
+                {
+                  decision: 'Area 02', area: 'Design system',
+                  subLabel: 'A shared component library across product and marketing',
+                  after: 'I built the first Cloudways design system from scratch — starting with an informal set of shared Sketch components and evolving it into a documented system used across product, marketing, and email. It reduced design inconsistency significantly and became the reference point for every designer and engineer who joined after me.'
+                },
+                {
+                  decision: 'Area 03', area: 'Onboarding',
+                  subLabel: 'Reducing time-to-first-deployment from days to minutes',
+                  after: 'The original onboarding assumed users knew what cloud infrastructure was. Most didn\'t. A redesigned onboarding flow — with better defaults, a simplified server selection step, and a progress-anchored first experience — reduced the time it took new users to deploy their first application from hours to under fifteen minutes.'
+                },
+                {
+                  decision: 'Area 04', area: 'Marketing site',
+                  subLabel: 'Converting visitors who arrived already comparing competitors',
+                  after: 'Cloudways users were sophisticated — they had usually already looked at competing products before landing. The marketing site redesigns I led focused on comparative messaging, social proof, and a visual quality that signalled we were serious competition to established players like WP Engine and Kinsta.'
+                },
+                {
+                  decision: 'Area 05', area: 'Brand evolution',
+                  subLabel: 'Growing a visual identity alongside a growing company',
+                  after: 'When I joined, Cloudways had a logo and not much else. Over seven years I developed a visual identity that scaled from a startup aesthetic to something that held up in enterprise sales decks, conference booths, and acquisition due diligence materials. The brand that DigitalOcean acquired wasn\'t just a product — it was a recognisable identity.'
+                },
+              ].map((row) =>
+                <div key={row.area} className="cs-table__row">
+                  <div>
+                    <div className="cs-table__label" style={{ marginBottom: 1, color: 'rgb(153, 153, 153)', fontWeight: '400', fontSize: '16px', textTransform: 'none', letterSpacing: 0 }}>{row.decision}</div>
+                    <div style={{ fontFamily: 'var(--font-body)', marginBottom: 0, fontWeight: '400', color: 'rgb(153, 153, 153)', fontSize: '16px' }}>{row.area}</div>
+                  </div>
+                  <div>
+                    <div className="cs-table__sublabel">{row.subLabel}</div>
+                    <div className="cs-table__solution" style={{ color: '#A3A3A3' }}>{row.after}</div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+
+        {/* ── 04 Working in growth ── */}
+        <section className="cs-section">
+          <div className="cs-col">
+            <div className="cs-eyebrow-row"><Eyebrow>Growth</Eyebrow></div>
+            <h2 className="cs-h2" data-reveal>Designing inside a company<br />that was growing faster than its design.</h2>
+            <p className="cs-body">The hardest part of seven years at Cloudways wasn't any individual project — it was maintaining design quality across a product that was adding features faster than the design system could absorb them. New screens would appear built by engineers without design input. Flows would branch in ways that created inconsistency at the seams.</p>
+            <p className="cs-body">I spent a significant portion of my time at Cloudways on what I'd call design maintenance — not redesigning, but auditing, aligning, and standardising the parts of the product that had drifted. This wasn't glamorous work. But it's what kept the product feeling coherent as the team grew from 10 people to over 200.</p>
+            <div className="cs-blockquote">
+              <p style={{ fontFamily: 'Geist', fontWeight: '400' }}>"A design system is only useful if it's the thing engineers actually reach for first."</p>
+            </div>
+            <div className="cs-grid-2">
+              <Ph height={260} label="Design system — Components" />
+              <Ph height={260} label="Platform — Settings" />
+            </div>
+          </div>
+        </section>
+
+        {/* ── 05 Working with a growing team ── */}
+        <section className="cs-section">
+          <div className="cs-col">
+            <div className="cs-eyebrow-row"><Eyebrow>Leadership</Eyebrow></div>
+            <h2 className="cs-h2" data-reveal>From sole designer to<br />leading a design function.</h2>
+            <p className="cs-body">I joined Cloudways as the only designer. By my last year, I was leading a small team across product and marketing design. That transition — from doing everything myself to establishing standards and reviewing other people's work — required a different kind of design thinking.</p>
+            <p className="cs-body">The most important thing I learned in that role: the multiplier effect of clear documentation. A well-written rationale for a design decision saves more time than the decision itself, because it stops the same conversation from happening six more times with six more stakeholders.</p>
+            <div className="cs-pull">
+              <p style={{ fontFamily: 'Geist', fontWeight: '400' }}>The work that scales is the work you can hand off. That means documentation, rationale, and systems — not just good-looking screens.</p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── 06 Output ── */}
+        <section className="cs-section">
+          <div className="cs-col">
+            <div className="cs-eyebrow-row"><Eyebrow>The output</Eyebrow></div>
+            <h2 className="cs-h2" data-reveal>Seven years of work, shipped.</h2>
+            <p className="cs-body" style={{ maxWidth: 680 }}>The product shipped continuously across my tenure — there was no single launch, no one defining moment. What accumulated was a platform that felt cohesive, a marketing presence that converted, and a brand that was recognisable across every surface it appeared on.</p>
+            <div className="cs-screens-grid">
+              <img src="assets/cloudways-1.png" alt="Cloudways — Dashboard" loading="lazy" />
+              <img src="assets/cloudways-2.png" alt="Cloudways — Server management" loading="lazy" />
+              <img src="assets/cloudways-3.png" alt="Cloudways — Application view" loading="lazy" />
+              <img src="assets/cloudways-4.png" alt="Cloudways — Marketing" loading="lazy" />
+            </div>
+          </div>
+        </section>
+
+        {/* ── 07 Outcomes ── */}
+        <section className="cs-section">
+          <div className="cs-col">
+            <div className="cs-eyebrow-row"><Eyebrow>Outcomes</Eyebrow></div>
+            <h2 className="cs-h2" data-reveal>The product I helped build<br />was acquired for $350M.</h2>
+            <p className="cs-body">In 2022, DigitalOcean acquired Cloudways for $350M. I had left the company the year before, but the product, design system, and brand I helped build were part of what was acquired. That's the best proxy for outcome I know — a product valuable enough that a public company paid a significant sum to own it.</p>
+            <p className="cs-body">The metric that mattered most to me personally wasn't the acquisition. It was that the platform had grown to 50,000+ customers — each one using something I had a hand in designing. At the scale of a B2B SaaS product, that's a meaningful reach.</p>
+            <div className="cs-metrics">
+              {[
+                { value: '$350M', label: 'Acquisition by DigitalOcean'    },
+                { value: '50k+',  label: 'Customers on the platform'      },
+                { value: '7yrs',  label: 'Continuous design contribution' },
+              ].map((m) =>
+                <div key={m.label} className="cs-metric">
+                  <div className="cs-metric__value" data-counter style={{ fontFamily: 'Geist', fontWeight: '400' }}>{m.value}</div>
+                  <div className="cs-metric__label">{m.label}</div>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+
+        {/* ── 08 Reflection ── */}
+        <section className="cs-section">
+          <div className="cs-col">
+            <div className="cs-eyebrow-row"><Eyebrow>Reflection</Eyebrow></div>
+            <h2 className="cs-h2" data-reveal>Seven years taught me what<br />short engagements never could.</h2>
+            <p className="cs-body">Most designers don't stay at a company for seven years. I understand why — the career incentives push towards variety, and there's real skill in adapting quickly to new domains. But there's something you only learn from staying: the long-term consequences of design decisions.</p>
+            <p className="cs-body">I watched decisions I made in 2015 create problems in 2018. I watched systems I built early save enormous time three years later. I watched patterns that seemed elegant on paper become confusing in practice once the user base grew. That feedback loop is compressed in short engagements — at Cloudways, it played out in full.</p>
+            <div className="cs-pull">
+              <p style={{ fontFamily: 'Geist', fontWeight: '400' }}>The best thing about staying is learning the full consequence of your decisions — the good ones and the ones you'd do differently.</p>
+            </div>
+            <p className="cs-body">What I carry from Cloudways isn't a portfolio piece — it's a set of instincts about what holds up over time and what doesn't. That's something I bring to every product I work on now.</p>
+          </div>
+        </section>
+
+        {/* ── More Work ── */}
+        <section className="cs-section">
+          <div className="cs-col">
+            <div className="cs-eyebrow-row"><Eyebrow>More work</Eyebrow></div>
+            <ProjectCard
+              eyebrow="CONVESIO"
+              title="Leading a self-initiated product redesign."
+              description="Identified key usability issues, pitched a redesign strategy, secured buy-in, and led a full platform transformation that drove 144% hosting revenue growth."
+              stats={[
+                { label: 'Role',    value: 'Lead Product Designer'      },
+                { label: 'Outcome', value: '144% Hosting Revenue Growth' },
+              ]}
+              cta={{ label: 'Read Case Study', href: 'Convesio Case Study.html' }}
+              media={<ConvesioShots />}
+            />
+          </div>
+        </section>
+
+        {/* ── Marquee ── */}
+        <MarqueeStripe items={[
+          'Cloudways', '$350M Acquisition', '7 Years · Lead Designer',
+          '50k+ Users', 'Product · Marketing · Brand', 'DigitalOcean',
+          'Cloudways', '$350M Acquisition', '7 Years · Lead Designer',
+          '50k+ Users', 'Product · Marketing · Brand', 'DigitalOcean',
+        ]} speed={44} />
+
+        {/* ── Final CTA ── */}
+        <section className="cs-section" style={{ textAlign: 'center', paddingBottom: 'var(--space-160)' }}>
+          <div className="cs-col--narrow">
+            <h2 className="cs-display" data-reveal>Work Together</h2>
+            <p className="cs-body" style={{ margin: '0 auto var(--space-40)', textAlign: 'center', maxWidth: 640 }}>
+              I'm looking for the next product I'll help shape, scale, and improve.<br />
+              If that sounds like what you're building, let's talk.
+            </p>
+            <Button as="a" href="mailto:navzkha@gmail.com" variant="primary" size="lg">Contact</Button>
+          </div>
+        </section>
+
+        <Footer
+          copyright="© All rights reserved. Naveed Khan"
+          socials={[
+            { icon: 'linkedin', href: 'https://www.linkedin.com/in/naveed-khan-designer/', label: 'LinkedIn' },
+            { icon: 'mail',     href: 'mailto:navzkha@gmail.com',                          label: 'Email'    },
+          ]}
+        />
+      </React.Fragment>
+    );
+  }
+
+  function mount() {
+    if (!window.NaveedKhanPortfolioDesignSystem_ee97a5) return setTimeout(mount, 40);
+    ReactDOM.createRoot(document.getElementById('root')).render(<CaseStudy />);
+  }
+  mount();
+}());
+</script>
+
+<!-- GSAP scroll animations -->
+<script>
+(function () {
+  function init() {
+    if (!window.gsap || !window.ScrollTrigger || !document.querySelector('[data-reveal]')) return setTimeout(init, 120);
+    gsap.registerPlugin(ScrollTrigger);
+
+    function splitReveal(el, delay) {
+      if (!el || el.dataset.split) return;
+      el.dataset.split = '1';
+      var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+      var nodes = [], n;
+      while ((n = walker.nextNode())) nodes.push(n);
+      nodes.forEach(function (tn) {
+        var words = tn.textContent.split(/(\s+)/);
+        var frag  = document.createDocumentFragment();
+        words.forEach(function (w) {
+          if (/^\s+$/.test(w)) { frag.appendChild(document.createTextNode(w)); }
+          else if (w) {
+            var o = document.createElement('span'); o.className = 'word-wrap';
+            var i = document.createElement('span'); i.className = 'word-inner';
+            i.textContent = w; o.appendChild(i); frag.appendChild(o);
+          }
+        });
+        tn.parentNode.replaceChild(frag, tn);
+      });
+      var inners = el.querySelectorAll('.word-inner');
+      gsap.fromTo(inners, { y: '115%', opacity: 0 },
+        { y: '0%', opacity: 1, duration: 0.75, stagger: 0.055, ease: 'power3.out', delay: delay || 0 });
+    }
+
+    /* Hamburger */
+    var ham    = document.getElementById('cs-ham');
+    var drawer = document.getElementById('cs-drawer');
+    var close  = document.getElementById('cs-close');
+    function openDrawer()  { if(drawer) drawer.classList.add('is-open');    document.body.style.overflow='hidden'; }
+    function closeDrawer() { if(drawer) drawer.classList.remove('is-open'); document.body.style.overflow=''; }
+    if (ham)   ham.addEventListener('click', openDrawer);
+    if (close) close.addEventListener('click', closeDrawer);
+    if (drawer) drawer.querySelectorAll('.cs-mob-drawer__link').forEach(function(a){
+      a.addEventListener('click', closeDrawer);
+    });
+
+    /* Sticky nav border */
+    var nav = document.getElementById('cs-nav');
+    if (nav) {
+      window.addEventListener('scroll', function () {
+        nav.classList.toggle('is-scrolled', window.scrollY > 10);
+      }, { passive: true });
+    }
+
+    /* Hero reveal */
+    splitReveal(document.querySelector('.cs-hero__title'), 0.2);
+
+    /* Section headings */
+    document.querySelectorAll('[data-reveal]').forEach(function (el) {
+      if (el === document.querySelector('.cs-hero__title')) return;
+      ScrollTrigger.create({
+        trigger: el, start: 'top 88%', once: true,
+        onEnter: function () { splitReveal(el, 0); }
+      });
+    });
+
+    /* Section fade-in */
+    gsap.utils.toArray('.cs-section').forEach(function (sec) {
+      gsap.fromTo(sec, { opacity: 0, y: 24 },
+        { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out',
+          scrollTrigger: { trigger: sec, start: 'top 92%', once: true } });
+    });
+  }
+  init();
+}());
+</script>
+</body>
+</html>

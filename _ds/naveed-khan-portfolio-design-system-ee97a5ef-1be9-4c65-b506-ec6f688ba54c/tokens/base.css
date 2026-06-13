@@ -1,0 +1,24 @@
+/* ============================================================
+   BASE — minimal reset + brand defaults
+   Applied lightly so specimen cards & kits inherit the dark base.
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+.ds-root,
+body.ds-base {
+  margin: 0;
+  background: var(--surface-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: var(--size-b3);
+  line-height: var(--lh-b3);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Display + heading helpers */
+.ds-display { font-family: var(--font-display); font-weight: var(--weight-bold); letter-spacing: var(--track-very-tight); line-height: 0.95; }
+.ds-eyebrow { font-family: var(--font-label); font-size: var(--size-h6); line-height: var(--lh-h6); color: var(--text-secondary); }
+.ds-serif   { font-family: var(--font-serif); font-weight: var(--weight-bold); letter-spacing: var(--track-tight); }
+
+::selection { background: var(--color-white); color: var(--color-ink-900); }

@@ -1,0 +1,10 @@
+/* ============================================================
+   FONTS — Naveed Khan Portfolio Design System
+   Webfonts loaded from Google Fonts CDN.
+   Syne (display), Geist (body/UI), Domine (editorial serif),
+   Archivo (eyebrow labels), Inter (product/dashboard UI).
+   ⚠ Substitution note: these are loaded from Google Fonts rather
+   than self-hosted binaries. All five families match the Figma
+   source exactly. Swap for licensed/self-hosted files for prod.
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Geist:wght@300;400;500;600;700&display=swap');

@@ -1,0 +1,15 @@
+/* ============================================================
+   RADIUS & BORDERS — sourced from Figma Variables + observed usage
+   Corners are restrained: 8px on buttons, 16px on cards/wells.
+   ============================================================ */
+:root {
+  --radius-xs: 4px;
+  --radius-sm: 8px;     /* buttons, inputs, chips */
+  --radius-md: 16px;    /* cards, image wells */
+  --radius-rounded: 48px;
+  --radius-full: 160px; /* pills */
+  --radius-pill: 9999px;
+
+  --border-hairline: 1px solid var(--border-default);
+  --border-outline: 1px solid var(--border-strong);
+}

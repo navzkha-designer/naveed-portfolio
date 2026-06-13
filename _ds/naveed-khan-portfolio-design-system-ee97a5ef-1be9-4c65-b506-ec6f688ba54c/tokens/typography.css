@@ -1,0 +1,63 @@
+/* ============================================================
+   TYPOGRAPHY — sourced from Figma Variables
+   Families:
+     Syne    → display / headings (700, tight tracking)
+     Geist   → body, UI, buttons, stats
+     Domine  → editorial serif (the "About" headline)
+     Archivo → eyebrow / section labels (uppercase)
+     Inter   → product & dashboard UI surfaces
+   ============================================================ */
+:root {
+  /* — Families — */
+  --font-display: 'Syne', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body:    'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif:   'Syne', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-label:   'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-ui:      'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* — Weights — */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-extrabold: 800;
+
+  /* — Sizes (px) — */
+  --size-display: 160px;
+  --size-h1: 80px;
+  --size-h2: 72px;
+  --size-h3: 48px;
+  --size-h4: 40px;
+  --size-h5: 32px;
+  --size-h6: 24px;
+  --size-b1: 20px;
+  --size-b2: 18px;
+  --size-b3: 16px;
+  --size-b4: 14px;
+  --size-utility: 18px;
+  --size-label: 12px;
+  --size-button-lg: 16px;
+  --size-button-sm: 14px;
+
+  /* — Line heights (px) — */
+  --lh-display: 120px;
+  --lh-h1: 80px;
+  --lh-h2: 72px;
+  --lh-h3: 56px;
+  --lh-h4: 48px;
+  --lh-h5: 40px;
+  --lh-h6: 32px;
+  --lh-b1: 28px;
+  --lh-b2: 26px;
+  --lh-b3: 24px;
+  --lh-b4: 22px;
+  --lh-utility: 26px;
+  --lh-label: 12px;
+
+  /* — Letter spacing — */
+  --track-very-tight: -2px;
+  --track-tight: -1px;
+  --track-normal: 0px;
+  --track-wide: 2px;
+  --track-wider: 4px;
+}

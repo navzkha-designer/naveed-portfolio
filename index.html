@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Naveed Khan — Senior Product Designer</title>
+
+<!-- Design System Tokens -->
+<link rel="stylesheet" href="_ds/naveed-khan-portfolio-design-system-ee97a5ef-1be9-4c65-b506-ec6f688ba54c/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/naveed-khan-portfolio-design-system-ee97a5ef-1be9-4c65-b506-ec6f688ba54c/tokens/colors.css">
+<link rel="stylesheet" href="_ds/naveed-khan-portfolio-design-system-ee97a5ef-1be9-4c65-b506-ec6f688ba54c/tokens/typography.css">
+<link rel="stylesheet" href="_ds/naveed-khan-portfolio-design-system-ee97a5ef-1be9-4c65-b506-ec6f688ba54c/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/naveed-khan-portfolio-design-system-ee97a5ef-1be9-4c65-b506-ec6f688ba54c/tokens/radius.css">
+<link rel="stylesheet" href="_ds/naveed-khan-portfolio-design-system-ee97a5ef-1be9-4c65-b506-ec6f688ba54c/tokens/effects.css">
+<link rel="stylesheet" href="_ds/naveed-khan-portfolio-design-system-ee97a5ef-1be9-4c65-b506-ec6f688ba54c/tokens/base.css">
+<link rel="stylesheet" href="_ds/naveed-khan-portfolio-design-system-ee97a5ef-1be9-4c65-b506-ec6f688ba54c/styles.css">
+
+<!-- Three.js (WebGL hero) -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+
+<!-- React + Babel -->
+<script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+
+<!-- GSAP 3 + ScrollTrigger -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+<!-- Design System Bundle -->
+<script src="_ds/naveed-khan-portfolio-design-system-ee97a5ef-1be9-4c65-b506-ec6f688ba54c/_ds_bundle.js"></script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--surface-primary); }
+
+  /* ── Layout ────────────────────────────────────────────────── */
+  .pf-page { background: var(--surface-primary); color: var(--text-primary); }
+  .pf-col  { width: min(1280px, calc(100% - 160px)); margin: 0 auto; }
+  .pf-section { padding: var(--space-160) 0; }
+  .pf-section__head { display: flex; flex-direction: column; gap: var(--space-16); margin-bottom: var(--space-48); }
+  .pf-h1 { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: var(--size-h1); line-height: var(--lh-h1); letter-spacing: var(--track-tight); color: var(--text-primary); }
+  .pf-eyebrow { margin: 0; font-family: var(--font-label); font-size: var(--size-b4); line-height: var(--lh-b4); letter-spacing: var(--track-wide); text-transform: uppercase; color: var(--text-secondary); }
+  .pf-eyebrow--lg { font-size: var(--size-h6); line-height: var(--lh-h6); }
+
+  /* ── Hero ──────────────────────────────────────────────────── */
+  .pf-hero { position: relative; overflow: hidden; background: var(--surface-primary); }
+  .pf-hero__webgl { position: absolute; inset: 0; width: 100%; height: 100%; display: block; z-index: 0; }
+  /* Resend-style: subtle grey radial glow — transparent base lets WebGL through */
+  .pf-hero__texture {
+    position: absolute; inset: 0; z-index: 1;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -10%,
+        rgba(180,180,180,0.10) 0%, transparent 65%),
+      radial-gradient(ellipse 60% 40% at 50% 0%,
+        rgba(120,120,120,0.06) 0%, transparent 55%);
+    pointer-events: none;
+  }
+  .pf-hero__vignette { position: absolute; inset: 0; background: var(--grad-hero); z-index: 2; }
+  .pf-hero__inner  { position: relative; z-index: 3; display: flex; flex-direction: column; }
+  .pf-hero__content { padding: 224px 0; display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-32); }
+  .pf-hero__title { margin: 0; font-family: var(--font-display); font-weight: 800; font-size: 120px; line-height: 0.9; letter-spacing: var(--track-very-tight); color: var(--text-primary); }
+  .pf-hero__lead  { margin: 0; max-width: 560px; font-family: var(--font-body); font-size: var(--size-b1); line-height: var(--lh-b1); color: var(--text-secondary); }
+  .pf-hero__cta   { margin-top: var(--space-12); }
+
+  /* ── Work ──────────────────────────────────────────────────── */
+  .pf-work__stack { display: flex; flex-direction: column; gap: var(--space-48); }
+  .pf-shots { display: flex; gap: 24px; padding: 28px; width: 100%; align-items: stretch; box-sizing: border-box; }
+  .pf-shot  { flex: 1; min-width: 0; border-radius: 10px; overflow: hidden; background: #fff; box-shadow: 0 10px 30px -12px rgba(0,0,0,.6); display: flex; flex-direction: column; }
+  .pf-shot__bar { height: 22px; background: #e9edf2; display: flex; align-items: center; gap: 5px; padding: 0 9px; }
+  .pf-shot__bar span { width: 7px; height: 7px; border-radius: 50%; background: #c3ccd6; }
+  .pf-shot__body { flex: 1; min-height: 150px; display: flex; }
+  .pf-shot__body.is-light { background: #f4f6f9; }
+  .pf-shot__body.is-blue  { background: #1565ff; align-items: center; justify-content: center; }
+  .pf-shot__brand { font-family: var(--font-ui, sans-serif); font-weight: 700; font-size: 18px; letter-spacing: 1px; color: #fff; }
+  .pf-shot__side  { width: 28%; background: #e4e9f0; border-right: 1px solid #d6dde6; }
+  .pf-shot__main  { flex: 1; padding: 14px; display: flex; flex-direction: column; gap: 8px; }
+  .pf-shot__line  { height: 8px; border-radius: 4px; background: #dde3ea; }
+  .pf-shot__cards { display: flex; gap: 8px; margin-top: 6px; }
+  .pf-shot__cards span { flex: 1; height: 40px; border-radius: 6px; background: #e7ecf2; }
+
+  /* ── About ─────────────────────────────────────────────────── */
+  .pf-about__grid  { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-64); align-items: start; }
+  .pf-serif        { margin: 0 0 var(--space-40); font-weight: 400; font-size: 32px; line-height: 1.18; color: var(--text-primary); max-width: 560px; }
+  .pf-about__prose { display: flex; flex-direction: column; gap: var(--space-20); margin-bottom: var(--space-40); }
+  .pf-about__prose p { margin: 0; font-family: var(--font-body); font-size: var(--size-b1); line-height: var(--lh-b1); color: var(--text-secondary); max-width: 540px; }
+  .pf-about__exp      { display: flex; flex-direction: column; gap: var(--space-32); }
+  .pf-about__timeline { display: flex; flex-direction: column; gap: var(--space-24); }
+
+  /* ── Metrics ───────────────────────────────────────────────── */
+  .pf-metrics { padding-bottom: var(--space-160); }
+  .pf-metrics__row { display: flex; justify-content: space-between; gap: var(--space-28); padding: var(--space-64) 0; border-top: var(--border-hairline); border-bottom: var(--border-hairline); }
+
+  /* ── CTA ───────────────────────────────────────────────────── */
+  .pf-cta { text-align: center; }
+  .pf-cta__inner { display: flex; flex-direction: column; align-items: center; gap: var(--space-32); }
+  .pf-cta__title { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: var(--size-h2); line-height: var(--lh-h2); letter-spacing: var(--track-tight); color: var(--text-primary); }
+  .pf-cta__lead  { margin: 0; font-family: var(--font-body); font-size: var(--size-b1); line-height: var(--lh-b1); color: var(--text-secondary); }
+
+  #work .pf-section__head p { font-size: 14px !important; }
+
+  /* ── All 3 work cards — primary-style CTA ── */
+  #work .pf-work__stack article .ds-btn--secondary {
+    background: var(--text-primary) !important;
+    color: var(--surface-primary) !important;
+    border-color: var(--text-primary) !important;
+  }
+  #work .pf-work__stack article .ds-btn--secondary::before {
+    background: #333 !important;
+  }
+  #work .pf-work__stack article .ds-btn--secondary:hover {
+    color: #fff !important;
+  }
+
+  /* ── Cloudways card marquee (homepage) ── */
+  .pf-cs-marquee { overflow: hidden; width: 100%; padding: 20px 0; }
+  .pf-cs-marquee__track { display: flex; gap: 20px; width: max-content; animation: cs-scroll 32s linear infinite; }
+  .pf-cs-marquee__track:hover { animation-play-state: paused; }
+  .pf-cs-marquee__img { flex: 0 0 auto; width: 490px; height: 339px; object-fit: cover; display: block; border-radius: 12px; box-shadow: 0 8px 28px -6px rgba(0,0,0,.7); }
+
+  /* ── MarqueeStripe overrides: bigger font, GPU smooth, no gap ── */
+  .ds-marquee__track {
+    will-change: transform !important;
+  }
+  .ds-marquee__track span[style] {
+    font-size: 17px !important;
+    color: rgba(255,255,255,0.55) !important;
+    letter-spacing: 0.01em !important;
+  }
+  /* separator + */
+  .ds-marquee__track [aria-hidden="true"] {
+    font-size: 20px !important;
+    margin: 0 32px !important;
+    color: rgba(255,255,255,0.55) !important;
+    opacity: 1 !important;
+  }
+
+  /* ══ MICRO-INTERACTIONS ═══════════════════════════════════ */
+
+  /* Word-split clip mask for cinematic reveals */
+  .word-wrap  { display: inline-block; overflow: hidden; vertical-align: bottom; line-height: inherit; }
+  .word-inner { display: inline-block; }
+
+
+  /* ── Primary button — Directional liquid fill + magnetic pull ── */
+  .ds-btn--primary {
+    position: relative !important;
+    overflow: hidden !important;
+    isolation: isolate !important;
+    transition: color 0.38s ease, box-shadow 0.22s ease !important;
+    will-change: transform;
+  }
+  /* Ink fill that sweeps in from cursor entry direction */
+  .ds-btn--primary::before {
+    content: ''; position: absolute; inset: 0;
+    background: #111;
+    transform: scaleX(0);
+    transform-origin: var(--btn-origin, 0% 50%);
+    transition: transform 0.42s cubic-bezier(0.77, 0, 0.175, 1);
+    z-index: 0; pointer-events: none;
+  }
+  .ds-btn--primary:hover::before { transform: scaleX(1); }
+  .ds-btn--primary:hover { color: #fff !important; }
+  /* Children above fill layer */
+  .ds-btn--primary > *, .ds-btn--primary span, .ds-btn--primary svg { position: relative; z-index: 1; }
+  .ds-btn--primary:active { transform: scale(0.97) !important; }
+
+  /* ── Secondary button — soft fill + dual-icon mask ── */
+  .ds-btn--secondary {
+    position: relative !important;
+    overflow: hidden !important;
+    transition: color 0.25s ease !important;
+  }
+  .ds-btn--secondary::before {
+    content: ''; position: absolute; inset: 0;
+    background: rgba(255,255,255,0.055);
+    transform: scaleY(0); transform-origin: bottom;
+    transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none; z-index: 0;
+  }
+  .ds-btn--secondary:hover::before { transform: scaleY(1); }
+  /* Exit: real SVG icon slides up-right and fades out */
+  .ds-btn--secondary svg {
+    transition: transform 0.26s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.2s ease;
+    position: relative; z-index: 1;
+  }
+  .ds-btn--secondary:hover svg {
+    transform: translate(11px, -11px) !important;
+    opacity: 0 !important;
+  }
+  /* Enter: duplicate arrow slides in from bottom-left */
+  .ds-btn--secondary::after {
+    content: '';
+    position: absolute;
+    right: 16px; top: 50%;
+    width: 15px; height: 15px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17 17 7'/%3E%3Cpath d='M7 7h10v10'/%3E%3C/svg%3E");
+    background-size: contain; background-repeat: no-repeat; background-position: center;
+    transform: translateY(calc(-50% + 11px)) translateX(-11px);
+    opacity: 0;
+    transition: transform 0.26s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.2s ease 0.06s;
+    pointer-events: none; z-index: 2;
+    display: block !important;
+  }
+  .ds-btn--secondary:hover::after {
+    transform: translateY(-50%) translateX(0);
+    opacity: 1;
+  }
+  .ds-btn--secondary > *, .ds-btn--secondary span { position: relative; z-index: 1; }
+  .ds-btn--secondary:active { transform: scale(0.96) !important; }
+
+  /* ══ END MICRO-INTERACTIONS ═════════════════════════════════════════════════ */
+
+  /* ── Project card eyebrow — 14px ──────────────────────── */
+  .pf-work__stack article p:first-child {
+    font-size: 14px !important;
+  }
+
+  /* ── Project card title override — Geist regular ────────── */
+  .pf-work__stack article :is(h1,h2,h3,h4,h5,h6) {
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-weight: 400 !important;
+  }
+
+  /* ── Convesio Image Marquee ─────────────────────────────────── */
+  .cs-marquee { overflow: hidden; width: 100%; padding: 24px 0 20px; }
+  .cs-marquee__track {
+    display: flex; gap: 20px; width: max-content;
+    animation: cs-scroll 32s linear infinite;
+  }
+  .cs-marquee__track:hover { animation-play-state: paused; }
+  .cs-marquee__img { flex: 0 0 auto; width: 490px; height: 339px; object-fit: cover; display: block; border-radius: 10px; box-shadow: 0 8px 28px -6px rgba(0,0,0,.7); }
+  @keyframes cs-scroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ── Responsive ────────────────────────────────────────────── */
+  @media (max-width: 1100px) {
+    .pf-col { width: calc(100% - 80px); }
+    .pf-hero__title { font-size: 92px; }
+    .pf-about__grid { grid-template-columns: 1fr; }
+    .pf-metrics__row { flex-wrap: wrap; justify-content: flex-start; gap: var(--space-40); }
+  }
+  @media (max-width: 768px) {
+    .pf-hero__title { font-size: 72px; }
+  }
+  @media (max-width: 680px) {
+    .pf-col { width: calc(100% - 48px); }
+    .pf-section { padding: var(--space-96) 0; }
+    .pf-hero__content { padding: var(--space-96) 0; }
+    .pf-hero__title { font-size: clamp(44px, 13vw, 64px); line-height: 0.92; }
+    .pf-h1 { font-size: clamp(36px, 11vw, 52px); line-height: 1; }
+    .pf-hero__lead { font-size: 15px; }
+    .pf-shots { flex-direction: column; }
+    .pf-metrics__row { flex-direction: column; align-items: center; gap: var(--space-32); text-align: center; }
+    .pf-cta__title { font-size: clamp(30px, 9vw, 44px); }
+    .pf-cta__lead { font-size: 15px; }
+    .pf-serif { font-size: 24px; }
+    .pf-about__prose p { font-size: 15px; }
+    .cs-marquee__img { width: 400px; height: 276px; }
+    .pf-cs-marquee__img { width: 400px; height: 276px; }
+    /* Project card: stack CTA below content on mobile */
+    #work .pf-work__stack article header {
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: var(--space-20);
+    }
+    /* Stats row: wrap on mobile */
+    #work .pf-work__stack article header > div > div[style*="gap: var(--space-40)"] {
+      flex-wrap: wrap;
+      gap: var(--space-16) !important;
+    }
+  }
+
+  /* ── Fixed Nav ── */
+  .pf-nav-wrap {
+    position: fixed; top: 0; left: 0; right: 0; width: 100%;
+    z-index: 100;
+    background: transparent;
+    transition: background 400ms ease;
+  }
+  .pf-nav-wrap.is-scrolled {
+    background: rgba(10, 10, 10, 0.72);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+  }
+  .pf-nav-wrap .pf-col { position: relative; width: min(1320px, calc(100% - 80px)) !important; }
+  /* Sections account for fixed nav height on anchor scroll */
+  #work, #about, #contact { scroll-margin-top: 60px; }
+
+  /* ── Mobile nav ── */
+  .pf-mob-toggle {
+    display: none; background: none; border: none; cursor: pointer;
+    padding: 8px; color: var(--text-primary);
+    position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+  }
+  .pf-mob-drawer {
+    display: none; position: fixed; inset: 0; z-index: 999;
+    background: #0A0A0A; flex-direction: column;
+    padding: 24px 32px 48px;
+  }
+  .pf-mob-drawer.is-open { display: flex; }
+  .pf-mob-drawer__top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 48px; }
+  .pf-mob-drawer__links { display: flex; flex-direction: column; gap: 8px; flex: 1; justify-content: center; }
+  .pf-mob-drawer__link {
+    font-family: var(--font-display); font-size: 40px; font-weight: 700;
+    letter-spacing: -1px; color: var(--text-secondary); text-decoration: none;
+    padding: 12px 0; border-bottom: 1px solid #1a1a1a;
+    transition: color 200ms ease;
+  }
+  .pf-mob-drawer__link:hover { color: var(--text-primary); }
+  .pf-mob-drawer__cta { margin-top: 40px; }
+  /* CTA title: override DS fixed line-height token */
+  .pf-cta__title { line-height: 1.05 !important; }
+  /* Footer: responsive padding overrides */
+  @media (max-width: 1280px) { footer { padding-left: 64px !important; padding-right: 64px !important; } }
+  @media (max-width: 1024px) { footer { padding-left: 40px !important; padding-right: 40px !important; } }
+  /* Footer: stack vertically + center on mobile */
+  @media (max-width: 680px) {
+    footer { flex-direction: column !important; align-items: center !important; text-align: center !important; gap: 16px !important; padding: 32px 24px !important; }
+    footer > div { gap: 20px !important; justify-content: center !important; }
+  }
+  @media (max-width: 768px) {
+    .pf-mob-toggle { display: flex; align-items: center; justify-content: center; }
+    .pf-nav-wrap nav > div > ul,
+    .pf-nav-wrap nav > div > a:last-child { display: none !important; }
+  }
+
+</style>
+</head>
+<body class="ds-base pf-page">
+<div id="root"></div>
+
+<!-- ════════════════════════════════════════════════════════════
+     HERO — GPU Fluid Smoke (Navier-Stokes, Three.js)
+     Mouse stirs monochrome ink that swirls + dissipates
+     ════════════════════════════════════════════════════════════ -->
+<script>
+(function () {
+  window._heroCanvasInit = function (canvas, hero) {
+    var THREE = window.THREE;
+    if (!THREE) return function(){};
+
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: false });
+    renderer.setPixelRatio(1);
+    renderer.autoClear = false;
+
+    /* ── Sim resolution (low = fast + smoky) ── */
+    var SIM_W = 288, SIM_H = 160;
+    var DYE_W = 576, DYE_H = 320;
+
+    function makeRT(w, h) {
+      return new THREE.WebGLRenderTarget(w, h, {
+        type: THREE.HalfFloatType,
+        format: THREE.RGBAFormat,
+        minFilter: THREE.LinearFilter,
+        magFilter: THREE.LinearFilter,
+        wrapS: THREE.ClampToEdgeWrapping,
+        wrapT: THREE.ClampToEdgeWrapping,
+        depthBuffer: false,
+      });
+    }
+    function makePair(w, h) {
+      return { a: makeRT(w, h), b: makeRT(w, h),
+        swap: function(){ var t = this.a; this.a = this.b; this.b = t; } };
+    }
+
+    var vel  = makePair(SIM_W, SIM_H);
+    var dye  = makePair(DYE_W, DYE_H);
+    var pres = makePair(SIM_W, SIM_H);
+    var divRT = makeRT(SIM_W, SIM_H);
+
+    var camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+    var scene  = new THREE.Scene();
+    var quadGeo = new THREE.PlaneGeometry(2, 2);
+    var mesh = new THREE.Mesh(quadGeo);
+    scene.add(mesh);
+
+    var VERT = 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position.xy,0.,1.); }';
+
+    function mat(frag, unis) {
+      return new THREE.ShaderMaterial({ vertexShader: VERT, fragmentShader: frag, uniforms: unis, depthWrite: false, depthTest: false });
+    }
+
+    var texel = new THREE.Vector2(1 / SIM_W, 1 / SIM_H);
+
+    /* ── Advection ── */
+    var advectMat = mat([
+      'precision highp float; varying vec2 vUv;',
+      'uniform sampler2D u_vel; uniform sampler2D u_src;',
+      'uniform float u_dt; uniform float u_diss;',
+      'void main(){',
+      '  vec2 v = texture2D(u_vel, vUv).xy;',
+      '  vec2 coord = vUv - u_dt * v * vec2(1.0, 1.8);',
+      '  gl_FragColor = texture2D(u_src, coord) * u_diss;',
+      '}'].join('\n'),
+      { u_vel: { value: null }, u_src: { value: null }, u_dt: { value: 0.016 }, u_diss: { value: 0.98 } });
+
+    /* ── Splat (inject velocity / dye) ── */
+    var splatMat = mat([
+      'precision highp float; varying vec2 vUv;',
+      'uniform sampler2D u_src; uniform vec2 u_point; uniform vec3 u_value;',
+      'uniform float u_radius; uniform float u_aspect;',
+      'void main(){',
+      '  vec2 d = vUv - u_point; d.x *= u_aspect;',
+      '  float a = exp(-dot(d, d) / u_radius);',
+      '  vec3 base = texture2D(u_src, vUv).xyz;',
+      '  gl_FragColor = vec4(base + u_value * a, 1.0);',
+      '}'].join('\n'),
+      { u_src: { value: null }, u_point: { value: new THREE.Vector2() }, u_value: { value: new THREE.Vector3() }, u_radius: { value: 0.001 }, u_aspect: { value: 1.8 } });
+
+    /* ── Divergence ── */
+    var divMat = mat([
+      'precision highp float; varying vec2 vUv;',
+      'uniform sampler2D u_vel; uniform vec2 u_texel;',
+      'void main(){',
+      '  float l = texture2D(u_vel, vUv - vec2(u_texel.x, 0.)).x;',
+      '  float r = texture2D(u_vel, vUv + vec2(u_texel.x, 0.)).x;',
+      '  float b = texture2D(u_vel, vUv - vec2(0., u_texel.y)).y;',
+      '  float t = texture2D(u_vel, vUv + vec2(0., u_texel.y)).y;',
+      '  gl_FragColor = vec4(0.5 * (r - l + t - b), 0., 0., 1.);',
+      '}'].join('\n'),
+      { u_vel: { value: null }, u_texel: { value: texel } });
+
+    /* ── Pressure Jacobi ── */
+    var presMat = mat([
+      'precision highp float; varying vec2 vUv;',
+      'uniform sampler2D u_pres; uniform sampler2D u_div; uniform vec2 u_texel;',
+      'void main(){',
+      '  float l = texture2D(u_pres, vUv - vec2(u_texel.x, 0.)).x;',
+      '  float r = texture2D(u_pres, vUv + vec2(u_texel.x, 0.)).x;',
+      '  float b = texture2D(u_pres, vUv - vec2(0., u_texel.y)).x;',
+      '  float t = texture2D(u_pres, vUv + vec2(0., u_texel.y)).x;',
+      '  float div = texture2D(u_div, vUv).x;',
+      '  gl_FragColor = vec4((l + r + b + t - div) * 0.25, 0., 0., 1.);',
+      '}'].join('\n'),
+      { u_pres: { value: null }, u_div: { value: null }, u_texel: { value: texel } });
+
+    /* ── Gradient subtract ── */
+    var gradMat = mat([
+      'precision highp float; varying vec2 vUv;',
+      'uniform sampler2D u_pres; uniform sampler2D u_vel; uniform vec2 u_texel;',
+      'void main(){',
+      '  float l = texture2D(u_pres, vUv - vec2(u_texel.x, 0.)).x;',
+      '  float r = texture2D(u_pres, vUv + vec2(u_texel.x, 0.)).x;',
+      '  float b = texture2D(u_pres, vUv - vec2(0., u_texel.y)).x;',
+      '  float t = texture2D(u_pres, vUv + vec2(0., u_texel.y)).x;',
+      '  vec2 v = texture2D(u_vel, vUv).xy;',
+      '  v -= 0.5 * vec2(r - l, t - b);',
+      '  gl_FragColor = vec4(v, 0., 1.);',
+      '}'].join('\n'),
+      { u_pres: { value: null }, u_vel: { value: null }, u_texel: { value: texel } });
+
+    /* ── Display ── */
+    var dispMat = mat([
+      'precision highp float; varying vec2 vUv;',
+      'uniform sampler2D u_dye;',
+      'void main(){',
+      '  float d = texture2D(u_dye, vUv).x;',
+      '  d = pow(d, 0.85);',
+      '  vec3 col = vec3(0.030) + vec3(0.92, 0.95, 1.0) * d * 0.85;',
+      '  /* top fade for nav */',
+      '  col *= mix(0.55, 1.0, smoothstep(1.0, 0.78, vUv.y));',
+      '  gl_FragColor = vec4(col, 1.0);',
+      '}'].join('\n'),
+      { u_dye: { value: null } });
+
+    function pass(material, target) {
+      mesh.material = material;
+      renderer.setRenderTarget(target);
+      renderer.render(scene, camera);
+      renderer.setRenderTarget(null);
+    }
+
+    /* ── Mouse state ── */
+    var mx = 0.5, my = 0.5, pmx = 0.5, pmy = 0.5, moved = false;
+    function onMove(e) {
+      var r = hero.getBoundingClientRect();
+      mx =       (e.clientX - r.left) / r.width;
+      my = 1.0 - (e.clientY - r.top)  / r.height;
+      moved = true;
+    }
+    window.addEventListener('mousemove', onMove, { passive: true });
+
+    function resize() {
+      var w = hero.clientWidth  || window.innerWidth;
+      var h = hero.clientHeight || Math.round(w * 0.6);
+      renderer.setSize(w, h, false);
+    }
+    resize();
+    var ro = new ResizeObserver(resize);
+    ro.observe(hero);
+
+    function splat(pair, x, y, vx, vy, vz, radius) {
+      splatMat.uniforms.u_src.value   = pair.a.texture;
+      splatMat.uniforms.u_point.value.set(x, y);
+      splatMat.uniforms.u_value.value.set(vx, vy, vz);
+      splatMat.uniforms.u_radius.value = radius;
+      pass(splatMat, pair.b);
+      pair.swap();
+    }
+
+    var clock = new THREE.Clock(), raf, t = 0;
+
+    function tick() {
+      raf = requestAnimationFrame(tick);
+      var dt = Math.min(clock.getDelta(), 0.033);
+      t += dt;
+
+      /* 1. Mouse force + dye */
+      if (moved) {
+        var dx = (mx - pmx), dy = (my - pmy);
+        var speed = Math.sqrt(dx * dx + dy * dy);
+        if (speed > 0.0001) {
+          splat(vel, mx, my, dx * 90.0, dy * 90.0, 0, 0.0016);
+          splat(dye, mx, my, Math.min(speed * 14.0, 0.55), 0, 0, 0.0014);
+        }
+        pmx = mx; pmy = my; moved = false;
+      }
+
+      /* 2. Ambient idle emitter — slow wandering breeze */
+      var ex = 0.5 + 0.40 * Math.sin(t * 0.21);
+      var ey = 0.42 + 0.22 * Math.sin(t * 0.17 + 2.1);
+      var ang = t * 0.35;
+      splat(vel, ex, ey, Math.cos(ang) * 1.6, Math.sin(ang) * 1.2, 0, 0.004);
+      splat(dye, ex, ey, 0.016, 0, 0, 0.005);
+
+      /* 3. Advect velocity */
+      advectMat.uniforms.u_vel.value = vel.a.texture;
+      advectMat.uniforms.u_src.value = vel.a.texture;
+      advectMat.uniforms.u_dt.value  = dt;
+      advectMat.uniforms.u_diss.value = 0.992;
+      pass(advectMat, vel.b); vel.swap();
+
+      /* 4. Divergence */
+      divMat.uniforms.u_vel.value = vel.a.texture;
+      pass(divMat, divRT);
+
+      /* 5. Pressure solve (14 Jacobi iterations) */
+      for (var i = 0; i < 14; i++) {
+        presMat.uniforms.u_pres.value = pres.a.texture;
+        presMat.uniforms.u_div.value  = divRT.texture;
+        pass(presMat, pres.b); pres.swap();
+      }
+
+      /* 6. Subtract gradient */
+      gradMat.uniforms.u_pres.value = pres.a.texture;
+      gradMat.uniforms.u_vel.value  = vel.a.texture;
+      pass(gradMat, vel.b); vel.swap();
+
+      /* 7. Advect dye */
+      advectMat.uniforms.u_vel.value = vel.a.texture;
+      advectMat.uniforms.u_src.value = dye.a.texture;
+      advectMat.uniforms.u_diss.value = 0.975;
+      pass(advectMat, dye.b); dye.swap();
+
+      /* 8. Display */
+      dispMat.uniforms.u_dye.value = dye.a.texture;
+      mesh.material = dispMat;
+      renderer.setRenderTarget(null);
+      renderer.render(scene, camera);
+    }
+    tick();
+
+    return function cleanup() {
+      cancelAnimationFrame(raf);
+      ro.disconnect();
+      window.removeEventListener('mousemove', onMove);
+      [vel.a, vel.b, dye.a, dye.b, pres.a, pres.b, divRT].forEach(function(rt){ rt.dispose(); });
+      renderer.dispose();
+    };
+  };
+}());
+</script>
+
+<!-- ════════════════════════════════════════════════════════════
+     HERO — Three.js WebGL Fragment Shader Background
+     Effects: Film Grain · Vignette · Mouse Light Trail
+     Base: #0A0A0A — design-system surface-primary (no added color)
+     ════════════════════════════════════════════════════════════ -->
+<script type="text/babel">
+(function () {
+  const { NavBar, Button, Logo } = window.NaveedKhanPortfolioDesignSystem_ee97a5;
+
+  function PfNav() {
+    return (
+      <React.Fragment>
+        <div className="pf-nav-wrap" id="pf-nav">
+          <div className="pf-col" style={{ position: 'relative' }}>
+            <NavBar links={[
+              { label: 'Work',    href: '#work'    },
+              { label: 'About',   href: '#about'   },
+              { label: 'Contact', href: '#contact' },
+            ]} cta={{ label: 'Resume', href: 'Naveed-Khan-Resume.pdf', target: '_blank' }} />
+            <button className="pf-mob-toggle" id="pf-ham" aria-label="Open menu">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <line x1="3" y1="6"  x2="21" y2="6"/>
+                <line x1="3" y1="12" x2="21" y2="12"/>
+                <line x1="3" y1="18" x2="21" y2="18"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile drawer — outside nav-wrap so backdrop-filter can't break position:fixed */}
+        <div className="pf-mob-drawer" id="pf-drawer">
+          <div className="pf-mob-drawer__top">
+            <a href="#" style={{ display:'flex', alignItems:'center' }}>
+              <Logo height={17} />
+            </a>
+            <button id="pf-close" style={{ background:'none', border:'none', cursor:'pointer', color:'var(--text-primary)', padding:8 }} aria-label="Close menu">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+          </div>
+          <nav className="pf-mob-drawer__links">
+            {[
+              { label: 'Work',    href: '#work'    },
+              { label: 'About',   href: '#about'   },
+              { label: 'Contact', href: '#contact' },
+            ].map(function(l) { return (
+              <a key={l.label} className="pf-mob-drawer__link" href={l.href}>{l.label}</a>
+            ); })}
+          </nav>
+          <div className="pf-mob-drawer__cta">
+            <Button as="a" href="Naveed-Khan-Resume.pdf" target="_blank" rel="noopener" variant="primary" size="lg">Resume</Button>
+          </div>
+        </div>
+      </React.Fragment>
+    );
+  }
+
+  function Hero() {
+    const canvasRef = React.useRef(null);
+
+    React.useEffect(function () {
+      var canvas = canvasRef.current;
+      if (!canvas) return;
+      var hero = canvas.parentElement;
+      if (!window._heroCanvasInit) return;
+      var cleanup = window._heroCanvasInit(canvas, hero);
+      return cleanup;
+    }, []);
+
+    return (
+      <header id="top" className="pf-hero">
+        <canvas ref={canvasRef} className="pf-hero__webgl" />
+        <div className="pf-hero__texture" />
+        <div className="pf-hero__vignette" />
+        <div className="pf-col pf-hero__inner">
+          <div className="pf-hero__content">
+            <p className="pf-eyebrow pf-eyebrow--lg"
+               style={{ fontFamily: 'Geist', fontSize: '16px' }}>
+              Senior Product Designer
+            </p>
+            <h1 className="pf-hero__title">Naveed<br/>Khan</h1>
+            <p className="pf-hero__lead">
+              Over 12+ years, I've designed SaaS, fintech, cloud hosting, and AI products —
+              leading 0→1 builds, redesigns, and growth initiatives from strategy to shipped UX.
+            </p>
+            <div className="pf-hero__cta">
+              <Button as="a" href="#work" variant="primary" size="lg">View Selected Work</Button>
+            </div>
+          </div>
+        </div>
+      </header>
+    );
+  }
+
+  window.PfNav = PfNav;
+  window.Hero = Hero;
+}());
+</script>
+
+<!-- ════════════ WORK ════════════ -->
+<script type="text/babel">
+(function () {
+  const { ProjectCard, Eyebrow } = window.NaveedKhanPortfolioDesignSystem_ee97a5;
+
+  /* ── Infinite marquee for Convesio case study images ─────── */
+  var IMGS = [
+    'assets/convesio-1.png',
+    'assets/convesio-2.png',
+    'assets/convesio-3.png',
+    'assets/convesio-4.png',
+  ];
+
+  var CONVESIO_IMGS = [
+    'assets/convesio-r1.webp',
+    'assets/convesio-r2.webp',
+    'assets/convesio-r3.webp',
+    'assets/convesio-r4.webp',
+  ];
+  function ConvesioRedesignMarquee() {
+    var all = CONVESIO_IMGS.concat(CONVESIO_IMGS);
+    return (
+      <div className="cs-marquee" style={{ padding: '20px 0' }}>
+        <div className="cs-marquee__track">
+          {all.map(function (src, i) {
+            return <img key={i} className="cs-marquee__img" src={src}
+              alt={'Convesio screen ' + ((i % CONVESIO_IMGS.length) + 1)} loading="lazy" />;
+          })}
+        </div>
+      </div>
+    );
+  }
+
+  function ConvesioMarquee() {
+    /* Duplicate the set so the CSS translateX(-50%) loop is seamless */
+    var all = IMGS.concat(IMGS);
+    return (
+      <div className="cs-marquee">
+        <div className="cs-marquee__track">
+          {all.map(function (src, i) {
+            return (
+              <img
+                key={i}
+                className="cs-marquee__img"
+                src={src}
+                alt={'Convesio screen ' + ((i % IMGS.length) + 1)}
+                loading="lazy"
+              />
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
+
+  /* ── Placeholder shots for other cards ──────────────────── */
+  function Shot({ tone, label }) {
+    var isBlue = tone === 'blue';
+    return (
+      <div className="pf-shot">
+        <div className="pf-shot__bar"><span></span><span></span><span></span></div>
+        <div className={"pf-shot__body " + (isBlue ? 'is-blue' : 'is-light')}>
+          {isBlue && label
+            ? <div className="pf-shot__brand">{label}</div>
+            : <React.Fragment>
+                <div className="pf-shot__side"></div>
+                <div className="pf-shot__main">
+                  <div className="pf-shot__line" style={{ width:'60%' }}></div>
+                  <div className="pf-shot__line" style={{ width:'85%' }}></div>
+                  <div className="pf-shot__cards"><span></span><span></span><span></span></div>
+                </div>
+              </React.Fragment>
+          }
+        </div>
+      </div>
+    );
+  }
+
+  var CW_IMGS = [
+    'assets/cloudways-1.png',
+    'assets/cloudways-2.png',
+    'assets/cloudways-3.png',
+    'assets/cloudways-4.png',
+  ];
+  function CloudwaysMarquee() {
+    var all = CW_IMGS.concat(CW_IMGS);
+    return (
+      <div className="pf-cs-marquee">
+        <div className="pf-cs-marquee__track">
+          {all.map(function (src, i) {
+            return <img key={i} className="pf-cs-marquee__img" src={src}
+              alt={'Cloudways ' + ((i % CW_IMGS.length) + 1)} loading="lazy" />;
+          })}
+        </div>
+      </div>
+    );
+  }
+
+  function WorkSection() {
+    return (
+      <section id="work" className="pf-section">
+        <div className="pf-col">
+          <div className="pf-section__head">
+            <Eyebrow size="lg">Selected Work</Eyebrow>
+            <h2 className="pf-h1" style={{ fontWeight: 800 }}>Work</h2>
+          </div>
+          <div className="pf-work__stack">
+            <ProjectCard
+              eyebrow="CONVESIOPAY"
+              description="Led end-to-end product design from concept to launch for a payments platform processing $1M+ in year one."
+              stats={[
+                { label: 'Role',    value: 'Lead Product Designer'  },
+                { label: 'Outcome', value: '$1M+ processed (Year 1)'},
+              ]}
+              cta={{ label: 'Read Case Study', href: 'ConvesioPay Case Study.html' }}
+              media={<ConvesioMarquee />}
+            />
+            <ProjectCard
+              eyebrow="CLOUDWAYS"
+              title="Designing at scale across product, web, and brand."
+              description="Spent 7 years designing and scaling a high-growth cloud hosting platform across product, marketing, and brand."
+              stats={[
+                { label: 'Role',    value: 'Lead Designer'                      },
+                { label: 'Outcome', value: 'Part of a $350M Acquisition Story' },
+              ]}
+              cta={{ label: 'Read Case Study', href: 'Cloudways Case Study.html' }}
+              media={<CloudwaysMarquee />}
+            />
+            <ProjectCard
+              eyebrow="CONVESIO"
+              title="Leading a self-initiated product redesign."
+              description="Identified key usability issues, pitched a redesign strategy, secured buy-in, and led a full platform transformation."
+              stats={[
+                { label: 'Role',    value: 'Lead Product Designer'    },
+                { label: 'Outcome', value: '144% Hosting Revenue Growth'},
+              ]}
+              cta={{ label: 'Read Case Study', href: 'Convesio Case Study.html', variant: 'primary' }}
+              media={<ConvesioRedesignMarquee />}
+            />
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  window.WorkSection = WorkSection;
+}());
+</script>
+
+<!-- ════════════ ABOUT ════════════ -->
+<script type="text/babel">
+(function () {
+  const { Eyebrow, Button, ExperienceRow } = window.NaveedKhanPortfolioDesignSystem_ee97a5;
+
+  var EXP = [
+    { company: 'CONVESIO',         role: 'Senior Product Designer',         period: '2022 - 2026' },
+    { company: 'BRAINSTORM FORCE', role: 'Senior Product Designer',         period: '2021 - 2022' },
+    { company: 'CLOUDWAYS',        role: 'Senior UI/UX / Product Designer', period: '2014 - 2021' },
+    { company: 'KNYSYS',           role: 'UI Designer',                     period: '2014'        },
+    { company: 'FREELANCE',        role: 'Graphic / UI Designer',           period: '2012 - 2013' },
+  ];
+
+  function AboutSection() {
+    return (
+      <section id="about" className="pf-section">
+        <div className="pf-col">
+          <div className="pf-section__head">
+            <Eyebrow>My Story</Eyebrow>
+            <h2 className="pf-h1" style={{ fontWeight: 800 }}>About</h2>
+          </div>
+          <div className="pf-about__grid">
+            <div className="pf-about__story">
+              <h3 className="pf-serif">A self-taught designer shaped by real products.</h3>
+              <div className="pf-about__prose">
+                <p>I learned design by building.</p>
+                <p>What started with freelance projects evolved into more than a decade of designing SaaS, fintech, cloud infrastructure, and AI products.</p>
+                <p>Throughout my career, I've often been trusted as the sole designer — working closely with founders, engineers, marketers, and stakeholders to take products from early concepts to shipped experiences.</p>
+                <p>I care about clarity, ownership, and creating products that continue delivering value long after launch.</p>
+              </div>
+              <Button as="a" href="Naveed-Khan-Resume.pdf" target="_blank" rel="noopener" variant="secondary" size="sm" icon="arrow-up-right">View Resume</Button>
+            </div>
+            <div className="pf-about__exp">
+              <Eyebrow>Experience</Eyebrow>
+              <div className="pf-about__timeline">
+                {EXP.map(function (e, i) {
+                  return <ExperienceRow key={e.company} company={e.company} role={e.role} period={e.period} divider={i < EXP.length - 1} />;
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  window.AboutSection = AboutSection;
+}());
+</script>
+
+<!-- ════════════ METRICS ════════════ -->
+<script type="text/babel">
+(function () {
+  const { Stat } = window.NaveedKhanPortfolioDesignSystem_ee97a5;
+
+  var METRICS = [
+    { value: '12+',   label: 'Years Experience'       },
+    { value: '$350M', label: 'Acquisition (Cloudways)'},
+    { value: '$1M',   label: 'Processed (Year 1)'     },
+    { value: '0 → 1', label: 'Products Built'         },
+  ];
+
+  function MetricsSection() {
+    return (
+      <section className="pf-metrics">
+        <div className="pf-col pf-metrics__row">
+          {METRICS.map(function (m) {
+            return <Stat key={m.label} size="lg" value={m.value} label={m.label} />;
+          })}
+        </div>
+      </section>
+    );
+  }
+
+  window.MetricsSection = MetricsSection;
+}());
+</script>
+
+<!-- ════════════ FINAL CTA ════════════ -->
+<script type="text/babel">
+(function () {
+  const { Button } = window.NaveedKhanPortfolioDesignSystem_ee97a5;
+
+  function FinalCTA() {
+    return (
+      <section id="contact" className="pf-section pf-cta">
+        <div className="pf-cta__inner">
+          <h2 className="pf-cta__title" style={{ fontWeight: 800 }}>Work Together</h2>
+          <p className="pf-cta__lead">
+            I'm looking for the next product I'll help shape, scale, and improve.<br/>
+            If that sounds like what you're building, let's talk.
+          </p>
+          <Button as="a" href="mailto:navzkha@gmail.com" variant="primary" size="lg">Contact</Button>
+        </div>
+      </section>
+    );
+  }
+
+  window.FinalCTA = FinalCTA;
+}());
+</script>
+
+<!-- ════════════ APP MOUNT ════════════ -->
+<script type="text/babel">
+(function () {
+  const { MarqueeStripe, Footer } = window.NaveedKhanPortfolioDesignSystem_ee97a5;
+
+  function App() {
+    return (
+      <React.Fragment>
+        <PfNav />
+        <Hero />
+        <MarqueeStripe items={[
+          'Cloudways · $350M Acquisition', '12 Years Self-Taught',
+          '50k Users · SaaS', '$1M+ Processed · Fintech',
+          '0 → 1 Products', 'Strategy to Shipped UX',
+          'Cloudways · $350M Acquisition', '12 Years Self-Taught',
+          '50k Users · SaaS', '$1M+ Processed · Fintech',
+        ]} speed={22} />
+        <WorkSection />
+        <AboutSection />
+        <MetricsSection />
+        <MarqueeStripe items={[
+          'Senior Product Designer', 'SaaS · Fintech · Cloud · AI',
+          'Concept to Launch', 'Redesign · Growth · 0→1',
+          'Senior Product Designer', 'SaaS · Fintech · Cloud · AI',
+          'Concept to Launch', 'Redesign · Growth · 0→1',
+          'Senior Product Designer', 'SaaS · Fintech · Cloud · AI',
+        ]} speed={22} />
+        <FinalCTA />
+        <Footer
+          copyright="© All rights reserved. Naveed Khan"
+          socials={[
+            { icon: 'linkedin', href: 'https://www.linkedin.com/in/naveed-khan-designer/', label: 'LinkedIn' },
+            { icon: 'mail',     href: 'mailto:navzkha@gmail.com',                          label: 'Email'    },
+          ]}
+        />
+      </React.Fragment>
+    );
+  }
+
+  function mount() {
+    if (!(window.PfNav && window.Hero && window.WorkSection && window.AboutSection
+        && window.MetricsSection && window.FinalCTA)) {
+      return setTimeout(mount, 30);
+    }
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  }
+  mount();
+}());
+</script>
+<!-- ════════════ GSAP ANIMATIONS ════════════
+     1. Magnetic pull + scale on primary buttons (GSAP)
+     2. Cinematic word-reveal on hero H1 + section H1s (GSAP)
+     3. Animated number counters on metrics (GSAP ScrollTrigger)
+     Runs after React mounts via polling.
+─────────────────────────────────────────── -->
+<script>
+(function () {
+  'use strict';
+
+  function init() {
+    if (!window.gsap || !window.ScrollTrigger ||
+        !document.querySelector('.ds-btn--primary')) {
+      return setTimeout(init, 120);
+    }
+    gsap.registerPlugin(ScrollTrigger);
+    textReveals();
+    counters();
+  }
+
+  /* ── 1. Cinematic word-by-word text reveal ──────────────── */
+  function splitWords(el) {
+    if (!el || el.dataset.split) return;
+    el.dataset.split = '1';
+    var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    var nodes = [], n;
+    while ((n = walker.nextNode())) nodes.push(n);
+    nodes.forEach(function (tn) {
+      var words = tn.textContent.split(/(\s+)/);
+      var frag  = document.createDocumentFragment();
+      words.forEach(function (w) {
+        if (/^\s+$/.test(w)) {
+          frag.appendChild(document.createTextNode(w));
+        } else if (w) {
+          var outer = document.createElement('span');
+          var inner = document.createElement('span');
+          outer.className = 'word-wrap';
+          inner.className = 'word-inner';
+          inner.textContent = w;
+          outer.appendChild(inner);
+          frag.appendChild(outer);
+        }
+      });
+      tn.parentNode.replaceChild(frag, tn);
+    });
+    return el.querySelectorAll('.word-inner');
+  }
+
+  function reveal(el, delay) {
+    var inners = splitWords(el);
+    if (!inners || !inners.length) return;
+    gsap.fromTo(inners,
+      { y: '115%', opacity: 0 },
+      { y: '0%', opacity: 1, duration: 0.82,
+        stagger: 0.065, ease: 'power3.out', delay: delay || 0 });
+  }
+
+  function textReveals() {
+    /* Hero H1 — fires on load */
+    reveal(document.querySelector('.pf-hero__title'), 0.3);
+
+    /* Section H1s — fire when scrolled into view */
+    document.querySelectorAll('.pf-h1').forEach(function (el) {
+      ScrollTrigger.create({
+        trigger: el, start: 'top 88%', once: true,
+        onEnter: function () { reveal(el, 0); }
+      });
+    });
+  }
+
+  /* ── 3. Animated number counters ───────────────────────── */
+  /* Stat value div is always the FIRST child of each Stat container */
+  function counters() {
+    var statOuters = document.querySelectorAll('.pf-metrics__row > div');
+    statOuters.forEach(function (outer) {
+      var el  = outer.querySelector('div');
+      if (!el) return;
+      var raw = el.textContent.trim();
+      if (raw.indexOf('\u2192') !== -1) return; /* skip "0 → 1" */
+
+      /* Parse  e.g.  $350M  →  pre="$"  num=350  suf="M" */
+      var m = raw.match(/^(\$?)(\d+(?:\.\d+)?)(M?\+?)$/);
+      if (!m) return;
+      var pre = m[1], num = parseFloat(m[2]), suf = m[3];
+      if (!num) return;
+
+      var obj = { v: 0 };
+      ScrollTrigger.create({
+        trigger: el, start: 'top 92%', once: true,
+        onEnter: function () {
+          gsap.to(obj, {
+            v: num, duration: 1.9, ease: 'power2.out',
+            onUpdate: function () {
+              el.textContent = pre + Math.round(obj.v) + suf;
+            },
+            onComplete: function () {
+              el.textContent = raw; /* restore exact string */
+            }
+          });
+        }
+      });
+    });
+  }
+
+  init();
+}());
+</script>
+
+<script>
+(function() {
+  function initHam() {
+    var ham    = document.getElementById('pf-ham');
+    var drawer = document.getElementById('pf-drawer');
+    var close  = document.getElementById('pf-close');
+    if (!ham || !drawer) return setTimeout(initHam, 120);
+    function openDrawer()  { drawer.classList.add('is-open');    document.body.style.overflow='hidden'; }
+    function closeDrawer() { drawer.classList.remove('is-open'); document.body.style.overflow=''; }
+    ham.addEventListener('click', openDrawer);
+    close.addEventListener('click', closeDrawer);
+    drawer.querySelectorAll('.pf-mob-drawer__link').forEach(function(a){
+      a.addEventListener('click', closeDrawer);
+    });
+  }
+  initHam();
+
+  // Sticky nav border on scroll
+  (function initStickyNav() {
+    var nav = document.getElementById('pf-nav');
+    if (!nav) return setTimeout(initStickyNav, 120);
+    window.addEventListener('scroll', function () {
+      nav.classList.toggle('is-scrolled', window.scrollY > 10);
+    }, { passive: true });
+  })();
+
+  // Ensure all Resume PDF links open in a new tab (max 20 retries)
+  (function patchResumeLinks(attempts) {
+    var links = document.querySelectorAll('a[href*="Resume.pdf"]');
+    links.forEach(function(a) { a.target = '_blank'; a.rel = 'noopener'; });
+    if (links.length === 0 && attempts < 20) {
+      setTimeout(function() { patchResumeLinks(attempts + 1); }, 200);
+    }
+  })(0);
+}());
+</script>
+</body>
+</html>

@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Convesio Redesign — Naveed Khan</title>
+
+<link rel="stylesheet" href="_ds/naveed-khan-portfolio-design-system-ee97a5ef-1be9-4c65-b506-ec6f688ba54c/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/naveed-khan-portfolio-design-system-ee97a5ef-1be9-4c65-b506-ec6f688ba54c/tokens/colors.css">
+<link rel="stylesheet" href="_ds/naveed-khan-portfolio-design-system-ee97a5ef-1be9-4c65-b506-ec6f688ba54c/tokens/typography.css">
+<link rel="stylesheet" href="_ds/naveed-khan-portfolio-design-system-ee97a5ef-1be9-4c65-b506-ec6f688ba54c/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/naveed-khan-portfolio-design-system-ee97a5ef-1be9-4c65-b506-ec6f688ba54c/tokens/radius.css">
+<link rel="stylesheet" href="_ds/naveed-khan-portfolio-design-system-ee97a5ef-1be9-4c65-b506-ec6f688ba54c/tokens/effects.css">
+<link rel="stylesheet" href="_ds/naveed-khan-portfolio-design-system-ee97a5ef-1be9-4c65-b506-ec6f688ba54c/tokens/base.css">
+<link rel="stylesheet" href="_ds/naveed-khan-portfolio-design-system-ee97a5ef-1be9-4c65-b506-ec6f688ba54c/styles.css">
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="_ds/naveed-khan-portfolio-design-system-ee97a5ef-1be9-4c65-b506-ec6f688ba54c/_ds_bundle.js"></script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--surface-primary); color: var(--text-primary); }
+
+  /* ── Layout ── */
+  .cs-page { background: var(--surface-primary); }
+  .cs-col   { width: min(1320px, calc(100% - 160px)); margin: 0 auto; }
+  .cs-col--narrow { width: min(800px, calc(100% - 160px)); margin: 0 auto; }
+
+  /* ── Section rhythm ── */
+  .cs-section { padding: var(--space-160) 0; position: relative; }
+  .cs-section::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1280px, calc(100% - 160px));
+    height: 1px;
+    background: var(--border-hairline, #262626);
+    background-color: #262626;
+  }
+  .cs-section:first-of-type::before { display: none; }
+  .cs-eyebrow-row { display: flex; align-items: center; gap: var(--space-16); margin-bottom: var(--space-32); }
+
+  /* ── Mobile nav ── */
+  .cs-mob-toggle {
+    display: none; background: none; border: none; cursor: pointer;
+    padding: 8px; margin-right: -8px; color: var(--text-primary);
+  }
+  .cs-mob-drawer {
+    display: none; position: fixed; inset: 0; z-index: 999;
+    background: #0A0A0A; flex-direction: column;
+    padding: 24px 32px 48px;
+  }
+  .cs-mob-drawer.is-open { display: flex; }
+  .cs-mob-drawer__top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 48px; }
+  .cs-mob-drawer__links { display: flex; flex-direction: column; gap: 8px; flex: 1; justify-content: center; }
+  .cs-mob-drawer__link {
+    font-family: var(--font-display); font-size: 40px; font-weight: 700;
+    letter-spacing: -1px; color: var(--text-secondary); text-decoration: none;
+    padding: 12px 0; border-bottom: 1px solid #1a1a1a;
+    transition: color 200ms ease;
+  }
+  .cs-mob-drawer__link:hover { color: var(--text-primary); }
+  .cs-mob-drawer__cta { margin-top: 40px; }
+  @media (max-width: 768px) {
+    .cs-mob-toggle { display: flex; align-items: center; justify-content: center; }
+    /* Hide DS NavBar links + button on mobile */
+    .cs-nav-wrap nav > div { display: none !important; }
+  }
+
+  /* ── Sticky Nav ── */
+  .cs-nav-wrap {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,10,10,0.88);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 300ms;
+  }
+  .cs-nav-wrap.is-scrolled { border-bottom-color: #262626; }
+  .cs-nav-wrap .cs-col { position: relative; }
+  /* Transparent overlay to redirect logo click → index.html */
+  .cs-nav-logo-link {
+    position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+    width: 48px; height: 36px; z-index: 2;
+  }
+
+  /* ── Hero ── */
+  .cs-hero { padding: var(--space-160) 0 var(--space-96); }
+  .cs-hero__back { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-body); font-size: 13px; color: var(--text-secondary); text-decoration: none; margin-bottom: var(--space-48); transition: color 200ms; }
+  .cs-hero__back:hover { color: var(--text-primary); }
+  .cs-hero__back svg { flex-shrink: 0; }
+  .cs-hero__title { font-family: var(--font-display); font-weight: 700; font-size: 72px; line-height: 72px; letter-spacing: var(--track-very-tight); color: var(--text-primary); margin: 0 0 var(--space-64); max-width: 1280px; }
+  .cs-hero__title em { color: var(--text-secondary); font-style: normal; }
+
+  /* ── Meta row ── */
+  .cs-meta { display: flex; gap: 0; margin-bottom: var(--space-80); border: 1px solid #262626; border-radius: 8px; overflow: hidden; }
+  .cs-meta__cell { flex: 1; padding: var(--space-24) var(--space-24); border-right: 1px solid #262626; }
+  .cs-meta__cell:last-child { border-right: none; }
+  .cs-meta__label { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-tertiary, #666); margin-bottom: 6px; }
+  .cs-meta__value { font-family: var(--font-body); font-size: 14px; color: var(--text-primary); font-weight: 400; }
+
+  /* ── Hero image marquee (same as homepage) ── */
+  .cs-marquee { overflow: hidden; width: 100%; padding: 20px 0; background: #111; border-radius: 16px; }
+  .cs-marquee__track {
+    display: flex; gap: 20px; width: max-content;
+    animation: cs-scroll 32s linear infinite;
+  }
+  .cs-marquee__track:hover { animation-play-state: paused; }
+  .cs-marquee__img { flex: 0 0 auto; width: 490px; height: 339px; object-fit: cover; display: block; border-radius: 12px; box-shadow: 0 8px 28px -6px rgba(0,0,0,.7); }
+  @keyframes cs-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  @media (max-width: 680px) { .cs-marquee__img { width: 300px; height: 208px; } }
+
+  /* ── Hero image strip ── */
+  .cs-hero__strip { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 12px; border-radius: 16px; overflow: hidden; }
+  .cs-img-well { background: #111; border-radius: 12px; overflow: hidden; position: relative; }
+  .cs-img-well img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cs-img-well--ph { background: #111; border: 1px solid #262626; min-height: 280px; display: flex; align-items: center; justify-content: center; }
+  .cs-ph-inner { display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0.25; }
+  .cs-ph-inner svg { width: 28px; height: 28px; stroke: #fff; }
+  .cs-ph-inner span { font-size: 11px; font-family: var(--font-body); color: #fff; letter-spacing: 1px; text-transform: uppercase; }
+
+  /* ── Typography ── */
+  .cs-display { font-family: var(--font-display); font-weight: 800; font-size: clamp(36px, 4vw, 60px); line-height: 1.05; letter-spacing: var(--track-tight); color: var(--text-primary); margin: 0 0 var(--space-32); }
+  .cs-h2 { font-family: var(--font-body); font-weight: 400; font-size: 48px; line-height: 56px; letter-spacing: var(--track-tight); color: var(--text-primary); margin: 0 0 var(--space-24); }
+  .cs-h3 { font-family: var(--font-body); font-weight: 400; font-size: 18px; line-height: 1.5; color: var(--text-primary); margin: 0 0 var(--space-20); }
+  .cs-body { font-family: var(--font-body); font-size: 17px; line-height: 1.75; color: var(--text-secondary); margin: 0 0 var(--space-20); max-width: 680px; }
+  .cs-body--wide { max-width: 100%; }
+  .cs-blockquote { border-left: 2px solid var(--text-primary); padding-left: var(--space-24); margin: var(--space-40) 0; }
+  .cs-blockquote p { font-family: 'Geist', sans-serif; font-weight: 400; font-size: 22px; line-height: 1.4; color: var(--text-primary); margin: 0; letter-spacing: -0.3px; }
+
+  /* ── Beyond the Screens — natural-size image grid ── */
+  .cs-screens-grid {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    justify-content: start;
+    gap: 24px;
+    margin: var(--space-48) 0;
+  }
+  .cs-screens-grid img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px -8px rgba(0,0,0,0.6);
+  }
+  @media (max-width: 900px) {
+    .cs-screens-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── Image grids ── */
+  .cs-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: var(--space-48) 0; }
+  .cs-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: var(--space-48) 0; }
+  .cs-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: var(--space-48) 0; }
+  .cs-full-img { width: 100%; border-radius: 12px; overflow: hidden; margin: var(--space-48) 0; }
+  .cs-full-img img { width: 100%; height: auto; display: block; }
+
+  /* ── Problem/Solution table ── */
+  .cs-table { width: 100%; max-width: 1280px; margin: var(--space-48) 0; border: 1px solid #262626; border-radius: 8px; overflow: hidden; }
+  .cs-table__head { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding-bottom: var(--space-16); border-bottom: var(--border-hairline); margin-bottom: var(--space-4); }
+  .cs-table__head span { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-tertiary, #666); }
+  .cs-table__row { display: grid; grid-template-columns: 280px 1fr; gap: 40px; padding: var(--space-24) var(--space-32); border-bottom: 1px solid #262626; }
+  .cs-table__label { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--text-tertiary, #555); margin-bottom: 6px; }
+  .cs-table__sublabel { font-family: var(--font-body); font-size: 20px; line-height: 28px; font-weight: 500; color: var(--text-primary); text-transform: none; letter-spacing: 0; margin-bottom: 10px; }
+  .cs-table__solution { font-family: var(--font-body); font-size: 15px; color: var(--text-primary); line-height: 1.6; }
+
+  /* ── Metrics row ── */
+  .cs-metrics { display: flex; gap: 0; padding: var(--space-64) 0; border-top: var(--border-hairline); border-bottom: var(--border-hairline); margin: var(--space-48) 0; }
+  .cs-metric { flex: 1; text-align: center; border-right: var(--border-hairline); padding: 0 var(--space-32); }
+  .cs-metric:last-child { border-right: none; }
+  .cs-metric:first-child { padding-left: 0; }
+  .cs-metric__value { font-family: var(--font-display); font-weight: 800; font-size: 56px; line-height: 1; letter-spacing: -2px; color: var(--text-primary); margin-bottom: 10px; }
+  .cs-metric__label { font-family: var(--font-body); font-size: 13px; color: var(--text-secondary); line-height: 1.4; }
+
+  /* ── Tag pills ── */
+  .cs-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: var(--space-32); }
+  .cs-tag { font-family: var(--font-body); font-size: 12px; font-weight: 500; padding: 5px 12px; border-radius: 99px; border: 1px solid #3a3a3a; color: var(--text-secondary); letter-spacing: 0.3px; }
+
+  /* ── Highlight pull quote ── */
+  .cs-pull { background: #111; border-radius: 12px; padding: var(--space-40); margin: var(--space-48) 0; max-width: 860px; }
+  .cs-pull p { font-family: 'Geist', sans-serif; font-weight: 400; font-size: 20px; line-height: 1.5; color: var(--text-primary); margin: 0; }
+
+  /* ── Cloudways feature ── */
+  .cs-feature { position: relative; border-radius: 16px; overflow: hidden; background: #0050ff; margin: var(--space-48) 0; min-height: 340px; display: flex; align-items: center; justify-content: center; }
+  .cs-feature__label { font-family: var(--font-display); font-weight: 800; font-size: 48px; letter-spacing: -1px; color: #fff; text-align: center; z-index: 1; position: relative; }
+  .cs-feature__sub { font-family: var(--font-body); font-size: 15px; color: rgba(255,255,255,0.6); text-align: center; margin-top: 10px; }
+
+  /* ── Two-col text ── */
+  .cs-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-64); align-items: start; }
+
+  /* ── ProjectCard overrides (More Work section) ── */
+  .cs-col article p:first-child { font-size: 16px !important; }
+  .cs-col article :is(h1,h2,h3,h4,h5,h6) { font-family: 'Geist', sans-serif !important; font-weight: 400 !important; }
+  @media (max-width: 680px) {
+    .cs-col article header { flex-direction: column !important; align-items: flex-start !important; gap: 20px; }
+  }
+
+  /* ── NavBar responsive ── */
+  @media (max-width: 680px) {
+    nav > div > ul { display: none !important; }
+    nav { padding: var(--space-16) 0 !important; }
+  }
+  @media (max-width: 480px) {
+    nav > div { gap: var(--space-16) !important; }
+  }
+
+  /* ── Footer responsive ── */
+  @media (max-width: 680px) {
+    footer {
+      flex-direction: column !important;
+      align-items: center !important;
+      text-align: center !important;
+      padding: var(--space-32) var(--space-24) !important;
+      gap: var(--space-16) !important;
+    }
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 1280px) {
+    .cs-hero__title { font-size: 60px; line-height: 64px; white-space: normal; }
+  }
+  @media (max-width: 1024px) {
+    .cs-col, .cs-col--narrow { width: calc(100% - 80px); }
+    .cs-two-col { grid-template-columns: 1fr; gap: var(--space-40); }
+    .cs-grid-4 { grid-template-columns: repeat(2, 1fr); }
+    .cs-hero__title { font-size: 52px; line-height: 56px; white-space: normal; }
+    .cs-h2 { font-size: 36px; line-height: 44px; }
+    .cs-table__row { grid-template-columns: 200px 1fr; gap: 24px; }
+    .cs-marquee__img { width: 380px; height: 263px; }
+  }
+  @media (max-width: 680px) {
+    .cs-col, .cs-col--narrow { width: calc(100% - 40px); }
+    .cs-section { padding: var(--space-96) 0; }
+    .cs-hero { padding: var(--space-96) 0 var(--space-64); }
+    .cs-hero__title { font-size: 36px; line-height: 40px; white-space: normal; }
+    .cs-h2 { font-size: 26px; line-height: 34px; }
+    .cs-display { font-size: 36px !important; line-height: 1.1 !important; }
+    .cs-body { font-size: 15px; }
+    .cs-grid-3 { grid-template-columns: 1fr; }
+    .cs-grid-2 { grid-template-columns: 1fr; }
+    .cs-meta { flex-wrap: wrap; }
+    .cs-meta__cell { flex: 0 0 50%; border-right: none; border-bottom: 1px solid #262626; }
+    .cs-meta__cell:nth-child(odd) { border-right: 1px solid #262626; }
+    .cs-meta__cell:nth-last-child(-n+2) { border-bottom: none; }
+    .cs-metrics { flex-direction: column; }
+    .cs-metric { border-right: none; border-bottom: 1px solid #262626; padding: var(--space-24) var(--space-32); }
+    .cs-metric:last-child { border-bottom: none; }
+    .cs-metric__value { font-size: 40px; }
+    .cs-table { max-width: 100%; }
+    .cs-table__row { grid-template-columns: 1fr; gap: 12px; }
+    .cs-blockquote { padding-left: var(--space-16); }
+    .cs-blockquote p { font-size: 18px; }
+    .cs-pull { padding: var(--space-24); }
+    .cs-pull p { font-size: 16px !important; }
+    .cs-marquee__img { width: 260px; height: 180px; }
+  }
+
+  /* ── Word reveal animation ── */
+  .word-wrap  { display: inline-block; overflow: hidden; vertical-align: bottom; line-height: inherit; }
+  .word-inner { display: inline-block; }
+
+  /* ── Button hover — Directional liquid fill + magnetic pull ── */
+  /* ── Primary button — Directional liquid fill + magnetic pull ── */
+  .ds-btn--primary {
+    position: relative !important;
+    overflow: hidden !important;
+    isolation: isolate !important;
+    transition: color 0.38s ease, box-shadow 0.22s ease !important;
+    will-change: transform;
+  }
+  /* Ink fill that sweeps in from cursor entry direction */
+  .ds-btn--primary::before {
+    content: ''; position: absolute; inset: 0;
+    background: #111;
+    transform: scaleX(0);
+    transform-origin: var(--btn-origin, 0% 50%);
+    transition: transform 0.42s cubic-bezier(0.77, 0, 0.175, 1);
+    z-index: 0; pointer-events: none;
+  }
+  .ds-btn--primary:hover::before { transform: scaleX(1); }
+  .ds-btn--primary:hover { color: #fff !important; }
+  /* Children above fill layer */
+  .ds-btn--primary > *, .ds-btn--primary span, .ds-btn--primary svg { position: relative; z-index: 1; }
+  .ds-btn--primary:active { transform: scale(0.97) !important; }
+
+  /* ── Secondary button — soft fill + dual-icon mask ── */
+  .ds-btn--secondary {
+    position: relative !important;
+    overflow: hidden !important;
+    transition: color 0.25s ease !important;
+  }
+  .ds-btn--secondary::before {
+    content: ''; position: absolute; inset: 0;
+    background: rgba(255,255,255,0.055);
+    transform: scaleY(0); transform-origin: bottom;
+    transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none; z-index: 0;
+  }
+  .ds-btn--secondary:hover::before { transform: scaleY(1); }
+  .ds-btn--secondary svg {
+    transition: transform 0.26s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+    position: relative; z-index: 1;
+  }
+  .ds-btn--secondary:hover svg { transform: translate(11px, -11px) !important; opacity: 0 !important; }
+  .ds-btn--secondary::after {
+    content: ''; position: absolute;
+    right: 16px; top: 50%; width: 15px; height: 15px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17 17 7'/%3E%3Cpath d='M7 7h10v10'/%3E%3C/svg%3E");
+    background-size: contain; background-repeat: no-repeat; background-position: center;
+    transform: translateY(calc(-50% + 11px)) translateX(-11px);
+    opacity: 0;
+    transition: transform 0.26s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease 0.06s;
+    pointer-events: none; z-index: 2; display: block !important;
+  }
+  .ds-btn--secondary:hover::after { transform: translateY(-50%) translateX(0); opacity: 1; }
+  .ds-btn--secondary > *, .ds-btn--secondary span { position: relative; z-index: 1; }
+  .ds-btn--secondary:active { transform: scale(0.96) !important; }
+
+</style>
+</head>
+<body class="ds-base cs-page">
+<div id="root"></div>
+
+<!-- ═══════════════ CASE STUDY PAGE ═══════════════ -->
+<script type="text/babel">
+
+
+
+
+
+
+
+(function () {
+  const { NavBar, Button, Eyebrow, Stat, Footer, MarqueeStripe, ProjectCard, Logo } = window.NaveedKhanPortfolioDesignSystem_ee97a5;
+
+  /* ── Cloudways real image marquee ── */
+  function CloudwaysShots() {
+    var imgs = [
+      'assets/cloudways-1.png',
+      'assets/cloudways-2.png',
+      'assets/cloudways-3.png',
+      'assets/cloudways-4.png',
+    ];
+    var all = imgs.concat(imgs);
+    return (
+      <div className="cs-marquee">
+        <div className="cs-marquee__track">
+          {all.map(function (src, i) {
+            return <img key={i} className="cs-marquee__img" src={src}
+            alt={'Cloudways screen ' + (i % imgs.length + 1)} loading="lazy" />;
+          })}
+        </div>
+      </div>
+    );
+  }
+
+  /* ── Hero image marquee ── */
+  var HERO_IMGS = [
+  'assets/convesio-r1.webp',
+  'assets/convesio-r2.webp',
+  'assets/convesio-r3.webp',
+  'assets/convesio-r4.webp'];
+
+  function HeroMarquee() {
+    var all = HERO_IMGS.concat(HERO_IMGS);
+    return (
+      <div className="cs-marquee">
+        <div className="cs-marquee__track">
+          {all.map(function (src, i) {
+            return <img key={i} className="cs-marquee__img" src={src}
+            alt={'Convesio screen ' + (i % HERO_IMGS.length + 1)} loading="lazy" />;
+          })}
+        </div>
+      </div>);
+
+  }
+
+  /* ── Placeholder image well ── */
+  function Ph({ height = 260, label = '' }) {
+    return (
+      <div className="cs-img-well cs-img-well--ph" style={{ minHeight: height }}>
+        <div className="cs-ph-inner">
+          <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" />
+            <path d="m21 15-5-5L5 21" />
+          </svg>
+          {label && <span>{label}</span>}
+        </div>
+      </div>);
+
+  }
+
+  /* ── Real image well ── */
+  function Img({ src, alt = '', height }) {
+    return (
+      <div className="cs-img-well" style={height ? { minHeight: height } : {}}>
+        <img src={src} alt={alt} loading="lazy" />
+      </div>);
+
+  }
+
+  /* ── Case Study Page ── */
+  function CaseStudy() {
+    return (
+      <React.Fragment>
+        {/* ── Sticky Nav ── */}
+        <div className="cs-nav-wrap" id="cs-nav">
+          <div className="cs-col" style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+            <a href="index.html" className="cs-nav-logo-link" aria-label="Back to homepage"></a>
+            <NavBar
+              links={[
+              { label: 'Work', href: 'index.html#work' },
+              { label: 'About', href: 'index.html#about' },
+              { label: 'Contact', href: 'index.html#contact' }]}
+              cta={{ label: 'Resume', href: 'Naveed-Khan-Resume.pdf', target: '_blank' }}
+              style={{ flex: 1 }}
+            />
+            <button className="cs-mob-toggle" id="cs-ham" aria-label="Open menu">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <line x1="3" y1="6"  x2="21" y2="6"/>
+                <line x1="3" y1="12" x2="21" y2="12"/>
+                <line x1="3" y1="18" x2="21" y2="18"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {/* ── Mobile drawer ── */}
+        <div className="cs-mob-drawer" id="cs-drawer">
+          <div className="cs-mob-drawer__top">
+            <a href="index.html" style={{ display:'flex', alignItems:'center' }}>
+              <Logo height={17} />
+            </a>
+            <button id="cs-close" style={{ background:'none', border:'none', cursor:'pointer', color:'var(--text-primary)', padding:8 }} aria-label="Close menu">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+          </div>
+          <nav className="cs-mob-drawer__links">
+            {[
+              { label: 'Work',    href: 'index.html#work'    },
+              { label: 'About',   href: 'index.html#about'   },
+              { label: 'Contact', href: 'index.html#contact' },
+            ].map(function(l) { return (
+              <a key={l.label} className="cs-mob-drawer__link" href={l.href}>{l.label}</a>
+            ); })}
+          </nav>
+          <div className="cs-mob-drawer__cta">
+            <Button as="a" href="Naveed-Khan-Resume.pdf" target="_blank" rel="noopener" variant="primary" size="lg">Resume</Button>
+          </div>
+        </div>
+
+        {/* ── Hero ── */}
+        <section className="cs-section cs-hero" style={{ borderTop: 'none' }}>
+          <div className="cs-col">
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: '13px', fontWeight: 500, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--text-secondary)', margin: '0 0 var(--space-24)' }}>Convesio Hosting Platform</p>
+            <h1 className="cs-hero__title" data-reveal>
+              I joined as their only designer.<br />
+              <em>Nobody asked for a redesign.</em>
+            </h1>
+            <div className="cs-meta" style={{ borderRadius: "4px", padding: "0px", margin: "0px 0px 80px", borderWidth: "1px" }}>
+              {[
+              { label: 'Role', value: 'Lead Product Designer' },
+              { label: 'Timeline', value: 'Jul 2022 – Mar 2023' },
+              { label: 'Scope', value: 'Product Redesign' },
+              { label: 'Outcome', value: '144% Hosting Revenue Growth' }].
+              map((m) =>
+              <div key={m.label} className="cs-meta__cell">
+                  <div className="cs-meta__label">{m.label}</div>
+                  <div className="cs-meta__value">{m.value}</div>
+                </div>
+              )}
+            </div>
+            <HeroMarquee />
+          </div>
+        </section>
+
+        {/* ── 01 The Story ── */}
+        <section className="cs-section">
+          <div className="cs-col">
+            <div className="cs-eyebrow-row"><Eyebrow>The story</Eyebrow></div>
+            <h2 className="cs-h2" data-reveal>The product worked.<br />The experience didn't.</h2>
+            <p className="cs-body">Convesio is a managed WordPress hosting platform built to handle serious scale. When I joined in early 2022, the platform had real technical muscle — container-based infrastructure, autoscaling, genuine DevOps capabilities for enterprise clients.</p>
+            <p className="cs-body">But the dashboard was a different story. It had been built fast, by engineers, without a dedicated designer. Features were bolted on. The information architecture had no centre of gravity. Every new user I watched try the product struggled with the same things — not because the product was bad, but because nobody had ever stepped back and looked at the whole thing.</p>
+            <p className="cs-body">I had been hired to work on new features. I ended up redesigning the platform from the ground up — with nobody asking me to.</p>
+          </div>
+        </section>
+
+        {/* ── 02 The Platform ── */}
+        <section className="cs-section">
+          <div className="cs-col">
+            <div className="cs-eyebrow-row"><Eyebrow>The problem</Eyebrow></div>
+            <h2 className="cs-h2" data-reveal>The platform was powerful,<br />but it required too much effort to use.</h2>
+            <div className="cs-two-col">
+              <p className="cs-body cs-body--wide">I mapped every screen in the product. I looked at support tickets, onboarding drop-off data, and I watched recordings of users navigating the dashboard. The friction wasn't in any single place — it was structural. Navigation was unpredictable. Core actions were buried. The visual language was inconsistent across sections that had been built at different times by different people.</p>
+              <p className="cs-body cs-body--wide">This wasn't a case of bad design decisions — it was the natural result of a product that had grown without design direction. The good news: the underlying product logic was sound. What needed to change was the surface. I started documenting.</p>
+            </div>
+            <div className="cs-grid-3">
+              <Ph height={220} label="Before — Nav" />
+              <Ph height={220} label="Before — Dashboard" />
+              <Ph height={220} label="Before — Apps" />
+            </div>
+            <div className="cs-grid-4">
+              <Ph height={160} label="Before — Settings" />
+              <Ph height={160} label="Before — Billing" />
+              <Ph height={160} label="Before — Support" />
+              <Ph height={160} label="Before — Onboarding" />
+            </div>
+          </div>
+        </section>
+
+        {/* ── 03 Nobody asked ── */}
+        <section className="cs-section">
+          <div className="cs-col">
+            <div className="cs-eyebrow-row"><Eyebrow>The pitch</Eyebrow></div>
+            <h2 className="cs-h2" data-reveal>Nobody asked for this.</h2>
+            <p className="cs-body">I had been at Convesio for three months when I put together the first deck. I wasn't asked to. But I had started to collect enough evidence — support patterns, session recordings, onboarding data — that I felt I could make the case clearly.</p>
+            <p className="cs-body">I presented to the CEO and CTO with a simple framing: we're losing on perception before we're losing on features. The engineering team had built a product worth paying for. The design was making it harder to see that.</p>
+            <div className="cs-blockquote">
+              <p style={{ fontFamily: "Geist", fontWeight: "400" }}>"We're losing on perception before we're losing on features."</p>
+            </div>
+            <p className="cs-body">The response surprised me — I was given full scope to redesign. Not a page, not a feature. The whole platform. I had three months and no additional headcount.</p>
+          </div>
+          <div className="cs-col" style={{ marginTop: 'var(--space-48)' }}>
+            <div className="cs-grid-2">
+              <Ph height={280} label="Pitch Deck — Slide 1" />
+              <Ph height={280} label="Pitch Deck — Evidence" />
+            </div>
+          </div>
+        </section>
+
+        {/* ── 04 Company-Wide Presentation ── */}
+        <section className="cs-section">
+          <div className="cs-col">
+            <div className="cs-eyebrow-row"><Eyebrow>Alignment</Eyebrow></div>
+            <h2 className="cs-h2" data-reveal>Company-Wide Presentation</h2>
+            <p className="cs-body">Before any design work happened, I ran a cross-functional alignment session. Every team — engineering, marketing, customer success, sales — had opinions about the product. I needed to understand all of them, and I needed everyone to agree on the direction before I started shipping screens.</p>
+            <p className="cs-body">The session produced one shared understanding: the product needed to feel like something people were proud to show clients. That became the design brief.</p>
+          </div>
+        </section>
+
+        {/* ── 05 What Needed To Change ── */}
+        <section className="cs-section">
+          <div className="cs-col">
+            <div className="cs-eyebrow-row"><Eyebrow>The redesign</Eyebrow></div>
+            <h2 className="cs-h2" data-reveal>What Needed To Change</h2>
+            <p className="cs-body">Every decision traced back to one of three problems users struggled to know where they were, important information was buried, and the interface required too much effort to understand.</p>
+            <div className="cs-table">
+              {[
+              {
+                decision: 'Decision 01', area: 'Navigation',
+                subLabel: 'Sidebar over horizontal tabs',
+                after: 'The original product used horizontal red text links forcing users to remember what existed where. A persistent left sidebar with icons means users can see the structure not remember it. One structural change that reduced cognitive load across every screen.'
+              },
+              {
+                decision: 'Decision 02', area: 'Site management',
+                subLabel: 'Health at a glance, not after investigation',
+                after: 'Agencies managing 20 client sites need to spot problems in three seconds. Plan Health, Disk Usage, Bandwidth, Performance — all surfaced directly in the site list. No clicking into each site to find issues.'
+              },
+              {
+                decision: 'Decision 03', area: 'Analytics',
+                subLabel: 'Organize by what users need, not what data exists',
+                after: 'Same data, completely different experience. Three tabs — Traffic, Firewall, Caching. Metric cards with sparklines. World map instead of a text table. The challenge wasn\'t missing data, it was too much data with no hierarchy.'
+              },
+              {
+                decision: 'Decision 04', area: 'Deployments',
+                subLabel: 'Real-time experience for two audiences',
+                after: 'Progress bar, step checklist, and live log stream in one modal. Technical users see exactly what\'s happening. Non-technical users see how far along they are. Two audiences, one screen, both served.'
+              },
+              {
+                decision: 'Decision 05', area: 'Empty states',
+                subLabel: 'Invitation, not absence',
+                after: 'The original empty dashboard was a blank table. An empty screen is a new user\'s first experience of the product. It should feel like an invitation — friendly copy, single clear action, two supporting cards.'
+              }].
+              map((row) =>
+              <div key={row.area} className="cs-table__row">
+                <div>
+                  <div className="cs-table__label" style={{ marginBottom: 1, color: "rgb(153, 153, 153)", fontWeight: "400", fontSize: "16px", textTransform: "none", letterSpacing: 0 }}>{row.decision}</div>
+                  <div style={{ fontFamily: 'var(--font-body)', marginBottom: 0, fontWeight: "400", color: "rgb(153, 153, 153)", fontSize: "16px" }}>{row.area}</div>
+                </div>
+                <div>
+                  <div className="cs-table__sublabel">{row.subLabel}</div>
+                  <div className="cs-table__solution" style={{ color: '#A3A3A3' }}>{row.after}</div>
+                </div>
+              </div>
+              )}
+            </div>
+          </div>
+        </section>
+
+        {/* ── 06 Not every decision ── */}
+        <section className="cs-section">
+          <div className="cs-col">
+            <div className="cs-eyebrow-row"><Eyebrow>Collaboration</Eyebrow></div>
+            <h2 className="cs-h2" data-reveal>Not every decision was mine.</h2>
+            <p className="cs-body">I was the only designer, but this was never a solo project. Every major structural decision was validated with the engineering team before it went into a prototype. Every copy change was reviewed with marketing. Customer success flagged three patterns I would have missed entirely from user research alone.</p>
+            <p className="cs-body">The rule I kept to: I own the design decisions, but I don't own the product knowledge. The engineers knew things I didn't. The CS team knew things nobody had ever written down. My job was to synthesise that, not override it.</p>
+            <div className="cs-blockquote">
+              <p style={{ fontFamily: "Geist", fontWeight: "400" }}>"I own the design decisions, but I don't own the product knowledge."</p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── 07 Beyond the Screens ── */}
+        <section className="cs-section">
+          <div className="cs-col">
+            <div className="cs-eyebrow-row"><Eyebrow>The output</Eyebrow></div>
+            <h2 className="cs-h2" data-reveal>Beyond the Screens</h2>
+            <p className="cs-body" style={{ maxWidth: 680 }}>The redesign covered more than UI. It produced a component library, a set of interaction patterns, documentation for the engineering team, and a visual language that extended into the marketing site and onboarding emails.</p>
+            <div className="cs-screens-grid">
+              <img src="assets/convesio-r1.webp" alt="Convesio Dashboard — After" loading="lazy" />
+              <img src="assets/convesio-r2.webp" alt="Convesio Sites — After" loading="lazy" />
+              <img src="assets/convesio-r3.webp" alt="Convesio Analytics — After" loading="lazy" />
+              <img src="assets/convesio-r4.webp" alt="Convesio Settings — After" loading="lazy" />
+            </div>
+          </div>
+        </section>
+
+        {/* ── 08 Outcomes ── */}
+        <section className="cs-section">
+          <div className="cs-col">
+            <div className="cs-eyebrow-row"><Eyebrow>Outcomes</Eyebrow></div>
+            <h2 className="cs-h2" data-reveal>What started as two screens<br />became a company initiative.</h2>
+            <p className="cs-body">The redesign shipped in phases across three months. There was no big-bang launch — features rolled out continuously as they were completed and reviewed. The metrics came in steadily after that.</p>
+            <p className="cs-body">The most meaningful outcome wasn't the numbers. It was that the engineering team started asking for design reviews before development started. That hadn't happened before.</p>
+            <div className="cs-metrics">
+              {[
+              { value: '144%', label: 'Hosting revenue growth during tenure' },
+              { value: '4–6mo', label: 'Development timeline' },
+              { value: '100%', label: 'Platform redesigned' }].
+              map((m) =>
+              <div key={m.label} className="cs-metric">
+                  <div className="cs-metric__value" data-counter style={{ fontFamily: "Geist", fontWeight: "400" }}>{m.value}</div>
+                  <div className="cs-metric__label">{m.label}</div>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+
+        {/* ── 09 Before a ticket ── */}
+        <section className="cs-section">
+          <div className="cs-col">
+            <div className="cs-eyebrow-row"><Eyebrow>Reflection</Eyebrow></div>
+            <h2 className="cs-h2" data-reveal>Great design work often starts<br />before a ticket exists.</h2>
+            <p className="cs-body">The instinct to fix things I wasn't asked to fix is something I've had to learn to channel carefully. Done wrong, it's noise. Done right, it's the difference between shipping features and shipping a product.</p>
+            <div className="cs-pull">
+              <p style={{ fontFamily: "Geist", fontWeight: "400" }}>The most important design work I've done has never started with a Jira ticket.<br />It's started with a question I couldn't stop thinking about.</p>
+            </div>
+            <p className="cs-body">At Convesio, the question was simple: why does a technically excellent product feel so hard to use? The answer took three months to build. But it started with spending a week watching people use it, and refusing to look away.</p>
+          </div>
+        </section>
+
+        {/* ── 10 Cloudways Bridge ── */}
+        {/* ── 10 More Work ── */}
+        <section className="cs-section">
+          <div className="cs-col">
+            <div className="cs-eyebrow-row"><Eyebrow>More work</Eyebrow></div>
+            <ProjectCard
+              eyebrow="CLOUDWAYS"
+              title="Designing at scale across product, web, and brand."
+              description="Spent 7 years designing and scaling a high-growth cloud hosting platform that was acquired for $350M. Product, marketing, and brand — all of it."
+              stats={[
+              { label: 'Role', value: 'Lead Designer' },
+              { label: 'Outcome', value: 'Part of a $350M Acquisition Story' }]
+              }
+              cta={{ label: 'Read Case Study', href: 'Cloudways Case Study.html' }}
+              media={<CloudwaysShots />} />
+            
+          </div>
+        </section>
+
+        {/* ── Marquee ── */}
+        <MarqueeStripe items={[
+        'Convesio Redesign', '120% Revenue Growth', '0 → 1 Design System',
+        'Self-Initiated', 'Lead Product Designer', 'Shipped in 4 months']
+        } speed={44} />
+
+        {/* ── CTA ── */}
+        <section className="cs-section" style={{ textAlign: 'center', paddingBottom: 'var(--space-160)' }}>
+          <div className="cs-col--narrow">
+            <h2 className="cs-display" data-reveal>Work Together</h2>
+            <p className="cs-body" style={{ margin: '0 auto var(--space-40)', textAlign: 'center', maxWidth: 640 }}>
+              I'm looking for the next product I'll help shape, scale, and improve.<br />
+              If that sounds like what you're building, let's talk.
+            </p>
+            <Button as="a" href="mailto:navzkha@gmail.com" variant="primary" size="lg">Contact</Button>
+          </div>
+        </section>
+
+        <Footer
+          copyright="© All rights reserved. Naveed Khan"
+          socials={[
+            { icon: 'linkedin', href: 'https://www.linkedin.com/in/naveed-khan-designer/', label: 'LinkedIn' },
+            { icon: 'mail',     href: 'mailto:navzkha@gmail.com',                          label: 'Email'    },
+          ]} />
+        
+      </React.Fragment>);
+
+  }
+
+  function mount() {
+    if (!window.NaveedKhanPortfolioDesignSystem_ee97a5) return setTimeout(mount, 40);
+    ReactDOM.createRoot(document.getElementById('root')).render(<CaseStudy />);
+  }
+  mount();
+})();
+</script>
+
+<!-- GSAP scroll animations -->
+<script>
+(function () {
+  function init() {
+    if (!window.gsap || !window.ScrollTrigger || !document.querySelector('[data-reveal]')) return setTimeout(init, 120);
+    gsap.registerPlugin(ScrollTrigger);
+
+    /* Word-split reveal helper */
+    function splitReveal(el, delay) {
+      if (!el || el.dataset.split) return;
+      el.dataset.split = '1';
+      var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+      var nodes = [], n;
+      while ((n = walker.nextNode())) nodes.push(n);
+      nodes.forEach(function (tn) {
+        var words = tn.textContent.split(/(\s+)/);
+        var frag  = document.createDocumentFragment();
+        words.forEach(function (w) {
+          if (/^\s+$/.test(w)) { frag.appendChild(document.createTextNode(w)); }
+          else if (w) {
+            var o = document.createElement('span'); o.className = 'word-wrap';
+            var i = document.createElement('span'); i.className = 'word-inner';
+            i.textContent = w; o.appendChild(i); frag.appendChild(o);
+          }
+        });
+        tn.parentNode.replaceChild(frag, tn);
+      });
+      var inners = el.querySelectorAll('.word-inner');
+      gsap.fromTo(inners, { y: '115%', opacity: 0 },
+        { y: '0%', opacity: 1, duration: 0.75, stagger: 0.055, ease: 'power3.out', delay: delay || 0 });
+    }
+
+    /* Hamburger menu */
+    var ham    = document.getElementById('cs-ham');
+    var drawer = document.getElementById('cs-drawer');
+    var close  = document.getElementById('cs-close');
+    function openDrawer()  { if(drawer) drawer.classList.add('is-open');    document.body.style.overflow='hidden'; }
+    function closeDrawer() { if(drawer) drawer.classList.remove('is-open'); document.body.style.overflow=''; }
+    if (ham)   ham.addEventListener('click', openDrawer);
+    if (close) close.addEventListener('click', closeDrawer);
+    if (drawer) drawer.querySelectorAll('.cs-mob-drawer__link').forEach(function(a){
+      a.addEventListener('click', closeDrawer);
+    });
+
+    /* Magnetic removed */
+
+        /* Sticky nav border on scroll */
+    var nav = document.getElementById('cs-nav');
+    if (nav) {
+      window.addEventListener('scroll', function () {
+        nav.classList.toggle('is-scrolled', window.scrollY > 10);
+      }, { passive: true });
+    }
+
+    /* Hero title fires immediately */
+    splitReveal(document.querySelector('.cs-hero__title'), 0.2);
+
+    /* All [data-reveal] headings on scroll */
+    document.querySelectorAll('[data-reveal]').forEach(function (el) {
+      if (el === document.querySelector('.cs-hero__title')) return;
+      ScrollTrigger.create({
+        trigger: el, start: 'top 88%', once: true,
+        onEnter: function () { splitReveal(el, 0); }
+      });
+    });
+
+    /* Section fade-in */
+    gsap.utils.toArray('.cs-section').forEach(function (sec) {
+      gsap.fromTo(sec, { opacity: 0, y: 24 },
+        { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out',
+          scrollTrigger: { trigger: sec, start: 'top 92%', once: true } });
+    });
+  }
+  init();
+}());
+</script>
+</body>
+</html>
