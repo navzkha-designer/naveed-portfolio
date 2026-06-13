@@ -5,6 +5,20 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Naveed Khan — Senior Product Designer</title>
+<meta name="description" content="Naveed Khan — Senior Product Designer with 12+ years designing SaaS, fintech, cloud hosting and AI products. From 0→1 builds to redesigns and growth, strategy to shipped UX."/>
+<link rel="canonical" href="https://naveed-portfolio-self.vercel.app/"/>
+
+<!-- Open Graph / social -->
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Naveed Khan — Senior Product Designer"/>
+<meta property="og:description" content="12+ years designing SaaS, fintech, cloud hosting and AI products — from 0→1 builds to redesigns and growth."/>
+<meta property="og:url" content="https://naveed-portfolio-self.vercel.app/"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Naveed Khan — Senior Product Designer"/>
+<meta name="twitter:description" content="12+ years designing SaaS, fintech, cloud hosting and AI products."/>
+
+<!-- Preconnect to CDN for faster script fetch -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin/>
 
 <!-- Design System Tokens -->
 <link rel="stylesheet" href="_ds/naveed-khan-portfolio-design-system-ee97a5ef-1be9-4c65-b506-ec6f688ba54c/tokens/fonts.css">
@@ -16,10 +30,7 @@
 <link rel="stylesheet" href="_ds/naveed-khan-portfolio-design-system-ee97a5ef-1be9-4c65-b506-ec6f688ba54c/tokens/base.css">
 <link rel="stylesheet" href="_ds/naveed-khan-portfolio-design-system-ee97a5ef-1be9-4c65-b506-ec6f688ba54c/styles.css">
 
-<!-- Three.js (WebGL hero) -->
-<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
-
-<!-- React + Babel -->
+<!-- React -->
 <script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
 
@@ -715,9 +726,28 @@
       var canvas = canvasRef.current;
       if (!canvas) return;
       var hero = canvas.parentElement;
-      if (!window._heroCanvasInit) return;
-      var cleanup = window._heroCanvasInit(canvas, hero);
-      return cleanup;
+      /* Skip the heavy WebGL fluid sim on mobile — saves ~600KB + GPU/CPU.
+         The gradient/texture layers render the hero fine without it. */
+      if (window.innerWidth <= 768) return;
+      var cleanup = null, cancelled = false;
+      function start() {
+        if (cancelled || !window._heroCanvasInit) return;
+        cleanup = window._heroCanvasInit(canvas, hero);
+      }
+      if (window.THREE) {
+        start();
+      } else {
+        /* Lazy-load Three.js after mount so it never blocks first paint. */
+        var s = document.createElement('script');
+        s.src = 'https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js';
+        s.async = true;
+        s.onload = start;
+        document.head.appendChild(s);
+      }
+      return function () {
+        cancelled = true;
+        if (cleanup) cleanup();
+      };
     }, []);
     return /*#__PURE__*/React.createElement("header", {
       id: "top",
