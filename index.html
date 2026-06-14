@@ -159,17 +159,20 @@
             mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
   }
   .pf-tools__track {
-    display: flex; align-items: center; gap: 88px; width: max-content;
+    display: flex; align-items: center; width: max-content;
     animation: pf-tools-scroll 34s linear infinite; will-change: transform;
   }
   .pf-tools__viewport:hover .pf-tools__track { animation-play-state: paused; }
+  /* margin-right (not gap) gives every logo equal trailing space, so the
+     duplicated set is exactly half the track width -> seamless -50% loop */
   .pf-tools__logo {
     height: 30px; width: auto; display: block; flex: 0 0 auto;
+    margin-right: 88px;
     opacity: 0.5; transition: opacity 220ms ease;
   }
   .pf-tools__logo:hover { opacity: 1; }
   @keyframes pf-tools-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-  @media (max-width: 680px) { .pf-tools__track { gap: 56px; } .pf-tools__logo { height: 26px; } }
+  @media (max-width: 680px) { .pf-tools__logo { height: 26px; margin-right: 56px; } }
   @media (prefers-reduced-motion: reduce) { .pf-tools__track { animation: none; } }
 
   /* ── MarqueeStripe overrides: bigger font, GPU smooth, no gap ── */
