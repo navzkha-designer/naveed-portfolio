@@ -6,6 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Convesio Redesign — Naveed Khan</title>
 <meta name="description" content="Case study: leading a self-initiated redesign of Convesio's managed WordPress hosting platform — usability research, strategy buy-in, and a full platform transformation by Naveed Khan."/>
+<link rel="canonical" href="https://naveed-portfolio-self.vercel.app/convesio"/>
+<meta property="og:url" content="https://naveed-portfolio-self.vercel.app/convesio"/>
 <meta property="og:type" content="article"/>
 <meta property="og:title" content="Convesio Redesign — Naveed Khan"/>
 <meta property="og:description" content="Leading a self-initiated redesign of Convesio's hosting platform — research, strategy, and full platform transformation."/>
@@ -89,7 +91,7 @@
   }
   .cs-nav-wrap.is-scrolled { border-bottom-color: #262626; }
   .cs-nav-wrap .cs-col { position: relative; }
-  /* Transparent overlay to redirect logo click → index.html */
+  /* Transparent overlay to redirect logo click → / */
   .cs-nav-logo-link {
     position: absolute; left: 0; top: 50%; transform: translateY(-50%);
     width: 48px; height: 36px; z-index: 2;
@@ -448,19 +450,19 @@
         alignItems: 'center'
       }
     }, /*#__PURE__*/React.createElement("a", {
-      href: "index.html",
+      href: "/",
       className: "cs-nav-logo-link",
       "aria-label": "Back to homepage"
     }), /*#__PURE__*/React.createElement(NavBar, {
       links: [{
         label: 'Work',
-        href: 'index.html#work'
+        href: '/#work'
       }, {
         label: 'About',
-        href: 'index.html#about'
+        href: '/#about'
       }, {
         label: 'Contact',
-        href: 'index.html#contact'
+        href: '/#contact'
       }],
       cta: {
         label: 'Resume',
@@ -503,7 +505,7 @@
     }, /*#__PURE__*/React.createElement("div", {
       className: "cs-mob-drawer__top"
     }, /*#__PURE__*/React.createElement("a", {
-      href: "index.html",
+      href: "/",
       style: {
         display: 'flex',
         alignItems: 'center'
@@ -542,13 +544,13 @@
       className: "cs-mob-drawer__links"
     }, [{
       label: 'Work',
-      href: 'index.html#work'
+      href: '/#work'
     }, {
       label: 'About',
-      href: 'index.html#about'
+      href: '/#about'
     }, {
       label: 'Contact',
-      href: 'index.html#contact'
+      href: '/#contact'
     }].map(function (l) {
       return /*#__PURE__*/React.createElement("a", {
         key: l.label,
@@ -907,7 +909,7 @@
       }],
       cta: {
         label: 'Read Case Study',
-        href: 'Cloudways Case Study.html'
+        href: '/cloudways'
       },
       media: /*#__PURE__*/React.createElement(CloudwaysShots, null)
     }))), /*#__PURE__*/React.createElement(MarqueeStripe, {
