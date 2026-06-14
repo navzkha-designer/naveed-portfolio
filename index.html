@@ -171,7 +171,7 @@
     opacity: 0.5; transition: opacity 220ms ease;
   }
   .pf-tools__logo:hover { opacity: 1; }
-  @keyframes pf-tools-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes pf-tools-scroll { from { transform: translateX(0); } to { transform: translateX(-25%); } }
   @media (max-width: 680px) { .pf-tools__logo { height: 26px; margin-right: 56px; } }
   @media (prefers-reduced-motion: reduce) { .pf-tools__track { animation: none; } }
 
@@ -1204,7 +1204,9 @@ float cnoise(vec3 P){
       { src: 'assets/logos/v0.svg',      name: 'v0'      },
       { src: 'assets/logos/github.svg',  name: 'GitHub'  }
     ];
-    var all = LOGOS.concat(LOGOS); /* duplicate for a seamless -50% loop */
+    /* 4 copies so the track stays wider than the viewport — no blank gap on
+       the right at the loop wrap. Animation translates by one set (-25%). */
+    var all = LOGOS.concat(LOGOS, LOGOS, LOGOS);
     return /*#__PURE__*/React.createElement("section", { className: "pf-tools", "aria-label": "Tools I work with" },
       /*#__PURE__*/React.createElement("p", { className: "pf-tools__label" }, "Tools I work with"),
       /*#__PURE__*/React.createElement("div", { className: "pf-tools__viewport" },
