@@ -153,11 +153,17 @@
     letter-spacing: var(--track-wide); text-transform: uppercase;
     color: var(--text-secondary);
   }
-  .pf-tools__viewport {
-    overflow: hidden; width: 100%;
-    -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
-            mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  /* No mask-image here — masks force a per-frame repaint of the moving track
+     and stutter when the main thread is busy. Use static edge-fade overlays
+     so the track stays a cheap, smooth composited layer. */
+  .pf-tools__viewport { position: relative; overflow: hidden; width: 100%; }
+  .pf-tools__viewport::before,
+  .pf-tools__viewport::after {
+    content: ''; position: absolute; top: 0; bottom: 0; width: 12%;
+    z-index: 2; pointer-events: none;
   }
+  .pf-tools__viewport::before { left: 0;  background: linear-gradient(to right, var(--surface-primary), transparent); }
+  .pf-tools__viewport::after  { right: 0; background: linear-gradient(to left,  var(--surface-primary), transparent); }
   .pf-tools__track {
     display: flex; align-items: center; width: max-content;
     animation: pf-tools-scroll 34s linear infinite; will-change: transform;
@@ -586,7 +592,7 @@ float cnoise(vec3 P){
       }
     });
 
-    var geometry = createStackedPlanes(THREE, beamNumber, beamWidth, beamHeight, 0, 100);
+    var geometry = createStackedPlanes(THREE, beamNumber, beamWidth, beamHeight, 0, 40);
     var mesh = new THREE.Mesh(geometry, material);
 
     var group = new THREE.Group();
@@ -606,7 +612,7 @@ float cnoise(vec3 P){
     camera.position.set(0, 0, 20);
 
     var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: false });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
 
     function resize() {
       var w = hero.clientWidth || window.innerWidth;
