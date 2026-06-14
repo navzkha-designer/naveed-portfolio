@@ -145,6 +145,33 @@
   .pf-cs-marquee__track:hover { animation-play-state: paused; }
   .pf-cs-marquee__img { flex: 0 0 auto; width: 490px; height: 339px; object-fit: cover; display: block; border-radius: 12px; box-shadow: 0 8px 28px -6px rgba(0,0,0,.7); }
 
+  /* ── Tools / stack logo marquee ── */
+  .pf-tools { padding: var(--space-80) 0 var(--space-96); }
+  .pf-tools__label {
+    text-align: center; margin: 0 0 var(--space-40);
+    font-family: var(--font-label); font-size: var(--size-b4);
+    letter-spacing: var(--track-wide); text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+  .pf-tools__viewport {
+    overflow: hidden; width: 100%;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+            mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  }
+  .pf-tools__track {
+    display: flex; align-items: center; gap: 88px; width: max-content;
+    animation: pf-tools-scroll 34s linear infinite; will-change: transform;
+  }
+  .pf-tools__viewport:hover .pf-tools__track { animation-play-state: paused; }
+  .pf-tools__logo {
+    height: 30px; width: auto; display: block; flex: 0 0 auto;
+    opacity: 0.5; transition: opacity 220ms ease;
+  }
+  .pf-tools__logo:hover { opacity: 1; }
+  @keyframes pf-tools-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @media (max-width: 680px) { .pf-tools__track { gap: 56px; } .pf-tools__logo { height: 26px; } }
+  @media (prefers-reduced-motion: reduce) { .pf-tools__track { animation: none; } }
+
   /* ── MarqueeStripe overrides: bigger font, GPU smooth, no gap ── */
   .ds-marquee__track {
     will-change: transform !important;
@@ -1160,14 +1187,46 @@ float cnoise(vec3 P){
     MarqueeStripe,
     Footer
   } = window.NaveedKhanPortfolioDesignSystem_ee97a5;
+
+  /* Tools / stack logo marquee (monochrome white SVGs, seamless scroll). */
+  function ToolsStrip() {
+    var LOGOS = [
+      { src: 'assets/logos/figma.svg',   name: 'Figma'   },
+      { src: 'assets/logos/claude.svg',  name: 'Claude'  },
+      { src: 'assets/logos/notion.svg',  name: 'Notion'  },
+      { src: 'assets/logos/chatgpt.svg', name: 'ChatGPT' },
+      { src: 'assets/logos/framer.svg',  name: 'Framer'  },
+      { src: 'assets/logos/gemini.svg',  name: 'Gemini'  },
+      { src: 'assets/logos/webflow.svg', name: 'Webflow' },
+      { src: 'assets/logos/v0.svg',      name: 'v0'      },
+      { src: 'assets/logos/github.svg',  name: 'GitHub'  }
+    ];
+    var all = LOGOS.concat(LOGOS); /* duplicate for a seamless -50% loop */
+    return /*#__PURE__*/React.createElement("section", { className: "pf-tools", "aria-label": "Tools I work with" },
+      /*#__PURE__*/React.createElement("p", { className: "pf-tools__label" }, "Tools I work with"),
+      /*#__PURE__*/React.createElement("div", { className: "pf-tools__viewport" },
+        /*#__PURE__*/React.createElement("div", { className: "pf-tools__track" },
+          all.map(function (l, i) {
+            return /*#__PURE__*/React.createElement("img", {
+              key: i,
+              className: "pf-tools__logo",
+              src: l.src,
+              alt: l.name,
+              title: l.name,
+              loading: "lazy",
+              draggable: false
+            });
+          })
+        )
+      )
+    );
+  }
+
   function App() {
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PfNav, null), /*#__PURE__*/React.createElement(Hero, null), /*#__PURE__*/React.createElement(MarqueeStripe, {
       items: ['Cloudways · $350M Acquisition', '12 Years Self-Taught', '50k Users · SaaS', '$1M+ Processed · Fintech', '0 → 1 Products', 'Strategy to Shipped UX', 'Cloudways · $350M Acquisition', '12 Years Self-Taught', '50k Users · SaaS', '$1M+ Processed · Fintech'],
       speed: 22
-    }), /*#__PURE__*/React.createElement(WorkSection, null), /*#__PURE__*/React.createElement(AboutSection, null), /*#__PURE__*/React.createElement(MetricsSection, null), /*#__PURE__*/React.createElement(MarqueeStripe, {
-      items: ['Senior Product Designer', 'SaaS · Fintech · Cloud · AI', 'Concept to Launch', 'Redesign · Growth · 0→1', 'Senior Product Designer', 'SaaS · Fintech · Cloud · AI', 'Concept to Launch', 'Redesign · Growth · 0→1', 'Senior Product Designer', 'SaaS · Fintech · Cloud · AI'],
-      speed: 22
-    }), /*#__PURE__*/React.createElement(FinalCTA, null), /*#__PURE__*/React.createElement(Footer, {
+    }), /*#__PURE__*/React.createElement(WorkSection, null), /*#__PURE__*/React.createElement(AboutSection, null), /*#__PURE__*/React.createElement(MetricsSection, null), /*#__PURE__*/React.createElement(ToolsStrip, null), /*#__PURE__*/React.createElement(FinalCTA, null), /*#__PURE__*/React.createElement(Footer, {
       copyright: "\xA9 All rights reserved. Naveed Khan",
       socials: [{
         icon: 'linkedin',
