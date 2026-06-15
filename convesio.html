@@ -204,6 +204,16 @@
   /* ── ProjectCard overrides (More Work section) ── */
   .cs-col article p:first-child { font-size: 16px !important; }
   .cs-col article :is(h1,h2,h3,h4,h5,h6) { font-family: 'Geist', sans-serif !important; font-weight: 400 !important; }
+  .cs-col article .ds-btn--secondary {
+    background: var(--text-primary) !important;
+    color: var(--surface-primary) !important;
+    border-color: var(--text-primary) !important;
+  }
+  .cs-col article .ds-btn--secondary::before { background: #333 !important; }
+  .cs-col article .ds-btn--secondary:hover { color: #fff !important; }
+  @media (max-width: 768px) {
+    .cs-col article { padding: 20px !important; }
+  }
   @media (max-width: 680px) {
     .cs-col article header { flex-direction: column !important; align-items: flex-start !important; gap: 20px; }
   }
