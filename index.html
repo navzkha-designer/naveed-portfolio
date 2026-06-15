@@ -779,7 +779,6 @@ float cnoise(vec3 P){
       var canvas = beamsRef.current;
       if (!canvas) return;
       var hero = canvas.parentElement;
-      if (window.innerWidth <= 768) return; /* mobile keeps the CSS bars */
       var cleanup = null, cancelled = false;
       function start() {
         if (cancelled || !window._heroBeamsInit) return;
