@@ -59,20 +59,6 @@
   /* Ethereal beams canvas (desktop WebGL) — paints over the CSS bars */
   .pf-hero__beams { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; display: block; pointer-events: none; }
   /* Animated gradient bars background (pure CSS, mobile fallback) */
-  .pf-hero__bars { position: absolute; inset: 0; z-index: 0; display: flex; overflow: hidden; pointer-events: none; }
-  .pf-bar {
-    height: 100%;
-    transform-origin: bottom;
-    background: linear-gradient(to top, var(--pf-bar-color, rgba(232,238,248,0.26)), transparent);
-    animation: pf-pulse 1.9s ease-in-out infinite alternate;
-    box-sizing: border-box;
-    will-change: transform, opacity;
-  }
-  @keyframes pf-pulse {
-    0%   { transform: scaleY(var(--s));               opacity: 0.65; }
-    100% { transform: scaleY(calc(var(--s) * 0.45));  opacity: 1;    }
-  }
-  @media (prefers-reduced-motion: reduce) { .pf-bar { animation: none; } }
   /* Resend-style: subtle grey radial glow — transparent base lets WebGL through */
   .pf-hero__texture {
     position: absolute; inset: 0; z-index: 1;
@@ -392,8 +378,6 @@
     .pf-nav-wrap nav > div > a:last-child { display: none !important; }
     /* Nav padding matches case study pages on mobile */
     .pf-nav-wrap .pf-col { width: calc(100% - 40px) !important; }
-    /* Hide CSS bars on mobile — clean dark background only */
-    .pf-hero__bars { display: none !important; }
   }
 
 </style>
@@ -787,8 +771,7 @@ float cnoise(vec3 P){
     }, "Resume"))));
   }
   function Hero() {
-    /* Desktop: animated 3D ethereal beams (Three.js, lazy-loaded).
-       Mobile: lightweight CSS gradient bars (below) — no WebGL. */
+    /* Desktop only: animated 3D ethereal beams (Three.js, lazy-loaded). */
     var beamsRef = React.useRef(null);
     React.useEffect(function () {
       var canvas = beamsRef.current;
@@ -812,35 +795,10 @@ float cnoise(vec3 P){
       return function () { cancelled = true; if (cleanup) cleanup(); };
     }, []);
 
-    /* CSS gradient bars — mobile fallback (and shown until/if WebGL loads). */
-    var NUM_BARS = 17;
-    function barHeight(i, total) {
-      var pos = i / (total - 1);
-      var dist = Math.abs(pos - 0.5);
-      return 0.30 + 0.70 * Math.pow(dist * 2.0, 1.2); /* 0.30 .. 1.00 */
-    }
-    var bars = [];
-    for (var i = 0; i < NUM_BARS; i++) {
-      var sc = barHeight(i, NUM_BARS);
-      bars.push(/*#__PURE__*/React.createElement("span", {
-        key: i,
-        className: "pf-bar",
-        style: {
-          flex: '1 0 ' + (100 / NUM_BARS) + '%',
-          maxWidth: (100 / NUM_BARS) + '%',
-          transform: 'scaleY(' + sc + ')',
-          animationDelay: (i * 0.13) + 's',
-          '--s': sc
-        }
-      }));
-    }
     return /*#__PURE__*/React.createElement("header", {
       id: "top",
       className: "pf-hero"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "pf-hero__bars",
-      "aria-hidden": "true"
-    }, bars), /*#__PURE__*/React.createElement("canvas", {
+    }, /*#__PURE__*/React.createElement("canvas", {
       className: "pf-hero__beams",
       ref: beamsRef,
       "aria-hidden": "true"
