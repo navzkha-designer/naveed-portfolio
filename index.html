@@ -390,6 +390,10 @@
     .pf-mob-toggle { display: flex; align-items: center; justify-content: center; }
     .pf-nav-wrap nav > div > ul,
     .pf-nav-wrap nav > div > a:last-child { display: none !important; }
+    /* Nav padding matches case study pages on mobile */
+    .pf-nav-wrap .pf-col { width: calc(100% - 40px) !important; }
+    /* Hide CSS bars on mobile — clean dark background only */
+    .pf-hero__bars { display: none !important; }
   }
 
 </style>
