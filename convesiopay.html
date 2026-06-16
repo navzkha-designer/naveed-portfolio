@@ -170,11 +170,10 @@
   .cs-table__solution { font-family: var(--font-body); font-size: 15px; color: var(--text-primary); line-height: 1.6; }
 
   /* ── Metrics row ── */
-  .cs-metrics { display: flex; gap: 0; padding: var(--space-64) 0; border-top: var(--border-hairline); border-bottom: var(--border-hairline); margin: var(--space-48) 0; }
-  .cs-metric { flex: 1; text-align: center; border-right: var(--border-hairline); padding: 0 var(--space-32); }
+  .cs-metrics { display: flex; gap: 0; margin: var(--space-48) 0; border: 1px solid #262626; border-radius: 8px; overflow: hidden; }
+  .cs-metric { flex: 1; text-align: center; border-right: 1px solid #262626; padding: var(--space-48) var(--space-32); }
   .cs-metric:last-child { border-right: none; }
-  .cs-metric:first-child { padding-left: 0; }
-  .cs-metric__value { font-family: var(--font-display); font-weight: 800; font-size: 56px; line-height: 1; letter-spacing: -2px; color: var(--text-primary); margin-bottom: 10px; }
+  .cs-metric__value { font-family: var(--font-display); font-weight: 800; font-size: 56px; line-height: 1; letter-spacing: -2px; margin-bottom: 10px; background: linear-gradient(160deg, #ffffff 0%, #888888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   .cs-metric__label { font-family: var(--font-body); font-size: 13px; color: var(--text-secondary); line-height: 1.4; }
 
   /* ── Placeholder image well ── */
@@ -295,7 +294,7 @@
     .cs-meta__cell { flex: 0 0 50%; border-right: none; border-bottom: 1px solid #262626; }
     .cs-meta__cell:nth-child(odd) { border-right: 1px solid #262626; }
     .cs-meta__cell:nth-last-child(-n+2) { border-bottom: none; }
-    .cs-metrics { flex-direction: column; }
+    .cs-metrics { flex-direction: column; border-radius: 8px; }
     .cs-metric { border-right: none; border-bottom: 1px solid #262626; padding: var(--space-24) var(--space-32); }
     .cs-metric:last-child { border-bottom: none; }
     .cs-metric__value { font-size: 40px; }
@@ -811,8 +810,7 @@
       "data-counter": true,
       style: {
         fontFamily: 'Geist',
-        fontWeight: '400',
-        color: '#C9A84C'
+        fontWeight: '400'
       }
     }, m.value), /*#__PURE__*/React.createElement("div", {
       className: "cs-metric__label"
