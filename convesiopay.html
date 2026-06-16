@@ -124,7 +124,7 @@
     animation: cs-scroll 28s linear infinite;
   }
   .cs-text-marquee__item { white-space: nowrap; font-size: 13px; font-weight: 500; letter-spacing: 0.04em; color: var(--text-secondary, #888); padding: 0 28px; text-transform: uppercase; }
-  .cs-text-marquee__sep { width: 4px; height: 4px; border-radius: 1px; background: var(--text-primary, #fff); opacity: 0.35; flex-shrink: 0; transform: rotate(45deg); }
+  .cs-text-marquee__sep { display: inline-block; width: 4px; height: 4px; border-radius: 1px; background: var(--text-primary, #fff); opacity: 0.35; flex-shrink: 0; transform: rotate(45deg); vertical-align: middle; }
 
   /* ── Typography ── */
   .cs-display { font-family: var(--font-display); font-weight: 800; font-size: clamp(36px, 4vw, 60px); line-height: 1.05; letter-spacing: var(--track-tight); color: var(--text-primary); margin: 0 0 var(--space-32); }
