@@ -154,6 +154,15 @@
   }
 
   /* ── Problem/Solution table ── */
+  .browser-mockup { width: 100%; margin: 2rem 0; }
+  .browser-frame { border-radius: 10px; border: 0.5px solid #2C2C2A; overflow: hidden; background: #1a1a1a; }
+  .browser-bar { background: #1a1a1a; border-bottom: 0.5px solid #2C2C2A; padding: 11px 14px; display: flex; align-items: center; gap: 8px; }
+  .browser-dots { display: flex; gap: 6px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .dot-red { background: #E24B4A; }
+  .dot-amber { background: #EF9F27; }
+  .dot-green { background: #639922; }
+  .browser-screen { width: 100%; display: block; }
   .cs-table { width: 100%; max-width: 1280px; margin: var(--space-48) 0; border: 1px solid #262626; border-radius: 8px; overflow: hidden; }
   .cs-table__row { display: grid; grid-template-columns: 280px 1fr; gap: 40px; padding: var(--space-24) var(--space-32); border-bottom: 1px solid #262626; }
   .cs-table__label { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--text-tertiary, #555); margin-bottom: 6px; }
@@ -649,6 +658,19 @@
     }, "What Was Built"), /*#__PURE__*/React.createElement("p", {
       className: "cs-body"
     }, "The product covered four primary flows: account setup and verification, payment method management, invoice generation and delivery, and transaction history and reporting. Each flow was designed independently and then tested for cross-flow coherence."), /*#__PURE__*/React.createElement("div", {
+      className: "browser-mockup"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "browser-frame"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "browser-bar"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "browser-dots"
+    }, /*#__PURE__*/React.createElement("span", {className: "dot dot-red"}), /*#__PURE__*/React.createElement("span", {className: "dot dot-amber"}), /*#__PURE__*/React.createElement("span", {className: "dot dot-green"}))), /*#__PURE__*/React.createElement("img", {
+      src: "assets/images/convesiopay_onboarding.gif",
+      alt: "ConvesioPay onboarding flow",
+      className: "browser-screen",
+      loading: "lazy"
+    }))), /*#__PURE__*/React.createElement("div", {
       className: "cs-table"
     }, [{
       decision: 'Flow 01',
