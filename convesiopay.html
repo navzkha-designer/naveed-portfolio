@@ -567,14 +567,14 @@
       label: 'Role',
       value: 'Lead Product Designer'
     }, {
-      label: 'Timeline',
-      value: 'Jan 2023 - Sep 2023'
+      label: 'Year',
+      value: '2023'
     }, {
       label: 'Scope',
-      value: 'Product Design · 0 → 1'
+      value: '0 to 1 Product Design'
     }, {
       label: 'Outcome',
-      value: '$1M+ Processed (Year 1)'
+      value: '$1M+ Processed · 90%+ Completion'
     }].map(m => /*#__PURE__*/React.createElement("div", {
       key: m.label,
       className: "cs-meta__cell"
@@ -597,7 +597,7 @@
       className: "cs-body"
     }, "I was given the brief in early 2023: design a payments product that felt native to the Convesio platform, was trustworthy enough to handle real money, and was simple enough that a non-technical user could set it up in under ten minutes. That brief was everything I had to start with."), /*#__PURE__*/React.createElement("p", {
       className: "cs-body"
-    }, "What followed was eight months of iterating from first principles, user flows, information architecture, security-first interaction design, and a visual system that balanced trust with the existing Convesio design language."))), /*#__PURE__*/React.createElement("section", {
+    }, "What followed was an intensive design process from first principles: user flows, information architecture, security-first interaction design, and a visual system that balanced trust with the existing Convesio design language."))), /*#__PURE__*/React.createElement("section", {
       className: "cs-section"
     }, /*#__PURE__*/React.createElement("div", {
       className: "cs-col"
@@ -612,7 +612,7 @@
       className: "cs-body cs-body--wide"
     }, "Designing for payments is different from designing a dashboard. Users approach payment flows with a heightened sense of scrutiny, they look for signals of security, of legitimacy, of clarity. A confusing label on a billing screen isn't just bad UX; it can make a user abandon the product entirely."), /*#__PURE__*/React.createElement("p", {
       className: "cs-body cs-body--wide"
-    }, "I spent the first month studying how users interacted with payment products they already trusted. Stripe, PayPal, Paddle, and mapping where ConvesioPay needed to diverge. We weren't Stripe. Our users were web professionals and agency owners, not developers building e-commerce at scale. That shaped every decision I made about what to show, what to hide, and what language to use.")), /*#__PURE__*/React.createElement("div", {
+    }, "I spent the first month studying how users interacted with payment products they already trusted. Stripe, PayPal, Paddle. And mapping where ConvesioPay needed to diverge. We weren't Stripe. Our users were web professionals and agency owners, not developers building e-commerce at scale. That shaped every decision I made about what to show, what to hide, and what language to use.")), /*#__PURE__*/React.createElement("div", {
       className: "browser-mockup"
     }, /*#__PURE__*/React.createElement("div", {
       className: "browser-frame"
@@ -634,7 +634,7 @@
     }, /*#__PURE__*/React.createElement(Eyebrow, null, "The approach")), /*#__PURE__*/React.createElement("h2", {
       className: "cs-h2",
       "data-reveal": true
-    }, "Three principles that shaped", /*#__PURE__*/React.createElement("br", null), "every design decision."), /*#__PURE__*/React.createElement("p", {
+    }, "Three principles shaped every design decision."), /*#__PURE__*/React.createElement("p", {
       className: "cs-body"
     }, "With no prior product to build on top of, I set three design principles early and held to them throughout."), /*#__PURE__*/React.createElement("div", {
       className: "cs-blockquote"
@@ -660,33 +660,46 @@
       "data-reveal": true
     }, "What Was Built"), /*#__PURE__*/React.createElement("p", {
       className: "cs-body"
-    }, "The product covered four primary flows: account setup and verification, payment method management, invoice generation and delivery, and transaction history and reporting. Each flow was designed independently and then tested for cross-flow coherence."), /*#__PURE__*/React.createElement("div", {
+    }, "The product covered four primary flows: account setup and verification, payment method management, transaction history and reporting, and dispute management."), /*#__PURE__*/React.createElement("div", {
+      className: "browser-mockup"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "browser-frame"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "browser-bar"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "browser-dots"
+    }, /*#__PURE__*/React.createElement("span", {className: "dot dot-red"}), /*#__PURE__*/React.createElement("span", {className: "dot dot-amber"}), /*#__PURE__*/React.createElement("span", {className: "dot dot-green"}))), /*#__PURE__*/React.createElement("img", {
+      src: "assets/convesiopay_onboarding.gif",
+      alt: "ConvesioPay onboarding flow",
+      className: "browser-screen",
+      loading: "lazy"
+    }))), /*#__PURE__*/React.createElement("div", {
       className: "cs-table"
     }, [{
       decision: 'Flow 01',
       area: 'Account Setup',
       subLabel: 'A guided onboarding that built confidence step by step',
-      after: 'New users follow a three-step verification flow: business details, payment method, payout account. Each step has a single focus. Inline validation and clear progress indicators meant users knew exactly where they were at every point.'
+      after: 'New users follow a multi-step verification flow: business details, payment method, payout account. Each step has a single focus. Inline validation and clear progress indicators meant users knew exactly where they were at every point.'
     }, {
       decision: 'Flow 02',
       area: 'Payment Methods',
       subLabel: 'Multiple methods, one coherent interface',
-      after: 'Users needed to manage credit cards, bank accounts, and PayPal in a single place. A unified card-based interface gave each method the same visual weight. Adding, removing, and setting defaults was designed to feel like managing files, familiar and low-stakes.'
+      after: 'Users needed to manage credit cards and bank accounts in a single place. A unified interface gave each method the same visual weight. Adding, removing, and setting defaults was designed to feel familiar and low-stakes.'
     }, {
       decision: 'Flow 03',
-      area: 'Invoice Generation',
-      subLabel: 'Automated billing that felt manual in the right places',
-      after: 'Agency users needed to send branded invoices without a billing team. A simple template system let them customise once and automate thereafter. The "send" moment was designed carefully: a summary confirmation screen that gave users confidence before committing.'
-    }, {
-      decision: 'Flow 04',
-      area: 'Transaction History',
+      area: 'Transaction Log',
       subLabel: 'Data density without cognitive overload',
       after: 'Financial data is inherently dense. The transaction log used a tiered disclosure model: a scannable list with key signals visible at a glance, expandable rows for full detail. Filter and search were first-class, not secondary tools.'
     }, {
+      decision: 'Flow 04',
+      area: 'Disputes',
+      subLabel: 'High-stakes moments designed for clarity',
+      after: 'Payment disputes are high-stakes moments. Each dispute view gave users a clear choice: accept or counter, with evidence upload built in. No dead ends, no ambiguity about next steps.'
+    }, {
       decision: 'Flow 05',
-      area: 'Error states',
+      area: 'Error States',
       subLabel: 'Failures designed to be recoverable',
-      after: 'Payment failures are high-stress moments. Every error state was written and designed to answer three questions: what happened, why it happened, and what to do next. No dead ends. No technical jargon. No vague "something went wrong" messages.'
+      after: 'Every error state was written and designed to answer three questions: what happened, why it happened, and what to do next. No technical jargon. No vague "something went wrong" messages.'
     }].map(row => /*#__PURE__*/React.createElement("div", {
       key: row.area,
       className: "cs-table__row"
@@ -724,11 +737,11 @@
     }, /*#__PURE__*/React.createElement(Eyebrow, null, "Collaboration")), /*#__PURE__*/React.createElement("h2", {
       className: "cs-h2",
       "data-reveal": true
-    }, "Working with constraints", /*#__PURE__*/React.createElement("br", null), "from day one."), /*#__PURE__*/React.createElement("p", {
+    }, "Built in collaboration from day one."), /*#__PURE__*/React.createElement("p", {
       className: "cs-body"
-    }, "Building from zero meant working alongside the engineering team from the very start, not handing off finished designs, but co-designing within technical constraints that shaped the product significantly."), /*#__PURE__*/React.createElement("p", {
+    }, "Building from zero meant working alongside the engineering team from the very start. Not handing off finished designs, but co-designing within technical constraints that shaped the product significantly."), /*#__PURE__*/React.createElement("p", {
       className: "cs-body"
-    }, "The payment infrastructure was built on Adyen's API. That gave us a lot, enterprise-grade reliability, compliance, and a proven payment backbone. But it also set boundaries. Some states I designed couldn't be triggered on demand; some flows required sequences that Adyen enforced. I learned to treat the API as a creative constraint rather than a limitation."), /*#__PURE__*/React.createElement("div", {
+    }, "The payment infrastructure was built on Adyen's API. That gave us a lot: enterprise-grade reliability, compliance, and a proven payment backbone. But it also set boundaries. Some states I designed couldn't be triggered on demand; some flows required sequences that Adyen enforced. I learned to treat the API as a creative constraint rather than a limitation."), /*#__PURE__*/React.createElement("div", {
       className: "cs-blockquote"
     }, /*#__PURE__*/React.createElement("p", {
       style: {
@@ -749,7 +762,7 @@
       className: "cs-col"
     }, /*#__PURE__*/React.createElement("div", {
       className: "cs-eyebrow-row"
-    }, /*#__PURE__*/React.createElement(Eyebrow, null, "The output")), /*#__PURE__*/React.createElement("h2", {
+    }, /*#__PURE__*/React.createElement(Eyebrow, null, "Output")), /*#__PURE__*/React.createElement("h2", {
       className: "cs-h2",
       "data-reveal": true
     }, "From zero to a live payments product."), /*#__PURE__*/React.createElement("p", {
@@ -758,22 +771,30 @@
         maxWidth: 680
       }
     }, "At launch, ConvesioPay covered the full billing lifecycle for Convesio's hosting customers. It shipped with a complete component library specific to the payments layer, interaction documentation for the engineering team, and end-to-end tested flows across all primary paths."), /*#__PURE__*/React.createElement("div", {
-      className: "cs-screens-grid"
+      className: "cs-grid-2"
     }, /*#__PURE__*/React.createElement("img", {
-      src: "assets/convesio-1.png",
-      alt: "ConvesioPay : Dashboard",
+      src: "assets/Dashboard_Overview.jpg",
+      alt: "ConvesioPay : Dashboard Overview",
+      className: "cs-full-img",
+      style: {margin: 0},
       loading: "lazy"
     }), /*#__PURE__*/React.createElement("img", {
-      src: "assets/convesio-2.png",
-      alt: "ConvesioPay : Payments",
+      src: "assets/Customer_Details.jpg",
+      alt: "ConvesioPay : Customer Details",
+      className: "cs-full-img",
+      style: {margin: 0},
       loading: "lazy"
     }), /*#__PURE__*/React.createElement("img", {
-      src: "assets/convesio-3.png",
-      alt: "ConvesioPay : Invoices",
+      src: "assets/Balances_Details.jpg",
+      alt: "ConvesioPay : Balances Details",
+      className: "cs-full-img",
+      style: {margin: 0},
       loading: "lazy"
     }), /*#__PURE__*/React.createElement("img", {
-      src: "assets/convesio-4.png",
-      alt: "ConvesioPay : History",
+      src: "assets/Disputes.jpg",
+      alt: "ConvesioPay : Disputes",
+      className: "cs-full-img",
+      style: {margin: 0},
       loading: "lazy"
     })))), /*#__PURE__*/React.createElement("section", {
       className: "cs-section"
@@ -781,24 +802,21 @@
       className: "cs-col"
     }, /*#__PURE__*/React.createElement("div", {
       className: "cs-eyebrow-row"
-    }, /*#__PURE__*/React.createElement(Eyebrow, null, "Outcomes")), /*#__PURE__*/React.createElement("h2", {
+    }, /*#__PURE__*/React.createElement(Eyebrow, null, "Outcome")), /*#__PURE__*/React.createElement("h2", {
       className: "cs-h2",
       "data-reveal": true
-    }, "$1M+ processed in year one.", /*#__PURE__*/React.createElement("br", null), "With no marketing push."), /*#__PURE__*/React.createElement("p", {
+    }, "$1M+ processed in year one. Early traction with a limited launch."), /*#__PURE__*/React.createElement("p", {
       className: "cs-body"
-    }, "The product launched to existing Convesio customers. There was no paid acquisition, no product-led growth campaign, just an announcement to the existing base. In the first twelve months, ConvesioPay processed over $1M in payments."), /*#__PURE__*/React.createElement("p", {
+    }, "The product launched to existing Convesio customers. In the first twelve months, ConvesioPay processed over $1M in payments."), /*#__PURE__*/React.createElement("p", {
       className: "cs-body"
     }, "The metric I cared most about wasn't volume, it was the payment completion rate. Users who reached the payment screen completed it at over 90%. That told me the design was doing its job: reducing friction, building confidence, and getting out of the way."), /*#__PURE__*/React.createElement("div", {
       className: "cs-metrics"
     }, [{
       value: '$1M+',
-      label: 'Processed in Year 1'
+      label: 'Payments Processed (Year 1)'
     }, {
-      value: '90%',
-      label: 'Payment completion rate'
-    }, {
-      value: '0 → 1',
-      label: 'Product built from scratch'
+      value: '90%+',
+      label: 'Payment Completion Rate'
     }].map(m => /*#__PURE__*/React.createElement("div", {
       key: m.label,
       className: "cs-metric"
@@ -807,7 +825,8 @@
       "data-counter": true,
       style: {
         fontFamily: 'Geist',
-        fontWeight: '400'
+        fontWeight: '400',
+        color: '#C9A84C'
       }
     }, m.value), /*#__PURE__*/React.createElement("div", {
       className: "cs-metric__label"
@@ -820,7 +839,7 @@
     }, /*#__PURE__*/React.createElement(Eyebrow, null, "Reflection")), /*#__PURE__*/React.createElement("h2", {
       className: "cs-h2",
       "data-reveal": true
-    }, "Building from zero teaches you", /*#__PURE__*/React.createElement("br", null), "to be precise about what matters."), /*#__PURE__*/React.createElement("p", {
+    }, "Working on a 0 to 1 product taught me to be precise about what matters."), /*#__PURE__*/React.createElement("p", {
       className: "cs-body"
     }, "Working on a 0 \u2192 1 product is a different kind of design challenge. There's no existing user behaviour to anchor to, no established patterns to iterate on, no prior version to push back against. Every decision is a genuine first, and that means every decision has to be deliberately made, not defaulted to."), /*#__PURE__*/React.createElement("div", {
       className: "cs-pull"
@@ -829,7 +848,7 @@
         fontFamily: 'Geist',
         fontWeight: '400'
       }
-    }, "A blank page forces clarity. You can't fall back on convention when there is none, you have to know why every element is there.")), /*#__PURE__*/React.createElement("p", {
+    }, "A blank page forces clarity. You can't fall back on convention when there is none. You have to know why every element is there.")), /*#__PURE__*/React.createElement("p", {
       className: "cs-body"
     }, "ConvesioPay taught me that 0 \u2192 1 work is less about creativity and more about conviction. The ability to defend a design decision when there's no precedent to point to is a muscle I've been building since I was freelancing, and this project tested it fully."))), /*#__PURE__*/React.createElement("section", {
       className: "cs-section"
